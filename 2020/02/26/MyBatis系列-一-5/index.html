@@ -7,18 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: 入门 - 合格NPC</title>
+<title>MyBatis系列(一.5) - 合格NPC</title>
 
 
-    <meta name="description" content="还行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="合格NPC">
-<meta property="og:url" content="http://eshyee.github.io/tags/%E5%85%A5%E9%97%A8/index.html">
+    <meta name="description" content="窒息小补充🍕">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis系列(一.5)">
+<meta property="og:url" content="http://eshyee.github.io/2020/02/26/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80-5/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="还行">
+<meta property="og:description" content="窒息小补充🍕">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-02-26T13:32:57.000Z">
+<meta property="article:modified_time" content="2020-02-26T14:22:12.928Z">
 <meta property="article:author" content="EShyee">
+<meta property="article:tag" content="补档">
+<meta property="article:tag" content="MyBatis">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -78,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="合格NPC" height="28">
+                <img src="/images/logo1.svg" alt="MyBatis系列(一.5)" height="28">
             
             </a>
         </div>
@@ -127,25 +131,14 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">入门</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-24T07:18:52.000Z">2020-02-24</time>
+                <time class="level-item has-text-grey" datetime="2020-02-26T13:32:57.000Z">2020-02-26</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
@@ -155,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1075 个字)
+                    4 分钟 读完 (大约 600 个字)
                 </span>
                 
                 
@@ -164,21 +157,52 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/">MyBatis系列(一)</a>
+                MyBatis系列(一.5)
             
         </h1>
         <div class="content">
-            <p>根据学校课程安排，学一波Mybatis✔</p>
+            <p>窒息小补充🍕</p>
+<a id="more"></a>
+
+<h1 id="关于MyBatis的增删改查实现"><a href="#关于MyBatis的增删改查实现" class="headerlink" title="关于MyBatis的增删改查实现"></a>关于MyBatis的增删改查实现</h1><p>在MyBatis系列(一)中涉及了如何创建一个<em>入门级</em>的mybatis测试。</p>
+<p>但是只涉及了查询单行数据，接下来 我把它补全。</p>
+<p>上次采用的是MySQL数据库 ，这次我采用的是Oracle。从官网下到了Oracle6的一个<code>jar</code>.</p>
+<p>环境：</p>
+<p>eclipse 2019-12</p>
+<p>Oracle 11g</p>
+<p>apache tomcat 9.0.3</p>
+<p>mybatis 3.5.4.jar</p>
+<p>Oracle.jar</p>
+<h4 id="在Oracle中建个表"><a href="#在Oracle中建个表" class="headerlink" title="在Oracle中建个表"></a>在Oracle中建个表</h4><p><code>create table (stuno number,stuname varchar(20),stuage number,graname varchar(20));</code>,</p>
+<p>随变插入几行数据，此处就不放图了🈚。</p>
+<h4 id="在eclipse里构建这个类"><a href="#在eclipse里构建这个类" class="headerlink" title="在eclipse里构建这个类"></a>在eclipse里构建这个类</h4><p>此处省略代码，详见MyBatis系列(一)。</p>
+<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><p>新建一个<code>studentMapper.xml</code>(当然是要映射了🍔)。</p>
+<p>新建<code>conf.xml</code>(选择数据库以及映射关系)。</p>
+<p>这里关于一些细节</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 通过default选择 数据库环境(说白了就是运行哪个数据库) --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- transactionManager事物的提交方式</span></span><br><span class="line"><span class="comment">		JDBC 利用JDBC处理事务，手动(commit rollback,close)</span></span><br><span class="line"><span class="comment">		MANAGED：将事务交由其他组件（spring，jobss）去托管 ，默认使用完之后会关闭连接</span></span><br><span class="line"><span class="comment">		&lt;property name="closeConnection" value="false" /&gt;这样就默认不关闭</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 数据源类型：</span></span><br><span class="line"><span class="comment">			POOLED：使用数据链接池</span></span><br><span class="line"><span class="comment">			UNPOOLED：不用连接池，传统JDBC，每次访问数据库均需要打开和关闭数据库 </span></span><br><span class="line"><span class="comment">			JNDI：从tomcat中获取一个内置的数据库链接池(数据库链接池-数据源)</span></span><br><span class="line"><span class="comment">			--&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:oracle:thin:@127.0.0.1:1521:ORCL"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"scott"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"tiger"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--因为我远端也有个数据库所以我可以再配一个环境--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"cloud"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.cj.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://eshyee,top:3306/test?useSSL=false<span class="symbol">&amp;amp;</span>serverTimezone=UTC"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"我的用户名"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"我的密码"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"top/eshyee/entity/studentMapper.xml"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于<code>Mapper.xml</code>的新增代码,无非就是增删改查✨</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentBystuNum"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">		select * from student where stuno= #&#123;stuno&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllStudent"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">		select * from student</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Student"</span> &gt;</span></span><br><span class="line">		insert into student(stuno,stuname,stuage,graname) values(#&#123;stuNo&#125;,#&#123;stuName&#125;,#&#123;stuAge&#125;,#&#123;graName&#125;)</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"upDateStuByNo"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">	update student set stuname=#&#123;stuName&#125;,stuage=#&#123;stuAge&#125;,graname=#&#123;graName&#125; where stuno=#&#123;stuNo&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteStuByNo"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">	delete from student where stuno=#&#123;stuno&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为查之前说了，这里就拿改学生信息来做个小测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改学生--按学号</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">updateStuByNo</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Reader reader = Resources.getResourceAsReader(<span class="string">"conf.xml"</span>);</span><br><span class="line">		SqlSessionFactory sessionfactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		SqlSession session = sessionfactory.openSession();</span><br><span class="line">		String statement = <span class="string">"top.eshyee.entity.studentMapper.upDateStuByNo"</span>;</span><br><span class="line">		Student stu=<span class="keyword">new</span> Student(<span class="number">2</span>,<span class="string">"小牛"</span>,<span class="number">33</span>,<span class="string">"二年级"</span>);</span><br><span class="line">		<span class="keyword">int</span> count = session.update(statement, stu);</span><br><span class="line">		session.commit();</span><br><span class="line">		System.out.println(<span class="string">"修改成功，"</span> + count + <span class="string">"行受影响"</span>);</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		selectAll();</span><br><span class="line">		updateStuByNo();</span><br><span class="line">		selectAll();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试，得到结果，注意要提交。</p>
+<img src="/2020/02/26/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80-5/image-20200226220001121.png" class="" title="mb1">
+
+<h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><p>本来都准备开始着手系列二了，结果发现还有一点东西没有涉及到，补个档☕</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MyBatis/" rel="tag">MyBatis</a>, <a class="has-link-grey -link" href="/tags/%E8%A1%A5%E6%A1%A3/" rel="tag">补档</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -186,9 +210,57 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zfb.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/ggh.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/26/CentOS7-3%E5%AE%89%E8%A3%85MySQL8/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">CentOS7.3安装MySQL8</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/26/MyBatis%E7%B3%BB%E5%88%97-%E4%BA%8C/">
+                <span class="level-item">MyBatis系列(二)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -837,7 +909,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="合格NPC" height="28">
+                    <img src="/images/logo1.svg" alt="MyBatis系列(一.5)" height="28">
                 
                 </a>
                 <p class="is-size-7">
