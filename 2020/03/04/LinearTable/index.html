@@ -7,23 +7,25 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>MyBatis系列(一) - 合格NPC</title>
+<title>LinearTable - 合格NPC</title>
 
 
-    <meta name="description" content="根据学校课程安排，学一波Mybatis✔">
+    <meta name="description" content="线性表–顺序表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis系列(一)">
-<meta property="og:url" content="http://eshyee.github.io/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/index.html">
+<meta property="og:title" content="LinearTable">
+<meta property="og:url" content="http://eshyee.github.io/2020/03/04/LinearTable/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="根据学校课程安排，学一波Mybatis✔">
+<meta property="og:description" content="线性表–顺序表">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-02-24T07:18:52.000Z">
-<meta property="article:modified_time" content="2020-02-26T14:21:36.685Z">
+<meta property="article:published_time" content="2020-03-04T03:19:33.000Z">
+<meta property="article:modified_time" content="2020-03-05T14:19:23.365Z">
 <meta property="article:author" content="EShyee">
-<meta property="article:tag" content="入门">
-<meta property="article:tag" content="初学者">
-<meta property="article:tag" content="mybatis">
+<meta property="article:tag" content="线性表">
+<meta property="article:tag" content="顺序表">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="动态分配">
+<meta property="article:tag" content="静态分配">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -84,7 +86,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="MyBatis系列(一)" height="28">
+                <img src="/images/logo1.svg" alt="LinearTable" height="28">
             
             </a>
         </div>
@@ -140,17 +142,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-24T07:18:52.000Z">2020-02-24</time>
+                <time class="level-item has-text-grey" datetime="2020-03-04T03:19:33.000Z">2020-03-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1075 个字)
+                    8 分钟 读完 (大约 1225 个字)
                 </span>
                 
                 
@@ -159,100 +161,78 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                MyBatis系列(一)
+                LinearTable
             
         </h1>
         <div class="content">
-            <p>根据学校课程安排，学一波Mybatis✔</p>
+            <p>线性表–顺序表</p>
 <a id="more"></a>
 
-<p>环境：</p>
-<ol>
-<li><p>JDK 13.0.2</p>
-</li>
-<li><p>tomcat 9.0.3</p>
-</li>
-<li><p>mybatis 3.5.4</p>
-</li>
-<li><p>mysql 8</p>
-</li>
-</ol>
-<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>早期为：ibatis：apache</p>
-<p>2010年被Google收购改称：Mybatis</p>
-<p>主要作用：简化JDBC操作，实现数据的持久化。</p>
-<p>ORM：Object Relational Mapping，可以使开发人员像操作对象一样操作数据库</p>
-<p>mybatis是ORM的一种实现</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>之前看过的一个教程是使用Idea的，也就是直接使用依赖库导入，这次看的是导入jar使用。</p>
-<h3 id="去官网"><a href="#去官网" class="headerlink" title="去官网"></a>去<a href="https://mybatis.org/mybatis-3/" title="此时是mybatis3">官网</a></h3><img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb1.png" class="" title="mb1">
+<h2 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>用顺序存储的方式实现线性表顺序存储。把逻辑上相邻的元素存储在位置上也相邻的存储单元中，元素之间的关系由存储单元的邻接关系来体现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a1-&gt;a2-&gt;a3-&gt;a4-&gt;a5</span><br><span class="line">在内存中也是</span><br><span class="line">a1-a2-a3-a4-a5</span><br></pre></td></tr></table></figure>
 
-<p>选择Getting Started</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb2.png" class="" title="mb2">
+<p>每个数据元素都是一样大的，即如果a1存放的位置为LOC(L),a2的位置=LOC(L)+数据元素的大小，a3的位置=LOC(L)+2*数据元素的大小…。</p>
+<h4 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof()"></a>sizeof()</h4><p>C语言中查看一个数据元素大小，使用sizeof(ElemType)。</p>
+<p>例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>)==<span class="number">4B</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">typedef</span> struct&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> people</span><br><span class="line">&#125; Customer;</span><br><span class="line"><span class="keyword">sizeof</span>(Customer)==<span class="number">8B</span></span><br></pre></td></tr></table></figure>
 
-<p>会有Maven方式，当然使用Idea就可以直接复制代码框内代码到idea中，但这次选择jar的超链接。</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb4.png" class="" title="mb4">
+<h3 id="数据表的实现"><a href="#数据表的实现" class="headerlink" title="数据表的实现"></a>数据表的实现</h3><h4 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10 <span class="comment">//定义最大长度</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	Elemtype data [MaxSize]; <span class="comment">//用静态的"数组"存放数据元素</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">//顺序表的当前长度</span></span><br><span class="line">&#125;SqList;<span class="comment">//顺序表的类型定义</span></span><br></pre></td></tr></table></figure>
 
-<p>就来到了熟悉的github，在最新版本下，有三个选项，这里选择第一个zip包下载。</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/image-20200224154635459.png" class="" width="20200224154635459">
+<p>这里就相当于一上来就定好了这么一个数据元素，内存为其分配连续的存储空间，大小为10.</p>
+<p>初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitList</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;MaxSize;i++)</span><br><span class="line">        L.data[i]=<span class="number">0</span>;<span class="comment">//各个元素初始化(根据需要不一定置零)，如果不进行这一行代码，可能会使元素中存入之前内存遗留的"脏数据".</span></span><br><span class="line">    L.length=<span class="number">0</span>;<span class="comment">//长度标识置零</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqList L;<span class="comment">//声名这个表</span></span><br><span class="line">    InitList(L);<span class="comment">//初始化这个表</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>下好之后是个zip，</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/zipmb.png" class="" title="zipmb">
+<p>缺点：<strong>存储空间不可变！</strong></p>
+<h4 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> InitSize 10 <span class="comment">//定义最大长度</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	Elemtype *data; <span class="comment">//指示动态分配数组的指针</span></span><br><span class="line">    <span class="keyword">int</span> MaxSize;<span class="comment">//顺序表的最大容量</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">//顺序表的当前长度</span></span><br><span class="line">&#125;SeqList;<span class="comment">//顺序表的类型定义</span></span><br></pre></td></tr></table></figure>
 
-<p>打开以后目录文件如图，</p>
-<p>lib文件夹存放mybatis的一些依赖包，</p>
-<p>license就是<del>字面意思</del> 许可证，</p>
-<p><code>mybatis-3.5.4.jar</code>即要用到的jar，</p>
-<p>.pdf即使用说明书，</p>
-<p>NOTICE也是<del>字面意思</del> 注意事项。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>简单实用一下：</p>
-<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>打开eclipse，新建一个JAVA项目，因为mybatis是操控数据库的，所以暂时可以先间隔Javaproject试一下。</p>
-<p>这里起名“TestMyBatis”，将<code>mybatis-3.5.4.jar</code>拖到src里面，顺便add to buildpath，添加环境。</p>
-<h3 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h3><p>打开cmd或者使用navicat，因为我的navicat建数据库总是会有数据编码混乱的问题，我一般建表都是用cmd。</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/persontable.png" class="" title="persontable">
+<h6 id="malloc-free"><a href="#malloc-free" class="headerlink" title="malloc \free"></a>malloc \free</h6><p>c语言中用于申请内存空间和释放内存空间的函数</p>
+<p>c++中是使用new 和delete</p>
+<p>malloc 会返回一个地址</p>
+<p><code>L.data=(ElemType *)malloc(sizeof(ElemType) * InitSize);</code></p>
+<p>比如 如果Elemtype为int，则上行代码为<code>L.data=(int *)malloc(sizeof(int)* InitSize);</code>，然后把返回的这个指针赋值给data。</p>
+<p>这里sizeof就是查看这数据元素的长度 然后成上大小，就完成这个内存空间的分配 然后返回地址，然后取出地址的指针赋给data。</p>
+<p>具体例子</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> InitSize 10 <span class="comment">//定义最大长度</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> *data; <span class="comment">//指示动态分配数组的指针</span></span><br><span class="line">    <span class="keyword">int</span> MaxSize;<span class="comment">//顺序表的最大容量</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">//顺序表的当前长度</span></span><br><span class="line">&#125;SeqList;<span class="comment">//顺序表的类型定义</span></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitList</span><span class="params">(SeqList &amp;L)</span></span>&#123;</span><br><span class="line"><span class="comment">//用malloc函数申请一篇连续的存储空间</span></span><br><span class="line">    L.data=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)* InitSize);</span><br><span class="line">    L.length=<span class="number">0</span>;</span><br><span class="line">    L.MaxSize=InitSize;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//增加动态数组的长度</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">IncreaseSize</span><span class="params">(SeqList &amp;L,<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *p=L.data;</span><br><span class="line">    L.data=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)* (L.MaxSize+len));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)&#123;</span><br><span class="line">        L.data[i]=p[i];<span class="comment">//将数据复制到新区域</span></span><br><span class="line">    &#125;</span><br><span class="line">    L.MaxSize=L.MaxSzie+len;<span class="comment">//顺序表最大长度增加len</span></span><br><span class="line">    <span class="built_in">free</span>(p);<span class="comment">//释放原来的内存空间</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SeqList L;</span><br><span class="line">    InitList(L);<span class="comment">//初始化</span></span><br><span class="line">    IncreaseSize(L,<span class="number">5</span>);<span class="comment">//增加动态数据的长度</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="创建实体类及映射关系"><a href="#创建实体类及映射关系" class="headerlink" title="创建实体类及映射关系"></a>创建实体类及映射关系</h3><p>创建实体类 Person</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/person.png" class="" title="person">
+<p>在增加长度的过程中，会先申请一个新的空间(增加后的大小),然后把之前存放的数据元素放到新空间里，然后释放旧空间。</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>随机访问，可以在O(1)时间内找到第i个元素。<code>data[i-1]</code></p>
+<p>存储密度搞，每个节点只存储数据元素</p>
+<p>拓展容量不方便（即使采用动态存储分配的方式实现，拓展长度的时间复杂度也比较高）</p>
+<p>插入、删除操作不方便，需要移动大量元素</p>
+<h3 id="顺序表的基本操作"><a href="#顺序表的基本操作" class="headerlink" title="顺序表的基本操作"></a>顺序表的基本操作</h3><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>ListInsert(&amp;L ,i,e):插入操作，在表L中的第i个位置上插入指定元素e。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data[MaxSize];</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;SqList;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ListInsert</span><span class="params">(SqList &amp;L ,<span class="keyword">int</span> i,<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">1</span> || i &gt; L.length + <span class="number">1</span>)<span class="comment">//判断i的范围是否有效</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span> (L.length &gt;= MaxSize)<span class="comment">//当前存储空间已满，不能插入</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=L.length;j&gt;=i;j--)</span><br><span class="line">        L.data[j]=L.data[j<span class="number">-1</span>];<span class="comment">//将第i个元素及之后的元素后移</span></span><br><span class="line">    L.data[i<span class="number">-1</span>]=e;<span class="comment">//在位置i处放入e</span></span><br><span class="line">    L.length++;<span class="comment">//长度+1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqList L;</span><br><span class="line">    InitList(L);</span><br><span class="line">    ListInsert(L,<span class="number">3</span>,<span class="number">3</span>);<span class="comment">//往第三个位置插入数据元素3</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>构建这个类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String id;</span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String id, String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>();</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h5><p>最好情况：新元素插入到表尾，不需要移动元素</p>
+<p>i=n+1，循环0次，<strong>最好时间复杂度=O(1)</strong></p>
+<p>最坏情况：新元素插入到表头，需要把原有的n个元素向后移动</p>
+<p>i=1,循环n次,<strong>最坏时间复杂度=O(n)</strong></p>
+<p>平均情况：新元素随即插入任何位置，平均概率为p=1/(n+1)</p>
+<p>则平均循环次数为n/2,化简后，<strong>平均时间复杂度=O(n)</strong></p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>ListDelete(&amp;L ,i,&amp;e):删除操作。删除表L中第i个位置的元素，并用e返回删除元素的值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data[MaxSize];</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;SqList;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ListDelete</span><span class="params">(SqList &amp;L ,<span class="keyword">int</span> i,<span class="keyword">int</span> &amp;e)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">1</span> || i &gt; L.length + <span class="number">1</span>)<span class="comment">//判断i的范围是否有效</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	e=L.data[i<span class="number">-1</span>];<span class="comment">//将被删除的元素复制给e</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;L.length;j++)</span><br><span class="line">        L.data[j<span class="number">-1</span>]=L.data[j];<span class="comment">//将第i个元素及之后的元素后前移</span></span><br><span class="line">    L.length--;<span class="comment">//长度-1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqList L;</span><br><span class="line">    InitList(L);</span><br><span class="line">    <span class="keyword">int</span> e=<span class="number">-1</span>;<span class="comment">//用变量e把删除的元素带回来</span></span><br><span class="line">    <span class="keyword">if</span>(ListDelete(L,<span class="number">3</span>,e))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"删除成功，删除元素为%d\n"</span>,e);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"删除失败，位序i不合法\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>创建配置文件映射表和类的映射 <code>.xml</code>文件</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/this.png" class="" title="this">
+<h5 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h5><p>与插入操作的类似且相反</p>
+<p>最好情况 删除表尾元素 O(1)</p>
+<p>最坏情况 删除表头元素O(n)</p>
+<p>平均情况 随机位置删除 O(n/2)即O(n)</p>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><p>位序i与数组小标为i的区别（前者从1开始，后者从0开始）</p>
+<h4 id="按位查找"><a href="#按位查找" class="headerlink" title="按位查找"></a>按位查找</h4><p>GetElem(L,i):按位查找操作，获取L中第i个位置的元素的值。</p>
+<h5 id="静态分配方式"><a href="#静态分配方式" class="headerlink" title="静态分配方式"></a>静态分配方式</h5><p>直接选择第i个元素就行了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	Elemtype data [MaxSize]; </span><br><span class="line">    <span class="keyword">int</span> length; </span><br><span class="line">&#125;SqList;</span><br><span class="line"><span class="function">ElemType <span class="title">GetElem</span><span class="params">(SqList L,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> L.data[i<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>点这里转换视图</p>
-<p>在刚刚的.pdf文件中有大概的配置方法，打开后找到“<strong>Exploring Mapped SQL Statements</strong>”</p>
-<p>下面有</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.mybatis.example.BlogMapper"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectBlog"</span> <span class="attr">resultType</span>=<span class="string">"Blog"</span>&gt;</span>    </span><br><span class="line">        select * from Blog where id = #&#123;id&#125;  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="动态分配方式"><a href="#动态分配方式" class="headerlink" title="动态分配方式"></a>动态分配方式</h5><p>也是直接选择第i个位置就行</p>
+<p>data是个指针，data[i]返回的即内存中data开始到往后sizeof(ElemType)个字节 的数据。</p>
+<p>即如果sizeof(ElemType)=3B，data指向123，data[i]= 123+i*3的内容。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> InitSize 10 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	Elemtype *data; </span><br><span class="line">    <span class="keyword">int</span> MaxSize;</span><br><span class="line">    <span class="keyword">int</span> length; </span><br><span class="line">&#125;SeqList;</span><br><span class="line"><span class="function">ElemType <span class="title">GetElem</span><span class="params">(SqList L,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> L.data[i<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>直接复制，到刚刚的xml中，更改<code>namespace</code> 后面的内容为自己的xml<code>top.eshyee.entity.personMapper</code> </p>
-<p>改完之后</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span>  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"top.eshyee.entity.personMapper"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryPersonById"</span> <span class="attr">resultType</span>=<span class="string">"Person"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span>&gt;</span></span><br><span class="line">		select * from person where id= #&#123;id&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="时间复杂度-2"><a href="#时间复杂度-2" class="headerlink" title="时间复杂度"></a>时间复杂度</h5><p>O(1)</p>
+<h4 id="按值查找"><a href="#按值查找" class="headerlink" title="按值查找"></a>按值查找</h4><p>LocateElem(L,e):按值查找操作，在表中查找给定关键字值的元素。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> InitSize 10 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	Elemtype *data; </span><br><span class="line">    <span class="keyword">int</span> MaxSize;</span><br><span class="line">    <span class="keyword">int</span> length; </span><br><span class="line">&#125;SeqList;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocateElem</span><span class="params">(SqList L,<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(L.data[i]==e)</span><br><span class="line">			<span class="keyword">return</span> i+<span class="number">1</span>;<span class="comment">//返回的是位序</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在创建一个配置文件，在src下创建一个叫<code>config.xml</code>的文件。</p>
-<p>在pdf中查找“<strong>Building SqlSessionFactory from XML</strong>”</p>
-<p>这里需要提前准备好一个用来链接的jar <em>MySQL connector</em> </p>
-<p>网址：<a href="https://dev.mysql.com/downloads/connector/j/">https://dev.mysql.com/downloads/connector/j/</a></p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/connector.png" class="" title="connector">
-
-<p>选zip，下好之后，里面乱七八糟的东西就不细致分析了，会点工地英语看看就好。主要使用<code>mysql-connector-java-8.0.19.jar</code>。拖到eclipse ，add一下环境。</p>
-<p>配置xml如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Config 3.0//EN"</span>  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.cj.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/test?useSSL=false<span class="symbol">&amp;amp;</span>serverTimezone=UTC"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"你的用户名"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"你的密码"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"top/eshyee/entity/personMapper.xml"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>ok写个测试用例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="comment">//加载config</span></span><br><span class="line">		Reader reader =Resources.getResourceAsReader(<span class="string">"config.xml"</span>);</span><br><span class="line">		SqlSessionFactory sessionFactory=<span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		SqlSession session= sessionFactory.openSession();</span><br><span class="line">		String statement =<span class="string">"top.eshyee.entity.personMapper.queryPersonById"</span>;</span><br><span class="line">		Person person=session.selectOne(statement,<span class="string">"1234567890"</span>);</span><br><span class="line">    <span class="comment">//这里的1234567890是我接下来要插入的字符串</span></span><br><span class="line">		System.out.println(person.toString());</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时在person下写一个toString()方法，这个可以自己来定，只要能看到person里的值就🉑。</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试以下~~在数据库中插入一行数据</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb6.png" class="" title="mb6">
-
-<p>run一下test</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb7.png" class="" title="mb7">
-
-<p>🆗</p>
-<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
-<li>写完之后run的时候除了问题，报了一坨错其中有个<strong>timezone</strong>…想起来url写的<code>jdbc:mysql://localhost:3306/test</code>,然后后面加了<code>?useSSL=false&amp;serverTimezone=UTC</code>,结果还不对，就百度了一下<code>&amp;</code>在xml中是一种很神奇的存在得写成<code>&amp;amp;</code>.</li>
-<li>Resource导包的时候选择<code>org.apache.ibatis.io.*;</code> </li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相对于写DButil方便了不少。</p>
+<h5 id="时间复杂度-3"><a href="#时间复杂度-3" class="headerlink" title="时间复杂度"></a>时间复杂度</h5><p>最好情况 要查找的元素在第一个位置 最好时间复杂度=O(1)</p>
+<p>最坏情况 要查找的元素在最后一个位置 最坏时间复杂度=O(n)</p>
+<p>平均情况 要查找的元素在随机位置 平均时间复杂度=O((n+1)/2)即O(n)</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>还总结？要啥自行车啊🥡</p>
 
         </div>
         
@@ -260,7 +240,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/mybatis/" rel="tag">mybatis</a>, <a class="has-link-grey -link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a>, <a class="has-link-grey -link" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" rel="tag">初学者</a>
+                    <a class="has-link-grey -link" href="/tags/C/" rel="tag">C</a>, <a class="has-link-grey -link" href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/" rel="tag">动态分配</a>, <a class="has-link-grey -link" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="tag">线性表</a>, <a class="has-link-grey -link" href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/" rel="tag">静态分配</a>, <a class="has-link-grey -link" href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" rel="tag">顺序表</a>
                 </div>
             </div>
         </div>
@@ -306,17 +286,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Oracle系列学习(一)</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/23/%E7%BB%88%E4%BA%8E%E9%97%B2%E4%B8%8B%E6%9D%A5%EF%BC%8C%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%88%91%E5%BB%BABlog%E4%B9%8B%E8%B7%AF/">
-                <span class="level-item">终于闲下来，说一说我建Blog之路</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/03/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%8C/">
+                <span class="level-item">Oracle系列学习(二)</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1159,7 +1132,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="MyBatis系列(一)" height="28">
+                    <img src="/images/logo1.svg" alt="LinearTable" height="28">
                 
                 </a>
                 <p class="is-size-7">

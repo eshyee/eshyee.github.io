@@ -7,23 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>MyBatis系列(一) - 合格NPC</title>
+<title>Oracle系列学习(二) - 合格NPC</title>
 
 
-    <meta name="description" content="根据学校课程安排，学一波Mybatis✔">
+    <meta name="description" content="关于土豆🥔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis系列(一)">
-<meta property="og:url" content="http://eshyee.github.io/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/index.html">
+<meta property="og:title" content="Oracle系列学习(二)">
+<meta property="og:url" content="http://eshyee.github.io/2020/03/03/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%8C/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="根据学校课程安排，学一波Mybatis✔">
+<meta property="og:description" content="关于土豆🥔">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-02-24T07:18:52.000Z">
-<meta property="article:modified_time" content="2020-02-26T14:21:36.685Z">
+<meta property="article:published_time" content="2020-03-03T03:23:33.000Z">
+<meta property="article:modified_time" content="2020-03-03T03:47:58.782Z">
 <meta property="article:author" content="EShyee">
-<meta property="article:tag" content="入门">
-<meta property="article:tag" content="初学者">
-<meta property="article:tag" content="mybatis">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -84,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="MyBatis系列(一)" height="28">
+                <img src="/images/logo1.svg" alt="Oracle系列学习(二)" height="28">
             
             </a>
         </div>
@@ -140,17 +138,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-24T07:18:52.000Z">2020-02-24</time>
+                <time class="level-item has-text-grey" datetime="2020-03-03T03:23:33.000Z">2020-03-03</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">Oracle系列</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1075 个字)
+                    几秒 读完 (大约 8 个字)
                 </span>
                 
                 
@@ -159,108 +157,18 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                MyBatis系列(一)
+                Oracle系列学习(二)
             
         </h1>
         <div class="content">
-            <p>根据学校课程安排，学一波Mybatis✔</p>
-<a id="more"></a>
-
-<p>环境：</p>
-<ol>
-<li><p>JDK 13.0.2</p>
-</li>
-<li><p>tomcat 9.0.3</p>
-</li>
-<li><p>mybatis 3.5.4</p>
-</li>
-<li><p>mysql 8</p>
-</li>
-</ol>
-<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>早期为：ibatis：apache</p>
-<p>2010年被Google收购改称：Mybatis</p>
-<p>主要作用：简化JDBC操作，实现数据的持久化。</p>
-<p>ORM：Object Relational Mapping，可以使开发人员像操作对象一样操作数据库</p>
-<p>mybatis是ORM的一种实现</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>之前看过的一个教程是使用Idea的，也就是直接使用依赖库导入，这次看的是导入jar使用。</p>
-<h3 id="去官网"><a href="#去官网" class="headerlink" title="去官网"></a>去<a href="https://mybatis.org/mybatis-3/" title="此时是mybatis3">官网</a></h3><img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb1.png" class="" title="mb1">
-
-<p>选择Getting Started</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb2.png" class="" title="mb2">
-
-<p>会有Maven方式，当然使用Idea就可以直接复制代码框内代码到idea中，但这次选择jar的超链接。</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb4.png" class="" title="mb4">
-
-<p>就来到了熟悉的github，在最新版本下，有三个选项，这里选择第一个zip包下载。</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/image-20200224154635459.png" class="" width="20200224154635459">
-
-<p>下好之后是个zip，</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/zipmb.png" class="" title="zipmb">
-
-<p>打开以后目录文件如图，</p>
-<p>lib文件夹存放mybatis的一些依赖包，</p>
-<p>license就是<del>字面意思</del> 许可证，</p>
-<p><code>mybatis-3.5.4.jar</code>即要用到的jar，</p>
-<p>.pdf即使用说明书，</p>
-<p>NOTICE也是<del>字面意思</del> 注意事项。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>简单实用一下：</p>
-<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>打开eclipse，新建一个JAVA项目，因为mybatis是操控数据库的，所以暂时可以先间隔Javaproject试一下。</p>
-<p>这里起名“TestMyBatis”，将<code>mybatis-3.5.4.jar</code>拖到src里面，顺便add to buildpath，添加环境。</p>
-<h3 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h3><p>打开cmd或者使用navicat，因为我的navicat建数据库总是会有数据编码混乱的问题，我一般建表都是用cmd。</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/persontable.png" class="" title="persontable">
-
-<h3 id="创建实体类及映射关系"><a href="#创建实体类及映射关系" class="headerlink" title="创建实体类及映射关系"></a>创建实体类及映射关系</h3><p>创建实体类 Person</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/person.png" class="" title="person">
-
-<p>构建这个类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String id;</span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String id, String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>();</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>创建配置文件映射表和类的映射 <code>.xml</code>文件</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/this.png" class="" title="this">
-
-<p>点这里转换视图</p>
-<p>在刚刚的.pdf文件中有大概的配置方法，打开后找到“<strong>Exploring Mapped SQL Statements</strong>”</p>
-<p>下面有</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.mybatis.example.BlogMapper"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectBlog"</span> <span class="attr">resultType</span>=<span class="string">"Blog"</span>&gt;</span>    </span><br><span class="line">        select * from Blog where id = #&#123;id&#125;  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>直接复制，到刚刚的xml中，更改<code>namespace</code> 后面的内容为自己的xml<code>top.eshyee.entity.personMapper</code> </p>
-<p>改完之后</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span>  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"top.eshyee.entity.personMapper"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryPersonById"</span> <span class="attr">resultType</span>=<span class="string">"Person"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span>&gt;</span></span><br><span class="line">		select * from person where id= #&#123;id&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在创建一个配置文件，在src下创建一个叫<code>config.xml</code>的文件。</p>
-<p>在pdf中查找“<strong>Building SqlSessionFactory from XML</strong>”</p>
-<p>这里需要提前准备好一个用来链接的jar <em>MySQL connector</em> </p>
-<p>网址：<a href="https://dev.mysql.com/downloads/connector/j/">https://dev.mysql.com/downloads/connector/j/</a></p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/connector.png" class="" title="connector">
-
-<p>选zip，下好之后，里面乱七八糟的东西就不细致分析了，会点工地英语看看就好。主要使用<code>mysql-connector-java-8.0.19.jar</code>。拖到eclipse ，add一下环境。</p>
-<p>配置xml如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Config 3.0//EN"</span>  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.cj.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/test?useSSL=false<span class="symbol">&amp;amp;</span>serverTimezone=UTC"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"你的用户名"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"你的密码"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"top/eshyee/entity/personMapper.xml"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>ok写个测试用例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="comment">//加载config</span></span><br><span class="line">		Reader reader =Resources.getResourceAsReader(<span class="string">"config.xml"</span>);</span><br><span class="line">		SqlSessionFactory sessionFactory=<span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		SqlSession session= sessionFactory.openSession();</span><br><span class="line">		String statement =<span class="string">"top.eshyee.entity.personMapper.queryPersonById"</span>;</span><br><span class="line">		Person person=session.selectOne(statement,<span class="string">"1234567890"</span>);</span><br><span class="line">    <span class="comment">//这里的1234567890是我接下来要插入的字符串</span></span><br><span class="line">		System.out.println(person.toString());</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时在person下写一个toString()方法，这个可以自己来定，只要能看到person里的值就🉑。</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试以下~~在数据库中插入一行数据</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb6.png" class="" title="mb6">
-
-<p>run一下test</p>
-<img src="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/mb7.png" class="" title="mb7">
-
-<p>🆗</p>
-<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
-<li>写完之后run的时候除了问题，报了一坨错其中有个<strong>timezone</strong>…想起来url写的<code>jdbc:mysql://localhost:3306/test</code>,然后后面加了<code>?useSSL=false&amp;serverTimezone=UTC</code>,结果还不对，就百度了一下<code>&amp;</code>在xml中是一种很神奇的存在得写成<code>&amp;amp;</code>.</li>
-<li>Resource导包的时候选择<code>org.apache.ibatis.io.*;</code> </li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相对于写DButil方便了不少。</p>
-
+            <a href="/2020/03/02/%E5%85%B3%E4%BA%8E%E5%9C%9F%E8%B1%86%F0%9F%A5%94/" title="关于土豆🥔">关于土豆🥔</a>
         </div>
         
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/mybatis/" rel="tag">mybatis</a>, <a class="has-link-grey -link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a>, <a class="has-link-grey -link" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" rel="tag">初学者</a>
+                    <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
                 </div>
             </div>
         </div>
@@ -307,16 +215,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/04/LinearTable/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Oracle系列学习(一)</span>
+                <span class="level-item">LinearTable</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/23/%E7%BB%88%E4%BA%8E%E9%97%B2%E4%B8%8B%E6%9D%A5%EF%BC%8C%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%88%91%E5%BB%BABlog%E4%B9%8B%E8%B7%AF/">
-                <span class="level-item">终于闲下来，说一说我建Blog之路</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/02/%E5%85%B3%E4%BA%8E%E5%9C%9F%E8%B1%86%F0%9F%A5%94/">
+                <span class="level-item">关于土豆🥔</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1159,7 +1067,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="MyBatis系列(一)" height="28">
+                    <img src="/images/logo1.svg" alt="Oracle系列学习(二)" height="28">
                 
                 </a>
                 <p class="is-size-7">
