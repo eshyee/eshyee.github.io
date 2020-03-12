@@ -398,7 +398,8 @@ img.thumbnail {
 }
 .content code {
   padding: 0;
-  background: transparent;
+  color: #5e81ac;
+  background: #eceff4;
 }
 .content > code,
 .content :not(pre) > code {
