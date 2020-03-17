@@ -7,21 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Oracle系列学习(一) - 合格NPC</title>
+<title>需求分析学习笔记-1 - 合格NPC</title>
 
 
-    <meta name="description" content="之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle">
+    <meta name="description" content="3-3需求分析案例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle系列学习(一)">
-<meta property="og:url" content="http://eshyee.github.io/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/index.html">
+<meta property="og:title" content="需求分析学习笔记-1">
+<meta property="og:url" content="http://eshyee.github.io/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle">
+<meta property="og:description" content="3-3需求分析案例">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-02-25T02:22:43.000Z">
-<meta property="article:modified_time" content="2020-03-03T03:25:19.139Z">
+<meta property="article:published_time" content="2020-03-17T08:03:05.000Z">
+<meta property="article:modified_time" content="2020-03-17T08:06:00.794Z">
 <meta property="article:author" content="EShyee">
-<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="需求分析">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="Oracle系列学习(一)" height="28">
+                <img src="/images/logo1.svg" alt="需求分析学习笔记-1" height="28">
             
             </a>
         </div>
@@ -138,17 +138,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-25T02:22:43.000Z">2020-02-25</time>
+                <time class="level-item has-text-grey" datetime="2020-03-17T08:03:05.000Z">2020-03-17</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">Oracle系列</a>
+                <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">需求分析</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 635 个字)
+                    15 分钟 读完 (大约 2206 个字)
                 </span>
                 
                 
@@ -157,76 +157,54 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Oracle系列学习(一)
+                需求分析学习笔记-1
             
         </h1>
         <div class="content">
-            <p>之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle</p>
-<a id="more"></a>
+            <h2 id="3-3需求分析案例"><a href="#3-3需求分析案例" class="headerlink" title="3-3需求分析案例"></a>3-3需求分析案例</h2><a id="more"></a>
 
-<p>环境：</p>
-<ol>
-<li>Oracle 11g</li>
-</ol>
-<h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2><p>下载网址:<a href="https://www.oracle.com/cn/downloads/">https://www.oracle.com/cn/downloads/</a></p>
-<p>选择11g,会有下载选项，两个file都要下载的。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/xz.png" class="" title="xz">
+<p>“Android点餐系统”项目案例需求获取资料介绍如下：</p>
+<h3 id="1-目标和范围"><a href="#1-目标和范围" class="headerlink" title="(1)目标和范围"></a>(1)目标和范围</h3><p>本软件主要作用是为点餐者提供一套可以在移动设备(手机、平板)上运行的点餐软件。 系统分为前台和后台,前台是点餐者使用的，点餐者可以在移动设备上查看餐馆所有的菜目、价格、简单的菜品介绍以及餐馆的特色菜介绍，同时点餐者还可以查看、取消自己已经挑选的菜品，最后上传订单。后台是管理员使用的，管理员可以在后进行订单管理、用户管理、菜谱管理等。</p>
+<h3 id="2-系统角色和职责"><a href="#2-系统角色和职责" class="headerlink" title="(2)系统角色和职责"></a>(2)系统角色和职责</h3><p>系统的使用人群包括两类管理员:系统的维护，订单管理、菜品的增删。</p>
+<p>普通用户:注册账号，点餐、座位预订。</p>
+<h3 id="3-系统处理功能要求"><a href="#3-系统处理功能要求" class="headerlink" title="(3)系统处理功能要求"></a>(3)系统处理功能要求</h3><p>查询菜品<br>设置菜品<br>顾客下单<br>订单处理<br>数据处理</p>
+<h3 id="4-系统其他要求"><a href="#4-系统其他要求" class="headerlink" title="(4)系统其他要求"></a>(4)系统其他要求</h3><p>本系统客户端要求符合大众操作习惯，与网上其他的Android系统App操作方式保持基本一致。餐馆要求每笔订单交易误差不得超过工角，每天交易额的误差不得超过100元。5年内价位在500元以上的Android手机都可以流畅运行该系统。</p>
+<h2 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h2><p>工作的输入是需求定义阶段产生的业务事件列表和报表列表，输出的是领域模型和用例模型。</p>
+<p>针对每个业务事件进行业务流程分析、业务实体分析和用例分析;</p>
+<p>针对每类报表进行业务实体分析和用例分析。</p>
+<h3 id="业务流程分析"><a href="#业务流程分析" class="headerlink" title="业务流程分析"></a>业务流程分析</h3><p>在分析过程中，要注意抓住核心业务和主要活动点、部门内以及部门之间的衔接，工作中的烦琐及反复的环节，成本高、效率低、时间长的环节以及任务转手次数较多的环节。</p>
+<p>“Android点餐系统”中的主要业务就是点餐，我们要围绕点餐的主业务展开分析。</p>
+<h4 id="业务流程分析的过程中的三个关键的要点"><a href="#业务流程分析的过程中的三个关键的要点" class="headerlink" title="业务流程分析的过程中的三个关键的要点"></a>业务流程分析的过程中的三个关键的要点</h4><p>一是理解流程的层次性，其中包含三大层次，有组织级，部门级<br>岗位级;</p>
+<p>二是了解流程的类型，包括生产性流程，管理性流程和支持性流<br>程;</p>
+<p>三是掌握以业务事件识别、寻找流程的技巧。</p>
+<h4 id="产物"><a href="#产物" class="headerlink" title="产物"></a>产物</h4><p>跨职责流程图<br>活动图<br>数据流图</p>
+<h4 id="基于Android平台的点餐系统的总体流程包括的步骤有"><a href="#基于Android平台的点餐系统的总体流程包括的步骤有" class="headerlink" title="基于Android平台的点餐系统的总体流程包括的步骤有"></a>基于Android平台的点餐系统的总体流程包括的步骤有</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(1)顾客在智能手机上登录点餐系统客户端后，自动进入</span><br><span class="line">菜谱界面，查看菜谱;</span><br><span class="line">(2)顾客选择菜品进行下单;</span><br><span class="line">(3)顾客选择菜品数量，若需在餐厅用餐还需选择座位号;</span><br><span class="line">(4)选择完成并确定后，提交订单;</span><br><span class="line">(5)订单提交后，订单数据会上传到服务器;</span><br><span class="line">(6)订单提交后，顾客可以在客户端查看自己的订单情况;</span><br><span class="line">(7)在管理员未确认订单之前，顾客可以对订单进行修改或取消操作;</span><br><span class="line">(8)管理员登录点餐系统服务器端，对用户订单进行确认;</span><br></pre></td></tr></table></figure>
 
-<p>把两个zip解压在一个文件下，双击“<strong>setup</strong>”进行安装</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225120405331.png" class="" title="image-20200225120405331">
+<h4 id="跨职责流程图的应用"><a href="#跨职责流程图的应用" class="headerlink" title="跨职责流程图的应用"></a>跨职责流程图的应用</h4><p>跨指责流程图绘制要点是在进行业务流程分析时，采用的关键入手点为部门级的业务流程，也就是从业务事件出发，分析该业务事件会触发的一系列活动。要真正保障绘制出来的跨职责流程图是真实、有效的，就必须强化用户的参与。</p>
+<p>我们应先找到业务事件的负责人，然后通过设问的方式，让他描述响应该业务事件所进行的活动,说明活动的执行岗位以及它们之间的关系、数据传递。</p>
+<p>(三)活动图<br>活动图是一种表述过程机理、业务过程以及工作流的技术。它可以用来对业务过程、工作流建模，也可以对用例实现甚至是程序实现来建模。<br>活动图的主要元素包含<strong>初始节点</strong>和<strong>活动终点</strong>、<strong>活动节点转换</strong>、<strong>分支与监护条件</strong>、<strong>分岔</strong>与<strong>汇合</strong>等。</p>
+<h4 id="数据流程图"><a href="#数据流程图" class="headerlink" title="数据流程图"></a>数据流程图</h4><p>点餐系统由客户端和服务器端两部分组成，客户端主要负责点菜，服务器端负责信息管理。</p>
+<h5 id="客户端的基本流程"><a href="#客户端的基本流程" class="headerlink" title="客户端的基本流程"></a>客户端的基本流程</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(1)用户输入正确的登录信息进入系统，若登录信息不对，系统提示重新输入登录系统，直到用户成功登录系统，新用户要先进行注册并注册成功才可以登录系统。</span><br><span class="line">(2)用户成功登录系统后，可先查看菜品信息，选择菜品及数量，若需在餐馆用餐还需选择座位，完成后进行下单操作。</span><br><span class="line">(3)用户可以查看自己的订单，在订单未确定的情况下，可以修改或取消订单。</span><br></pre></td></tr></table></figure>
 
-<p>一波疯狂下一步就好了✔</p>
-<p>这里安装的是<strong>桌面类，企业版</strong></p>
-<p>安装完成后会有<strong>Database Configuration Assistant</strong>，选择<strong>口令管理</strong></p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140230194.png" class="" title="image-20200225120405331">
+<h5 id="服务器端的基本流程"><a href="#服务器端的基本流程" class="headerlink" title="服务器端的基本流程"></a>服务器端的基本流程</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)管理员输入正确的登录信息进入系统，若登录信息不对，系统会提示重新输入登录信息，直到管理员成功登录系统。</span><br><span class="line">(2)管理员成功进入系统后，可进行各类信息的管理，如菜品信息管理、用户信息管理、订单管理等，其实就是对上述信息进行添加、删除及修改操作。</span><br></pre></td></tr></table></figure>
 
-<p>分别选择<strong>sys ，system 和scott</strong>，解锁，修改口令为”<strong>sys</strong>“,”<strong>system</strong>“,”<strong>tiger</strong>“(不带引号)。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140548831.png" class="" title="image-20200225120405331">
-
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140606895.png" class="" title="image-20200225120405331">
-
-<p>然后点击确定，只要没输错 ，就不要管提示。</p>
-<p>ok，Oracle11g就在电脑上成功安装。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140804868.png" class="" title="image-20200225120405331">
-
-<h2 id="使用测试"><a href="#使用测试" class="headerlink" title="使用测试"></a>使用测试</h2><p>打开sqlplus</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225141806309.png" class="" title="image-20200225120405331">
-
-<p>输入scott,口令就是tiger</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225141901711.png" class="" title="image-20200225120405331">
-
-<p>查看一下所有表</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225142136582.png" class="" title="image-20200225120405331">
-
-<h2 id="连接到navicat"><a href="#连接到navicat" class="headerlink" title="连接到navicat"></a>连接到navicat</h2><p>打开navicat</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143308994.png" class="" title="image-20200225120405331">
-
-<p>新建链接+，如图配置，我这里选择的是以system链接，password就是安装的时候填的口令。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143446828.png" class="" title="image-20200225120405331">
-
-<p>advanced页面把SYSDBA选一下</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143714410.png" class="" title="image-20200225120405331">
-
-<p>测试链接，连接成功！</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145319695.png" class="" title="image-20200225120405331">
-
-<p>打开Oracle的连接，查看目录：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145447644.png" class="" title="image-20200225120405331">
-
-<p>打开scott，查看里面的表，当然跟刚刚查询到的是一样的</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145609209.png" class="" title="image-20200225120405331">
-
-<p>然后是sysman里面的表(709张😵)：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145653505.png" class="" title="image-20200225120405331">
-
-<p>system里面有156张：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145931982.png" class="" title="image-20200225120405331">
-
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
-<li><strong>不要轻易尝试最新版。</strong>我一开始下的是最新版(19)，然后一切都是常规安装，但是当时就卡在45%不动了，卡了一下午。是一个实例没有安装好，sqlplus能运行，但是navicat连不上(可能是配置问题)。最后中止安装删除D盘文件，C盘文件，注册表等。重新下的11g。</li>
-<li><strong>安装过程中尽量不要在电脑上干别的事情。</strong>不知道是运气不好，还是怎么着，安装11g的时候一开始好好的，我就去搞别的事情了，但是过一会回来看，卡在60%了。又是一下午，最后无奈中止，重启安装文件，安装成功。</li>
-<li>如果忘记设置口令，问题不大，后期可以改。(<strong>alter user scott account unlock;</strong>)</li>
-</ol>
+<h3 id="业务实体分析"><a href="#业务实体分析" class="headerlink" title="业务实体分析"></a>业务实体分析</h3><p>要了解这个问题域中有哪些业务实体，它们之间存在什么样的逻辑关系、数量关系，以及有什么相应的结构规则。</p>
+<h4 id="1-业务实体分析任务概述"><a href="#1-业务实体分析任务概述" class="headerlink" title="1.业务实体分析任务概述"></a>1.业务实体分析任务概述</h4><p>“自底向上”</p>
+<p>识别出业务实体<br>确定实体间关系<br>定义实体关健属性</p>
+<p>业务实体分析的产物有两种可选的模型，包括类图和E/R模型也叫实体关系图。</p>
+<h4 id="2-类图"><a href="#2-类图" class="headerlink" title="2.类图"></a>2.类图</h4><h5 id="根据边界类、控制类、实体类帮助分析系统中的类"><a href="#根据边界类、控制类、实体类帮助分析系统中的类" class="headerlink" title="根据边界类、控制类、实体类帮助分析系统中的类"></a>根据边界类、控制类、实体类帮助分析系统中的类</h5><p>(1)领域建模方法</p>
+<p>领域建模时，其工作主要就是识别标识类、明确类之间的逻辑关系和数量关系以及添加重要的结构规则三个方面。</p>
+<p>(2)建立类之间的关联</p>
+<p>(3)添加类的重要属性</p>
+<h5 id="分析模型中有3种十分有用的构造型即实体类、控制类和边界类。"><a href="#分析模型中有3种十分有用的构造型即实体类、控制类和边界类。" class="headerlink" title="分析模型中有3种十分有用的构造型即实体类、控制类和边界类。"></a>分析模型中有3种十分有用的构造型即实体类、控制类和边界类。</h5><p>实体类:即实体对象的抽象，通常来自域模型也就是现实世界，用来描述具体的实体，通常映射到数据库表格与文件中;</p>
+<p>控制类:即控制对象的抽象，主要用来体现应用程序的执行逻辑，将其抽象出来，可以使得变化不影响用户界面和数据库中的表;</p>
+<p>边界类:即边界对象的抽象，通常是用来完成参与者(用户、外部系统)与系统之间交互的对象，例如From、对话框、菜单、接口等。</p>
+<h4 id="3-E-R图应用基础"><a href="#3-E-R图应用基础" class="headerlink" title="3.E/R图应用基础"></a>3.E/R图应用基础</h4><p>数据建模过程的优势体现在能够更好地与后续的数据库设计<br>结合;</p>
+<p>缺点是语义相对于类图来说更弱一些，同时对面向对象开发的指导作用相对差- - .些。</p>
+<p>概念模型是需求人员的视图，等价于现在出镜率很高的领域模型;</p>
+<p>逻辑模型是开发人员(包括设计人员)的视图，它约等于面向对象分析与设计方法中提到的“分析模型”。</p>
+<h5 id="概念模型与逻辑模型具体区别在于两个方面"><a href="#概念模型与逻辑模型具体区别在于两个方面" class="headerlink" title="概念模型与逻辑模型具体区别在于两个方面"></a>概念模型与逻辑模型具体区别在于两个方面</h5><p>完整性:逻辑模型在完整性上要比概念模型更胜筹，通过在需求细化、设计的阶段会对类的属性进行细化，会补充-些新的类;</p>
+<p>加工方式:概念模型的原则是忠于问题域，而逻辑模型则会从实现的便利性和需要的角度进行细化，具体来说可能会对一些类进行分拆、合并。</p>
 
         </div>
         
@@ -234,7 +212,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+                    <a class="has-link-grey -link" href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/" rel="tag">需求分析</a>
                 </div>
             </div>
         </div>
@@ -280,17 +258,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/26/MyBatis%E7%B3%BB%E5%88%97-%E4%BA%8C/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">MyBatis系列(二)</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/">
-                <span class="level-item">MyBatis系列(一)</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/16/Stack/">
+                <span class="level-item">Stack</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1345,7 +1316,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="Oracle系列学习(一)" height="28">
+                    <img src="/images/logo1.svg" alt="需求分析学习笔记-1" height="28">
                 
                 </a>
                 <p class="is-size-7">

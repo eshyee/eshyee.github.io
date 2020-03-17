@@ -7,21 +7,20 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Oracle系列学习(一) - 合格NPC</title>
+<title>Stack - 合格NPC</title>
 
 
-    <meta name="description" content="之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle">
+    <meta name="description" content="只允许在一端进行插入或删除操作的线性表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle系列学习(一)">
-<meta property="og:url" content="http://eshyee.github.io/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/index.html">
+<meta property="og:title" content="Stack">
+<meta property="og:url" content="http://eshyee.github.io/2020/03/16/Stack/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle">
+<meta property="og:description" content="只允许在一端进行插入或删除操作的线性表">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-02-25T02:22:43.000Z">
-<meta property="article:modified_time" content="2020-03-03T03:25:19.139Z">
+<meta property="article:published_time" content="2020-03-16T01:10:44.000Z">
+<meta property="article:modified_time" content="2020-03-16T07:40:50.813Z">
 <meta property="article:author" content="EShyee">
-<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -82,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="Oracle系列学习(一)" height="28">
+                <img src="/images/logo1.svg" alt="Stack" height="28">
             
             </a>
         </div>
@@ -138,17 +137,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-25T02:22:43.000Z">2020-02-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">Oracle系列</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2020-03-16T01:10:44.000Z">2020-03-16</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 635 个字)
+                    3 分钟 读完 (大约 413 个字)
                 </span>
                 
                 
@@ -157,86 +152,35 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Oracle系列学习(一)
+                Stack
             
         </h1>
         <div class="content">
-            <p>之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle</p>
+            <p>只允许在一端进行插入或删除操作的线性表</p>
 <a id="more"></a>
 
-<p>环境：</p>
-<ol>
-<li>Oracle 11g</li>
-</ol>
-<h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2><p>下载网址:<a href="https://www.oracle.com/cn/downloads/">https://www.oracle.com/cn/downloads/</a></p>
-<p>选择11g,会有下载选项，两个file都要下载的。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/xz.png" class="" title="xz">
+<h3 id="后进先出LIFO"><a href="#后进先出LIFO" class="headerlink" title="后进先出LIFO"></a>后进先出LIFO</h3><p><img src="D:%5Cblog%5Csource_posts%5CStack%5Cimage-20200316102101311.png" alt="image-20200316102101311"></p>
+<p>进栈顺序:a1-&gt;a2-&gt;a3-&gt;a4-&gt;a5</p>
+<p>出栈顺序:a5-&gt;a4-&gt;a3-&gt;a2-&gt;a1</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p>InitStack(&amp;S):初始化栈。构造一个空栈S，分配内存空间。<strong>创建</strong></p>
+<p>DestroyStack(&amp;L):销毁栈。销毁并释放栈S所占用的内存空间。<strong>销毁</strong></p>
+<p>Push(&amp;S,x):进栈，若栈S未满，则将x加入使之成为新栈顶。<strong>增</strong></p>
+<p>Pop(&amp;S,&amp;x):出栈，若栈S非空，则弹出栈项元素，并用x返回。<strong>删</strong></p>
+<p>GetTop(S, &amp;x):读栈顶元素。若栈S非空，则用x返回栈顶元素。<strong>查</strong><br>查栈的使用场景中大<br>多只访问栈顶元素</p>
+<h4 id="其他常用操作"><a href="#其他常用操作" class="headerlink" title="其他常用操作"></a>其他常用操作</h4><p>StackEmpty(S):判断-一个栈S是否为空。若S为空，则返回true，否则返回false。</p>
+<h3 id="规律"><a href="#规律" class="headerlink" title="规律"></a>规律</h3><p>n个不同元素进栈，出栈元素不同排列的个数为</p>
+<p>$$ \frac{1}{n+1}\sideset{}{^n_2n}C $$</p>
+<p>1/n+1乘Cn 2n</p>
+<p>上述公式称为卡特兰(Catalan) 数，可采用数学归纳法证<br>明(不要求掌握)</p>
+<p>5个进栈有42种方式</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="comment">//定义栈中元素的最大个数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType data [MaxSize];</span><br><span class="line">	<span class="comment">//静态数组存放栈中元素</span></span><br><span class="line">	<span class="keyword">int</span> top;</span><br><span class="line">	<span class="comment">//栈顶指针</span></span><br><span class="line">&#125; SqStack;</span><br></pre></td></tr></table></figure>
 
-<p>把两个zip解压在一个文件下，双击“<strong>setup</strong>”进行安装</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225120405331.png" class="" title="image-20200225120405331">
+<p><strong>顺序存储</strong>:给各个数据元素分配连续的存储空间，大小为MaxSize* sizeof(ElemType)。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化栈</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(SqStack &amp;S)</span></span>&#123;</span><br><span class="line">S.top=- <span class="number">1</span>;</span><br><span class="line"><span class="comment">//初始化栈顶指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>一波疯狂下一步就好了✔</p>
-<p>这里安装的是<strong>桌面类，企业版</strong></p>
-<p>安装完成后会有<strong>Database Configuration Assistant</strong>，选择<strong>口令管理</strong></p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140230194.png" class="" title="image-20200225120405331">
+<h2 id="判断是否为空"><a href="#判断是否为空" class="headerlink" title="判断是否为空"></a>判断是否为空</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断栈空</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">StackEmpty</span><span class="params">(SqStack S)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> S.top==<span class="number">-1</span>?<span class="literal">true</span>:<span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//S.top==-1为空栈</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>分别选择<strong>sys ，system 和scott</strong>，解锁，修改口令为”<strong>sys</strong>“,”<strong>system</strong>“,”<strong>tiger</strong>“(不带引号)。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140548831.png" class="" title="image-20200225120405331">
 
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140606895.png" class="" title="image-20200225120405331">
-
-<p>然后点击确定，只要没输错 ，就不要管提示。</p>
-<p>ok，Oracle11g就在电脑上成功安装。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140804868.png" class="" title="image-20200225120405331">
-
-<h2 id="使用测试"><a href="#使用测试" class="headerlink" title="使用测试"></a>使用测试</h2><p>打开sqlplus</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225141806309.png" class="" title="image-20200225120405331">
-
-<p>输入scott,口令就是tiger</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225141901711.png" class="" title="image-20200225120405331">
-
-<p>查看一下所有表</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225142136582.png" class="" title="image-20200225120405331">
-
-<h2 id="连接到navicat"><a href="#连接到navicat" class="headerlink" title="连接到navicat"></a>连接到navicat</h2><p>打开navicat</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143308994.png" class="" title="image-20200225120405331">
-
-<p>新建链接+，如图配置，我这里选择的是以system链接，password就是安装的时候填的口令。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143446828.png" class="" title="image-20200225120405331">
-
-<p>advanced页面把SYSDBA选一下</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143714410.png" class="" title="image-20200225120405331">
-
-<p>测试链接，连接成功！</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145319695.png" class="" title="image-20200225120405331">
-
-<p>打开Oracle的连接，查看目录：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145447644.png" class="" title="image-20200225120405331">
-
-<p>打开scott，查看里面的表，当然跟刚刚查询到的是一样的</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145609209.png" class="" title="image-20200225120405331">
-
-<p>然后是sysman里面的表(709张😵)：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145653505.png" class="" title="image-20200225120405331">
-
-<p>system里面有156张：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145931982.png" class="" title="image-20200225120405331">
-
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
-<li><strong>不要轻易尝试最新版。</strong>我一开始下的是最新版(19)，然后一切都是常规安装，但是当时就卡在45%不动了，卡了一下午。是一个实例没有安装好，sqlplus能运行，但是navicat连不上(可能是配置问题)。最后中止安装删除D盘文件，C盘文件，注册表等。重新下的11g。</li>
-<li><strong>安装过程中尽量不要在电脑上干别的事情。</strong>不知道是运气不好，还是怎么着，安装11g的时候一开始好好的，我就去搞别的事情了，但是过一会回来看，卡在60%了。又是一下午，最后无奈中止，重启安装文件，安装成功。</li>
-<li>如果忘记设置口令，问题不大，后期可以改。(<strong>alter user scott account unlock;</strong>)</li>
-</ol>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
-                </div>
-            </div>
         </div>
         
         
@@ -281,16 +225,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/26/MyBatis%E7%B3%BB%E5%88%97-%E4%BA%8C/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">MyBatis系列(二)</span>
+                <span class="level-item">需求分析学习笔记-1</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/">
-                <span class="level-item">MyBatis系列(一)</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/13/%E5%8D%95%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%B0%8F%E5%AE%9E%E9%AA%8C/">
+                <span class="level-item">单交换机小实验</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1345,7 +1289,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="Oracle系列学习(一)" height="28">
+                    <img src="/images/logo1.svg" alt="Stack" height="28">
                 
                 </a>
                 <p class="is-size-7">

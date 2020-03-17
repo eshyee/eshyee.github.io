@@ -7,21 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Oracle系列学习(一) - 合格NPC</title>
+<title>分类: 需求分析 - 合格NPC</title>
 
 
-    <meta name="description" content="之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Oracle系列学习(一)">
-<meta property="og:url" content="http://eshyee.github.io/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/index.html">
+    <meta name="description" content="还行">
+<meta property="og:type" content="website">
+<meta property="og:title" content="合格NPC">
+<meta property="og:url" content="http://eshyee.github.io/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle">
+<meta property="og:description" content="还行">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-02-25T02:22:43.000Z">
-<meta property="article:modified_time" content="2020-03-03T03:25:19.139Z">
 <meta property="article:author" content="EShyee">
-<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -82,7 +79,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="Oracle系列学习(一)" height="28">
+                <img src="/images/logo1.svg" alt="合格NPC" height="28">
             
             </a>
         </div>
@@ -131,24 +128,38 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/categories">分类</a></li>
+            
+            <li><a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li>
+            
+            <li class="is-active"><a href="#" aria-current="page">需求分析</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-25T02:22:43.000Z">2020-02-25</time>
+                <time class="level-item has-text-grey" datetime="2020-03-17T08:03:05.000Z">2020-03-17</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">Oracle系列</a>
+                <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">需求分析</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 635 个字)
+                    15 分钟 读完 (大约 2206 个字)
                 </span>
                 
                 
@@ -157,146 +168,31 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Oracle系列学习(一)
+                <a class="has-link-black-ter" href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/">需求分析学习笔记-1</a>
             
         </h1>
         <div class="content">
-            <p>之前都是一直在用MySQL，这回鸟枪换炮玩玩Oracle</p>
-<a id="more"></a>
-
-<p>环境：</p>
-<ol>
-<li>Oracle 11g</li>
-</ol>
-<h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2><p>下载网址:<a href="https://www.oracle.com/cn/downloads/">https://www.oracle.com/cn/downloads/</a></p>
-<p>选择11g,会有下载选项，两个file都要下载的。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/xz.png" class="" title="xz">
-
-<p>把两个zip解压在一个文件下，双击“<strong>setup</strong>”进行安装</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225120405331.png" class="" title="image-20200225120405331">
-
-<p>一波疯狂下一步就好了✔</p>
-<p>这里安装的是<strong>桌面类，企业版</strong></p>
-<p>安装完成后会有<strong>Database Configuration Assistant</strong>，选择<strong>口令管理</strong></p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140230194.png" class="" title="image-20200225120405331">
-
-<p>分别选择<strong>sys ，system 和scott</strong>，解锁，修改口令为”<strong>sys</strong>“,”<strong>system</strong>“,”<strong>tiger</strong>“(不带引号)。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140548831.png" class="" title="image-20200225120405331">
-
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140606895.png" class="" title="image-20200225120405331">
-
-<p>然后点击确定，只要没输错 ，就不要管提示。</p>
-<p>ok，Oracle11g就在电脑上成功安装。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225140804868.png" class="" title="image-20200225120405331">
-
-<h2 id="使用测试"><a href="#使用测试" class="headerlink" title="使用测试"></a>使用测试</h2><p>打开sqlplus</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225141806309.png" class="" title="image-20200225120405331">
-
-<p>输入scott,口令就是tiger</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225141901711.png" class="" title="image-20200225120405331">
-
-<p>查看一下所有表</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225142136582.png" class="" title="image-20200225120405331">
-
-<h2 id="连接到navicat"><a href="#连接到navicat" class="headerlink" title="连接到navicat"></a>连接到navicat</h2><p>打开navicat</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143308994.png" class="" title="image-20200225120405331">
-
-<p>新建链接+，如图配置，我这里选择的是以system链接，password就是安装的时候填的口令。</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143446828.png" class="" title="image-20200225120405331">
-
-<p>advanced页面把SYSDBA选一下</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225143714410.png" class="" title="image-20200225120405331">
-
-<p>测试链接，连接成功！</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145319695.png" class="" title="image-20200225120405331">
-
-<p>打开Oracle的连接，查看目录：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145447644.png" class="" title="image-20200225120405331">
-
-<p>打开scott，查看里面的表，当然跟刚刚查询到的是一样的</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145609209.png" class="" title="image-20200225120405331">
-
-<p>然后是sysman里面的表(709张😵)：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145653505.png" class="" title="image-20200225120405331">
-
-<p>system里面有156张：</p>
-<img src="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/image-20200225145931982.png" class="" title="image-20200225120405331">
-
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
-<li><strong>不要轻易尝试最新版。</strong>我一开始下的是最新版(19)，然后一切都是常规安装，但是当时就卡在45%不动了，卡了一下午。是一个实例没有安装好，sqlplus能运行，但是navicat连不上(可能是配置问题)。最后中止安装删除D盘文件，C盘文件，注册表等。重新下的11g。</li>
-<li><strong>安装过程中尽量不要在电脑上干别的事情。</strong>不知道是运气不好，还是怎么着，安装11g的时候一开始好好的，我就去搞别的事情了，但是过一会回来看，卡在60%了。又是一下午，最后无奈中止，重启安装文件，安装成功。</li>
-<li>如果忘记设置口令，问题不大，后期可以改。(<strong>alter user scott account unlock;</strong>)</li>
-</ol>
-
+            <h2 id="3-3需求分析案例"><a href="#3-3需求分析案例" class="headerlink" title="3-3需求分析案例"></a>3-3需求分析案例</h2>
         </div>
         
-        <div class="level is-size-7 is-uppercase">
+        
+        <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+                <a class="button is-size-7 is-light" href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/#more">阅读更多</a>
                 </div>
             </div>
         </div>
         
         
-        
     </div>
 </div>
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="/images/zfb.jpg" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="/images/ggh.jpg" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/26/MyBatis%E7%B3%BB%E5%88%97-%E4%BA%8C/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">MyBatis系列(二)</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/24/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%80/">
-                <span class="level-item">MyBatis系列(一)</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
 </div>
@@ -1345,7 +1241,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="Oracle系列学习(一)" height="28">
+                    <img src="/images/logo1.svg" alt="合格NPC" height="28">
                 
                 </a>
                 <p class="is-size-7">
