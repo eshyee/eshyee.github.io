@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>mybatis小练习 - 合格NPC</title>
+
+
+    <meta name="description" content="一对一，一对多，多对多练习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis小练习">
+<meta property="og:url" content="http://eshyee.github.io/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:site_name" content="合格NPC">
+<meta property="og:description" content="一对一，一对多，多对多练习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-03-24T12:10:40.000Z">
+<meta property="article:modified_time" content="2020-03-25T05:03:13.902Z">
+<meta property="article:author" content="EShyee">
+<meta property="article:tag" content="关联查询">
+<meta property="article:tag" content="一对一">
+<meta property="article:tag" content="一对多">
+<meta property="article:tag" content="多对多">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <script type="text/javascript" src="/js/love.js"></script>
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.svg" alt="mybatis小练习" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">👨‍💻咻咻~</a>
+                
+                <a class="navbar-item"
+                href="/archives">🍤时光轴</a>
+                
+                <a class="navbar-item"
+                href="/categories">🍧分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">🌭标签云</a>
+                
+                <a class="navbar-item"
+                href="/about">🍟关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-24T12:10:40.000Z">2020-03-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2186 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                mybatis小练习
+            
+        </h1>
+        <div class="content">
+            <p>一对一，一对多，多对多练习</p>
+<a id="more"></a>
+
+<p>环境说明：eclipse JDK13 Oracle11g</p>
+<p>测试的公用部分</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 公用部分</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">connUntil</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Reader reader = Resources.getResourceAsReader(<span class="string">"conf.xml"</span>);</span><br><span class="line">    SqlSessionFactory sessionfactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">    SqlSession session = sessionfactory.openSession();</span><br><span class="line">    UserMapper stuMapper = session.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="comment">//qUserAll(stuMapper);</span></span><br><span class="line">    <span class="comment">//System.out.println(updateUserALL(stuMapper));   </span></span><br><span class="line">    <span class="comment">//System.out.println(deleteUserALL(stuMapper)+"has been totally deleted.✔");</span></span><br><span class="line">    <span class="comment">//selectDepartAll(stuMapper);</span></span><br><span class="line">    <span class="comment">//System.out.println(addProject(stuMapper)+"的项目已经提交✔"); </span></span><br><span class="line">    <span class="comment">//System.out.println(updateProject(stuMapper)+"行已经受影响✔");</span></span><br><span class="line">    <span class="comment">//System.out.println(delteProject(stuMapper)+"已经被删除✔"); </span></span><br><span class="line">    <span class="comment">//queryprojectWithEid(stuMapper);</span></span><br><span class="line">    <span class="comment">//queryprojectWithDid(stuMapper);</span></span><br><span class="line">    <span class="comment">//queryprojectWithPName(stuMapper);</span></span><br><span class="line">    session.commit();</span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		connUntil();</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//放一个map</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">giveMeAMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		User user = giveMeAUser();</span><br><span class="line">		Map&lt;String, Object&gt; userMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">		userMap.put(<span class="string">"UNAMEin"</span>, user.getUserinfo().getuName());</span><br><span class="line">		<span class="keyword">return</span> userMap;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 放一个user</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> User <span class="title">giveMeAUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Detail detail = <span class="keyword">new</span> Detail(<span class="number">3</span>, <span class="string">"北京"</span>, <span class="string">"2085321569"</span>, <span class="string">"2085321569@qq.com"</span>);</span><br><span class="line">		UserInfo userinfo = <span class="keyword">new</span> UserInfo(<span class="number">3</span>, <span class="string">"老张"</span>, <span class="string">"321321"</span>);</span><br><span class="line">		User user = <span class="keyword">new</span> User(userinfo, detail);</span><br><span class="line">		<span class="keyword">return</span> user;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//放一个EMP</span></span><br><span class="line">	<span class="comment">//放一个EMP</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EmpInfo <span class="title">giveMeAEMP</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		 EmpInfo emp =<span class="keyword">new</span> EmpInfo();</span><br><span class="line">		 emp.seteId(<span class="number">43</span>);</span><br><span class="line">		 emp.seteAge(<span class="number">18</span>);</span><br><span class="line">		 emp.setdId(<span class="number">1</span>);</span><br><span class="line">		 emp.seteName(<span class="string">"林哥"</span>);</span><br><span class="line">		 emp.setePhone(<span class="string">"18181818181"</span>);</span><br><span class="line">		 emp.seteSex(<span class="string">"女"</span>);</span><br><span class="line">		 <span class="keyword">return</span> emp;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="一对一关联映射更新操作"><a href="#一对一关联映射更新操作" class="headerlink" title="一对一关联映射更新操作"></a>一对一关联映射更新操作</h3><p>userinfo和detail的数据都更新</p>
+<p>SQL存储结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PROCEDURE</span> UpdateAllInfo (USIDin <span class="keyword">IN</span> <span class="built_in">NUMBER</span>,UNAMEin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,UPASSin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,DADDRESSin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span> ,DQQin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,DEMAILin</span><br><span class="line"><span class="keyword">IN</span> <span class="built_in">VARCHAR2</span> ,CHUQU <span class="keyword">OUT</span> <span class="built_in">VARCHAR2</span>)</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">update</span> USERINFO u</span><br><span class="line"><span class="keyword">set</span> (u.UNAME,u.UPASS)=(<span class="keyword">SELECT</span> UNAMEin,UPASSin <span class="keyword">FROM</span> DUAL) <span class="keyword">WHERE</span> u.USID=USIDin;</span><br><span class="line"><span class="keyword">update</span> DETAIL d</span><br><span class="line"><span class="keyword">set</span> (d.DADDRESS,d.DEMAIL,d.DQQ)=(<span class="keyword">SELECT</span> DADDRESSin,DEMAILin,DQQin <span class="keyword">FROM</span> DUAL) <span class="keyword">WHERE</span> d.DED=USIDin;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">select</span> UNAME <span class="keyword">INTO</span> CHUQU <span class="keyword">FROM</span> USERINFO u <span class="keyword">WHERE</span> u.USID=USIDin;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 添加全部user --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addUser"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span> <span class="attr">statementType</span>=<span class="string">"CALLABLE"</span>&gt;</span></span><br><span class="line">    &#123;CALL InsertAllInfo( </span><br><span class="line">    #&#123;UNAME,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">    #&#123;UPASS,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">    #&#123;DADDRESS,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">    #&#123;DQQ,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">    #&#123;DEMAIL,jdbcType=VARCHAR,mode=IN&#125; )&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更新用户所有的信息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">updateUserALL</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    User user = giveMeAUser();</span><br><span class="line">    Map&lt;String, Object&gt; userMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    userMap.put(<span class="string">"USIDin"</span>, user.getUserinfo().getUsID());</span><br><span class="line">    userMap.put(<span class="string">"UNAMEin"</span>, user.getUserinfo().getuName());</span><br><span class="line">    userMap.put(<span class="string">"UPASSin"</span>, user.getUserinfo().getuPass());</span><br><span class="line">    userMap.put(<span class="string">"DADDRESSin"</span>, user.getDetail().getDaddress());</span><br><span class="line">    userMap.put(<span class="string">"DQQin"</span>, user.getDetail().getdQQ());</span><br><span class="line">    userMap.put(<span class="string">"DEMAILin"</span>, user.getDetail().getDaddress());</span><br><span class="line">    System.out.println(userMap.get(<span class="string">"USIDin"</span>)+<span class="string">" "</span>+userMap.get(<span class="string">"UNAMEin"</span>)+<span class="string">" "</span>+userMap.get(<span class="string">"DADDRESSin"</span>)+<span class="string">" "</span>+userMap.get(<span class="string">"DQQin"</span>)+<span class="string">" "</span>);</span><br><span class="line">    stuMapper.updateUserAll(userMap);</span><br><span class="line">    String str = (String) userMap.get(<span class="string">"CHUQU"</span>);</span><br><span class="line">    System.out.println(<span class="string">"更新成功，"</span> + str + <span class="string">"行受影响"</span>);</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一对一关联映射删除操作</p>
+<p>SQL存储结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PROCEDURE</span> DeleteAllInfo (UNAMEin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span> ,CHUQU <span class="keyword">OUT</span> <span class="built_in">VARCHAR2</span>)</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line">n <span class="built_in">NUMBER</span>;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">select</span> UNAME <span class="keyword">INTO</span> CHUQU <span class="keyword">FROM</span> USERINFO u <span class="keyword">WHERE</span> u.UNAME=UNAMEin;</span><br><span class="line">	<span class="keyword">delete</span> <span class="keyword">from</span> DETAIL d <span class="keyword">where</span> d.DED=(<span class="keyword">select</span> USID <span class="keyword">FROM</span> USERINFO u <span class="keyword">WHERE</span> u.UNAME=UNAMEin);</span><br><span class="line">	<span class="keyword">delete</span> <span class="keyword">FROM</span> USERINFO u <span class="keyword">WHERE</span> u.UNAME=UNAMEin;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 删除user --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteUserALL"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span> <span class="attr">statementType</span>=<span class="string">"CALLABLE"</span>&gt;</span></span><br><span class="line">&#123;CALL DeleteAllInfo( </span><br><span class="line">#&#123;UNAMEin,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">#&#123;CHUQU,jdbcType=VARCHAR,mode=OUT&#125;</span><br><span class="line">)&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//完整删除用户</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">deleteUserALL</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Map&lt;String, Object&gt; userMap=giveMeAMap();</span><br><span class="line">    stuMapper.deleteUserALL(userMap);</span><br><span class="line">    <span class="keyword">return</span> (String) userMap.get(<span class="string">"CHUQU"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="一对多操作"><a href="#一对多操作" class="headerlink" title="一对多操作"></a>一对多操作</h3><p>通过输入部门的名称，查询出相应部门的所有的员工信息。</p>
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 根据名称查部门 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectDeparALL"</span> <span class="attr">resultMap</span>=<span class="string">"depart_emp_did"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span>&gt;</span></span><br><span class="line">    SELECT * FROM EMPINFO e INNER JOIN DEPARTMENT d ON e.DID=d.DID WHERE d.DNAME=#&#123;dName&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"top.eshyee.entity.Department"</span> <span class="attr">id</span>=<span class="string">"depart_emp_did"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"Did"</span> <span class="attr">column</span>=<span class="string">"Did"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"Dname"</span> <span class="attr">column</span>=<span class="string">"Dname"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"empinfo"</span> <span class="attr">ofType</span>=<span class="string">"top.eshyee.entity.EmpInfo"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"eId"</span> <span class="attr">column</span>=<span class="string">"eId"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"eName"</span> <span class="attr">column</span>=<span class="string">"eName"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"eAge"</span> <span class="attr">column</span>=<span class="string">"eAge"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"eSex"</span> <span class="attr">column</span>=<span class="string">"eSex"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"ePhone"</span> <span class="attr">column</span>=<span class="string">"ePhone"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据名字查depart所有东西</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectDepartAll</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Department dp =stuMapper.selectDeparALL(<span class="string">"团伙1"</span>);</span><br><span class="line">    System.out.println(dp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200325113913.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200325113913.png" alt="QQ图片20200325113913"></p>
+<p>通过员工的编号，查询出相应的员工信息（员工职务、员工年龄、员工电话、员工所在部门）。</p>
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 连接EMPINFO Department 2个表 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"EMP_DEPART"</span>&gt;</span></span><br><span class="line">    select e.* ,d.DNAME FROM EMPINFO e ,DEPARTMENT d </span><br><span class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 通过编号找员工加部门--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryEMPAndDep"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    SELECT * FROM (<span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"EMP_DEPART"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span>) WHERE EID =#&#123;eId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询EMP包含部门信息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryEMPAndDep</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; map=stuMapper.queryEMPAndDep(<span class="number">1</span>);</span><br><span class="line">    System.out.println(<span class="string">"根据编号找员工包括部门信息"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;map.size();i++) &#123;</span><br><span class="line">        System.out.println(map.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200325113701.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200325113701.png" alt="QQ图片20200325113701"></p>
+<p>在相应部门插入一个员工信息。</p>
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在相应部门插入一个员工信息 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"InsertAEMP"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.EmpInfo"</span>&gt;</span></span><br><span class="line">    insert into EMPINFO(DID,ENAME,EAGE,ESEX,EPHONE) values(#&#123;dId&#125;,#&#123;eName&#125;,#&#123;eAge&#125;,#&#123;eSex&#125;,#&#123;ePhone&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 插入一个EMP */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">InsertAEMP</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    EmpInfo emp=giveMeAEMP();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> stuMapper.InsertAEMP(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200325115338.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200325115338.png" alt="QQ图片20200325115338"></p>
+<p>根据员工的编号，修改员工信息。</p>
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"upDateEMPByid"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.EmpInfo"</span>&gt;</span></span><br><span class="line">    update EMPINFO set DID=#&#123;dId&#125;,ENAME=#&#123;eName&#125;,EAGE=#&#123;eAge&#125;,ESEX=#&#123;eSex&#125;,EPHONE=#&#123;ePhone&#125; where eid=#&#123;eId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 更新EMP */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">upDateEMPByid</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		EmpInfo emp=giveMeAEMP();</span><br><span class="line">		 </span><br><span class="line">		<span class="keyword">return</span> stuMapper.upDateEMPByid(emp);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200325120220.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200325120220.png" alt="QQ图片20200325120220"></p>
+<p>根据员工的编号，删除员工信息。</p>
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 根据id删EMP --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteEMPByid"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    delete from EMPINFO where EID=#&#123;eId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 删除EMP */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">deleteEMPByid</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> stuMapper.deleteEMPByid(<span class="number">43</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200325120539.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200325120539.png" alt="QQ图片20200325120539"></p>
+<h3 id="多对多情景说明"><a href="#多对多情景说明" class="headerlink" title="多对多情景说明"></a>多对多情景说明</h3><p>公司里各个部门的员工可以进行企业项目的申报，如果项目通过企业审核，可以投入企业的项目规划环节。</p>
+<p>员工可以申请项目。一个员工申请多个项目，一个项目可以有多个员工。备注：</p>
+<p>项目包含的数据项（<strong>项目编号，项目名称，项目内容，项目提交的时间</strong>）</p>
+<p>继续建设company数据库以及进行程序设计，完成上面关于多对多的映射案例。</p>
+<p>设计三个表 </p>
+<p>员工表(empinfo)</p>
+<p>项目表(cproject)</p>
+<p>映射表(主要用于把两个主键映射起来，为了看着舒服一点，不创建也可以)</p>
+<p>（1）申请项目，插入操作。插入一个员工申请的项目。</p>
+<p>SQL端制作一个存储过程</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PROCEDURE</span> InsertPROJECT(PNAMEin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,PCONTENTin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,ENAMEin <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,Informo <span class="keyword">OUT</span> <span class="built_in">VARCHAR2</span>)</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line">n1 <span class="built_in">NUMBER</span>;<span class="comment">--两个自增</span></span><br><span class="line">n2 NUMBER;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">select</span> PROJECTSEQ.nextval <span class="keyword">into</span> n1 <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">into</span> CPROJECT(PID,PNAME,PCONTENT,PTIME) <span class="keyword">values</span> (n1,PNAMEin,PCONTENTin,<span class="keyword">SYSDATE</span>);</span><br><span class="line"><span class="keyword">select</span> EPMAPPERSEQ.nextval <span class="keyword">into</span> n2 <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EPMAPPER(EPID,EID,PID) <span class="keyword">VALUES</span>(n2,(<span class="keyword">SELECT</span> e.EID <span class="keyword">FROM</span> EMPINFO e <span class="keyword">WHERE</span> e.ENAME=ENAMEin),n1);</span><br><span class="line"><span class="keyword">SELECT</span> ENAME <span class="keyword">INTO</span> Informo <span class="keyword">FROM</span> EMPINFO e <span class="keyword">WHERE</span> e.ENAME=ENAMEin;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 添加项目 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addProject"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span> <span class="attr">statementType</span>=<span class="string">"CALLABLE"</span>&gt;</span></span><br><span class="line">		&#123;CALL InsertPROJECT(</span><br><span class="line">                #&#123;PNAMEin,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">                #&#123;PCONTENTin,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">                #&#123;ENAMEin,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">                #&#123;Informo,jdbcType=VARCHAR,mode=OUT&#125;</span><br><span class="line">            )&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//insert一个项目</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">addProject</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Map&lt;String, Object&gt; empMap=<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">		EProject ep=<span class="keyword">new</span> EProject(<span class="string">"小项目"</span>,<span class="string">"很小的一个项目"</span>);</span><br><span class="line">		EmpInfo emp=giveMeAEMP();</span><br><span class="line">		empMap.put(<span class="string">"PNAMEin"</span>, ep.getpName());</span><br><span class="line">		empMap.put(<span class="string">"PCONTENTin"</span>, ep.getpContent());</span><br><span class="line">		empMap.put(<span class="string">"ENAMEin"</span>, emp.geteName());</span><br><span class="line">		stuMapper.addProject(empMap);</span><br><span class="line">		<span class="keyword">return</span> (String) empMap.get(<span class="string">"Informo"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200324171345.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200324171345.png" alt="QQ图片20200324171345"></p>
+<p>（2）修改项目，更新操作。修改一个员工申请的项目。</p>
+<p>对项目信息的更新相对简单一些</p>
+<p>xml中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 更新项目 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateProject"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.EProject"</span>&gt;</span></span><br><span class="line">	UPDATE CPROJECT p SET p.PNAME=#&#123;pName&#125;,p.PCONTENT=#&#123;pContent&#125;,p.PTIME=SYSDATE WHERE PID=#&#123;pId&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试集</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改项目</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">updateProject</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		EProject ep=<span class="keyword">new</span> EProject(<span class="number">1</span>,<span class="string">"成功的小项目"</span>,<span class="string">"哈"</span>);</span><br><span class="line">		<span class="keyword">return</span> stuMapper.updateProject(ep);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200324173927.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200324173927.png" alt="QQ图片20200324173927"></p>
+<p>（3）删除项目，删除操作。删除一个员工申请的项目。</p>
+<p>删除除了删掉项目本身以外 还应考虑删掉映射表中的映射关系</p>
+<p>创建存储过程</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PROCEDURE</span> delproject(PIDin <span class="keyword">IN</span> <span class="built_in">NUMBER</span>,PNameout <span class="keyword">OUT</span> <span class="built_in">VARCHAR2</span>)</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="keyword">SELECT</span> PNAME <span class="keyword">INTO</span> PNameout <span class="keyword">from</span> CPROJECT <span class="keyword">WHERE</span> PID=PIDin ;</span><br><span class="line">  <span class="keyword">DELETE</span> <span class="keyword">FROM</span> EPMAPPER <span class="keyword">WHERE</span> PID=PIDin;</span><br><span class="line">	<span class="keyword">DELETE</span> <span class="keyword">FROM</span> CPROJECT <span class="keyword">WHERE</span> PID=PIDin;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<p>配置xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delteProject"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span> <span class="attr">statementType</span>=<span class="string">"CALLABLE"</span>&gt;</span></span><br><span class="line">	&#123;CALL delproject( </span><br><span class="line">	#&#123;PIDin,jdbcType=INTEGER,mode=IN&#125;,</span><br><span class="line">		#&#123;PNameout,jdbcType=VARCHAR,mode=OUT&#125;</span><br><span class="line">		 )&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试集</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除项目</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String  <span class="title">delteProject</span> <span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Map&lt;String, Object&gt; userMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">		userMap.put(<span class="string">"PIDin"</span>, <span class="number">5</span>);</span><br><span class="line">		stuMapper.delteProject(userMap);</span><br><span class="line">		<span class="keyword">return</span> (String) userMap.get(<span class="string">"PNameout"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200324180303.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200324180303.png" alt="QQ图片20200324180303"></p>
+<p>（4）查询项目，查询操作。进行多条件查询。根据员工编号，员工所在部门，员工的项目名称（模糊查询）等条件进行查询。</p>
+<p>这里虽然使用到多对多的概念 但是mybatis目前没有真正意义上的多对多 ，需要使用到两个多对一。然后采用resultmap，这里提供另一个思路。</p>
+<p>SQL端将三个表连接起来去重</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> A.*,B.EPID,C.* <span class="keyword">FROM</span> EMPINFO A  ,EPMAPPER B ，CPROJECT C <span class="keyword">WHERE</span> A.EID=B.EID <span class="keyword">AND</span> B.PID=C.PID</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">4	1	根哥	10	女	13254621021	7	1	成功的小项目	哈	2020-03-24 17:39:14</span><br><span class="line">2	1	小王	9	女	12545236547	5	1	成功的小项目	哈	2020-03-24 17:39:14</span><br><span class="line">1	1	小刘	11	男	21326545231	1	1	成功的小项目	哈	2020-03-24 17:39:14</span><br><span class="line">4	1	根哥	10	女	13254621021	8	2	项目二	项目二	2020-03-12 09:07:37</span><br><span class="line">2	1	小王	9	女	12545236547	4	2	项目二	项目二	2020-03-12 09:07:37</span><br><span class="line">1	1	小刘	11	男	21326545231	2	2	项目二	项目二	2020-03-12 09:07:37</span><br><span class="line">4	1	根哥	10	女	13254621021	9	3	项目三	项目三	2020-03-15 09:08:03</span><br><span class="line">2	1	小王	9	女	12545236547	6	3	项目三	项目三	2020-03-15 09:08:03</span><br><span class="line">1	1	小刘	11	男	21326545231	3	3	项目三	项目三	2020-03-15 09:08:03</span><br><span class="line">4	1	根哥	10	女	13254621021	12	8	小项目	很小的一个项目	2020-03-24 17:13:17</span><br></pre></td></tr></table></figure>
+
+<p>这样关系似乎更加明显了</p>
+<p>然后再在mapper.xml文件中分别写三个查询就ok了</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- project查询 EID--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryprojectWithEid"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">		SELECT DISTINCT * FROM (</span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"projectJoinAll"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">) WHERE EID=#&#123;eId&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- project查询 DID --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryprojectWithDid"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">		SELECT DISTINCT * FROM (</span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"projectJoinAll"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">) WHERE DID=#&#123;dId&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- project查询 模糊项目名称 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryprojectWithPName"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">		SELECT DISTINCT * FROM (</span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"projectJoinAll"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">) WHERE PNAME like '%$&#123;pName&#125;%'</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 连接三个表 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"projectJoinAll"</span>&gt;</span></span><br><span class="line">	SELECT A.*,B.EPID,C.* FROM EMPINFO A  ,EPMAPPER B ，CPROJECT C WHERE A.EID=B.EID AND B.PID=C.PID</span><br><span class="line">	<span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试文件中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询全部project相关 BY eId</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryprojectWithEid</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; map=stuMapper.queryprojectWithEid(<span class="number">1</span>);</span><br><span class="line">		System.out.println(<span class="string">"根据员工编号查询"</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;map.size();i++) &#123;</span><br><span class="line">			System.out.println(map.get(i));</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//查询全部project相关 BY dId</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryprojectWithDid</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; map=stuMapper.queryprojectWithDid(<span class="number">1</span>);</span><br><span class="line">		System.out.println(<span class="string">"根据员工所在部门查询"</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;map.size();i++) &#123;</span><br><span class="line">			System.out.println(map.get(i));</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//查询全部project相关 BY pName</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryprojectWithPName</span><span class="params">(UserMapper stuMapper)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">			List&lt;Map&lt;String, Object&gt;&gt; map=stuMapper.queryprojectWithPName(<span class="string">"项目三"</span>);</span><br><span class="line">			System.out.println(<span class="string">"根据项目名称模糊查询"</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;map.size();i++) &#123;</span><br><span class="line">				System.out.println(map.get(i));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">// 公用部分</span></span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<img src="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/QQ%E5%9B%BE%E7%89%8720200324193915.png" class="" title="mb1">
+
+<p><img src="D:%5Cblog%5Csource_posts%5Cmybatis%E5%B0%8F%E7%BB%83%E4%B9%A0%5CQQ%E5%9B%BE%E7%89%8720200324193915.png" alt="QQ图片20200324193915"></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/" rel="tag">一对一</a>, <a class="has-link-grey -link" href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/" rel="tag">一对多</a>, <a class="has-link-grey -link" href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" rel="tag">关联查询</a>, <a class="has-link-grey -link" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/" rel="tag">多对多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zfb.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/ggh.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/25/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%83/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">MyBatis系列(七)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/19/MyBatis%E7%B3%BB%E5%88%97-%E5%85%AD/">
+                <span class="level-item">MyBatis系列(六)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/ava.jpg" alt="EShyee">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        EShyee
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        合格NPC
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China DongYing</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            29
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            41
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eshyee" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/eshyee">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Facebook" href="https://facebook.com/eshyee">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="https://user.qzone.qq.com/2085713294">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="哔哩哔哩" href="https://space.bilibili.com/167370813">
+                
+                <i class="fab fa-tv"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://space.bilibili.com/167370813" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">bilibili</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">space.bilibili.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://weibo.com/u/3628942965" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Weibo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">weibo.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://jq.qq.com/?_wv=1027&k=5nNf4OD" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">QQ</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">jq.qq.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://tiktok.com/@eshyee" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Tiktok</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">tiktok.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/">
+            <span class="level-start">
+                <span class="level-item">学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+            <span class="level-start">
+                <span class="level-item">数据结构</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E6%A0%88/">
+            <span class="level-start">
+                <span class="level-item">栈</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+            <span class="level-start">
+                <span class="level-item">需求分析</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+            <span class="level-start">
+                <span class="level-item">项目管理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/">
+            <span class="level-start">
+                <span class="level-item">技术</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">MyBatis系列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">Oracle系列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/%E5%BB%BA%E7%AB%99%E4%B9%8B%E8%B7%AF/">
+            <span class="level-start">
+                <span class="level-item">建站之路</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/">
+            <span class="level-start">
+                <span class="level-item">生活</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/">
+            <span class="level-start">
+                <span class="level-item">旅行</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/%E7%83%A7%E9%A5%AD/">
+            <span class="level-start">
+                <span class="level-item">烧饭</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/Cisco/" style="font-size: 10px;">Cisco</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/parameterType/" style="font-size: 10px;">parameterType</a> <a href="/tags/resultType/" style="font-size: 10px;">resultType</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/" style="font-size: 13.33px;">一对一</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/" style="font-size: 13.33px;">一对多</a> <a href="/tags/%E4%B8%8A%E6%B5%B7/" style="font-size: 10px;">上海</a> <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/" style="font-size: 10px;">交叉线</a> <a href="/tags/%E4%BC%98%E5%8C%96/" style="font-size: 10px;">优化</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 13.33px;">入门</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/" style="font-size: 10px;">共享栈</a> <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" style="font-size: 13.33px;">关联查询</a> <a href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" style="font-size: 16.67px;">初学者</a> <a href="/tags/%E5%8A%A8%E6%80%81sql/" style="font-size: 10px;">动态sql</a> <a href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">动态分配</a> <a href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/" style="font-size: 13.33px;">单链表</a> <a href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/" style="font-size: 10px;">双绞线</a> <a href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/" style="font-size: 13.33px;">双链表</a> <a href="/tags/%E5%9C%9F%E8%B1%86/" style="font-size: 10px;">土豆</a> <a href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/" style="font-size: 13.33px;">多对多</a> <a href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/" style="font-size: 10px;">头结点</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/" style="font-size: 13.33px;">崩溃的</a> <a href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">延迟加载</a> <a href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">循环链表</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.33px;">数据库</a> <a href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/" style="font-size: 10px;">直通线</a> <a href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">类型处理器</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" style="font-size: 20px;">线性表</a> <a href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" style="font-size: 10px;">编制项目预算</a> <a href="/tags/%E8%A1%A5%E6%A1%A3/" style="font-size: 10px;">补档</a> <a href="/tags/%E9%93%BE%E6%A0%88/" style="font-size: 10px;">链栈</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/" style="font-size: 10px;">需求分析</a> <a href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">静态分配</a> <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">静态链表</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/" style="font-size: 10px;">项目支出</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/" style="font-size: 10px;">顺序栈</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" style="font-size: 10px;">顺序表</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/25/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%83/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列(七)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-25T04:13:12.000Z">2020-03-25</time></div>
+                    <a href="/2020/03/25/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%83/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列(七)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mybatis小练习">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-24T12:10:40.000Z">2020-03-24</time></div>
+                    <a href="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mybatis小练习</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/19/MyBatis%E7%B3%BB%E5%88%97-%E5%85%AD/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列(六)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T08:17:48.000Z">2020-03-19</time></div>
+                    <a href="/2020/03/19/MyBatis%E7%B3%BB%E5%88%97-%E5%85%AD/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列(六)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/19/%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="项目预算">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T00:58:05.000Z">2020-03-19</time></div>
+                    <a href="/2020/03/19/%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">项目预算</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a> / <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="需求分析学习笔记-1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-17T08:03:05.000Z">2020-03-17</time></div>
+                    <a href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">需求分析学习笔记-1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a> / <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">需求分析</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cisco/">
+                        <span class="tag">Cisco</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MyBatis/">
+                        <span class="tag">MyBatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/log4j/">
+                        <span class="tag">log4j</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/parameterType/">
+                        <span class="tag">parameterType</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/resultType/">
+                        <span class="tag">resultType</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/">
+                        <span class="tag">一对一</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">一对多</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%8A%E6%B5%B7/">
+                        <span class="tag">上海</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/">
+                        <span class="tag">交叉线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BC%98%E5%8C%96/">
+                        <span class="tag">优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%A5%E9%97%A8/">
+                        <span class="tag">入门</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/">
+                        <span class="tag">共享栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/">
+                        <span class="tag">关联查询</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/">
+                        <span class="tag">初学者</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81sql/">
+                        <span class="tag">动态sql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">动态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">单链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/">
+                        <span class="tag">双绞线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">双链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9C%9F%E8%B1%86/">
+                        <span class="tag">土豆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">多对多</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/">
+                        <span class="tag">头结点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+                        <span class="tag">存储过程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/">
+                        <span class="tag">崩溃的</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">
+                        <span class="tag">延迟加载</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">循环链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/">
+                        <span class="tag">直通线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/">
+                        <span class="tag">类型处理器</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/">
+                        <span class="tag">线性表</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/">
+                        <span class="tag">编制项目预算</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%A1%A5%E6%A1%A3/">
+                        <span class="tag">补档</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E6%A0%88/">
+                        <span class="tag">链栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+                        <span class="tag">需求分析</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">静态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">静态链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/">
+                        <span class="tag">项目支出</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/">
+                        <span class="tag">顺序栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
+                        <span class="tag">顺序表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/25/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%83/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列(七)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-25T04:13:12.000Z">2020-03-25</time></div>
+                    <a href="/2020/03/25/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%83/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列(七)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mybatis小练习">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-24T12:10:40.000Z">2020-03-24</time></div>
+                    <a href="/2020/03/24/mybatis%E5%B0%8F%E7%BB%83%E4%B9%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mybatis小练习</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/19/MyBatis%E7%B3%BB%E5%88%97-%E5%85%AD/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列(六)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T08:17:48.000Z">2020-03-19</time></div>
+                    <a href="/2020/03/19/MyBatis%E7%B3%BB%E5%88%97-%E5%85%AD/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列(六)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/19/%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="项目预算">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T00:58:05.000Z">2020-03-19</time></div>
+                    <a href="/2020/03/19/%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">项目预算</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a> / <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="需求分析学习笔记-1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-17T08:03:05.000Z">2020-03-17</time></div>
+                    <a href="/2020/03/17/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">需求分析学习笔记-1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a> / <a class="has-link-grey -link" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">需求分析</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cisco/">
+                        <span class="tag">Cisco</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MyBatis/">
+                        <span class="tag">MyBatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/log4j/">
+                        <span class="tag">log4j</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/parameterType/">
+                        <span class="tag">parameterType</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/resultType/">
+                        <span class="tag">resultType</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/">
+                        <span class="tag">一对一</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">一对多</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%8A%E6%B5%B7/">
+                        <span class="tag">上海</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/">
+                        <span class="tag">交叉线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BC%98%E5%8C%96/">
+                        <span class="tag">优化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%A5%E9%97%A8/">
+                        <span class="tag">入门</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/">
+                        <span class="tag">共享栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/">
+                        <span class="tag">关联查询</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/">
+                        <span class="tag">初学者</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81sql/">
+                        <span class="tag">动态sql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">动态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">单链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/">
+                        <span class="tag">双绞线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">双链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9C%9F%E8%B1%86/">
+                        <span class="tag">土豆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">多对多</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/">
+                        <span class="tag">头结点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+                        <span class="tag">存储过程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/">
+                        <span class="tag">崩溃的</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">
+                        <span class="tag">延迟加载</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">循环链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/">
+                        <span class="tag">直通线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/">
+                        <span class="tag">类型处理器</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/">
+                        <span class="tag">线性表</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/">
+                        <span class="tag">编制项目预算</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%A1%A5%E6%A1%A3/">
+                        <span class="tag">补档</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E6%A0%88/">
+                        <span class="tag">链栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+                        <span class="tag">需求分析</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">静态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">静态链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/">
+                        <span class="tag">项目支出</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/">
+                        <span class="tag">顺序栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
+                        <span class="tag">顺序表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.svg" alt="mybatis小练习" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 EShyee&nbsp;
+                努力做一名合格的NPC🙍‍♂️
+                
+                
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://eshyee.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
