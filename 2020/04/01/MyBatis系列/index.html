@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta  />
+<meta  />
+<meta  />
+<title>MyBatis系列 - 合格NPC</title>
+
+
+    <meta name="description" content="mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis系列">
+<meta property="og:url" content="http://eshyee.github.io/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/index.html">
+<meta property="og:site_name" content="合格NPC">
+<meta property="og:description" content="mybatis">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-04-01T13:32:57.000Z">
+<meta property="article:modified_time" content="2020-04-11T02:38:58.555Z">
+<meta property="article:author" content="EShyee">
+<meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="类型处理器">
+<meta property="article:tag" content="存储过程">
+<meta property="article:tag" content="动态sql">
+<meta property="article:tag" content="关联查询">
+<meta property="article:tag" content="一对多">
+<meta property="article:tag" content="log4j">
+<meta property="article:tag" content="延迟加载">
+<meta property="article:tag" content="二级缓存">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/ava.jpg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atelier-forest-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <script type="text/javascript" src="/js/love.js"></script>
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.svg" alt="MyBatis系列" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">👨‍💻咻咻~</a>
+                
+                <a class="navbar-item"
+                href="/archives">🍤时光轴</a>
+                
+                <a class="navbar-item"
+                href="/categories">🍧分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">🌭标签云</a>
+                
+                <a class="navbar-item"
+                href="/about">🍟关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="在GitHub上找到我" href="https://github.com/eshyee">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-01T13:32:57.000Z">2020-04-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    27 分钟 读完 (大约 4119 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                MyBatis系列
+            
+        </h1>
+        <div class="content">
+            <p>mybatis</p>
+<a id="more"></a>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=440411401&auto=1&height=66"></iframe>
+
+<h2 id="关于MyBatis的增删改查实现"><a href="#关于MyBatis的增删改查实现" class="headerlink" title="关于MyBatis的增删改查实现"></a>关于MyBatis的增删改查实现</h2><p>在MyBatis系列(一)中涉及了如何创建一个<em>入门级</em>的mybatis测试。</p>
+<p>但是只涉及了查询单行数据，接下来 我把它补全。</p>
+<p>上次采用的是MySQL数据库 ，这次我采用的是Oracle。从官网下到了Oracle6的一个<code>jar</code>.</p>
+<p>环境：</p>
+<p>eclipse 2019-12</p>
+<p>Oracle 11g</p>
+<p>apache tomcat 9.0.3</p>
+<p>mybatis 3.5.4.jar</p>
+<p>Oracle.jar</p>
+<h4 id="在Oracle中建个表"><a href="#在Oracle中建个表" class="headerlink" title="在Oracle中建个表"></a>在Oracle中建个表</h4><p><code>create table (stuno number,stuname varchar(20),stuage number,graname varchar(20));</code>,</p>
+<p>随变插入几行数据，此处就不放图了🈚。</p>
+<h4 id="在eclipse里构建这个类"><a href="#在eclipse里构建这个类" class="headerlink" title="在eclipse里构建这个类"></a>在eclipse里构建这个类</h4><p>此处省略代码，详见MyBatis系列(一)。</p>
+<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><p>新建一个<code>studentMapper.xml</code>(当然是要映射了🍔)。</p>
+<p>新建<code>conf.xml</code>(选择数据库以及映射关系)。</p>
+<p>这里关于一些细节</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 通过default选择 数据库环境(说白了就是运行哪个数据库) --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- transactionManager事物的提交方式</span></span><br><span class="line"><span class="comment">		JDBC 利用JDBC处理事务，手动(commit rollback,close)</span></span><br><span class="line"><span class="comment">		MANAGED：将事务交由其他组件（spring，jobss）去托管 ，默认使用完之后会关闭连接</span></span><br><span class="line"><span class="comment">		&lt;property name="closeConnection" value="false" /&gt;这样就默认不关闭</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 数据源类型：</span></span><br><span class="line"><span class="comment">			POOLED：使用数据链接池</span></span><br><span class="line"><span class="comment">			UNPOOLED：不用连接池，传统JDBC，每次访问数据库均需要打开和关闭数据库 </span></span><br><span class="line"><span class="comment">			JNDI：从tomcat中获取一个内置的数据库链接池(数据库链接池-数据源)</span></span><br><span class="line"><span class="comment">			--&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:oracle:thin:@127.0.0.1:1521:ORCL"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"scott"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"tiger"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--因为我远端也有个数据库所以我可以再配一个环境--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"cloud"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.cj.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://eshyee,top:3306/test?useSSL=false<span class="symbol">&amp;amp;</span>serverTimezone=UTC"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"我的用户名"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"我的密码"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"top/eshyee/entity/studentMapper.xml"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于<code>Mapper.xml</code>的新增代码,无非就是增删改查✨</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentBystuNum"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">		select * from student where stuno= #&#123;stuno&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllStudent"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">		select * from student</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Student"</span> &gt;</span></span><br><span class="line">		insert into student(stuno,stuname,stuage,graname) values(#&#123;stuNo&#125;,#&#123;stuName&#125;,#&#123;stuAge&#125;,#&#123;graName&#125;)</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"upDateStuByNo"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">	update student set stuname=#&#123;stuName&#125;,stuage=#&#123;stuAge&#125;,graname=#&#123;graName&#125; where stuno=#&#123;stuNo&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteStuByNo"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">	delete from student where stuno=#&#123;stuno&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为查之前说了，这里就拿改学生信息来做个小测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改学生--按学号</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">updateStuByNo</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Reader reader = Resources.getResourceAsReader(<span class="string">"conf.xml"</span>);</span><br><span class="line">		SqlSessionFactory sessionfactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		SqlSession session = sessionfactory.openSession();</span><br><span class="line">		String statement = <span class="string">"top.eshyee.entity.studentMapper.upDateStuByNo"</span>;</span><br><span class="line">		Student stu=<span class="keyword">new</span> Student(<span class="number">2</span>,<span class="string">"小牛"</span>,<span class="number">33</span>,<span class="string">"二年级"</span>);</span><br><span class="line">		<span class="keyword">int</span> count = session.update(statement, stu);</span><br><span class="line">		session.commit();</span><br><span class="line">		System.out.println(<span class="string">"修改成功，"</span> + count + <span class="string">"行受影响"</span>);</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		selectAll();</span><br><span class="line">		updateStuByNo();</span><br><span class="line">		selectAll();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试，得到结果，注意要提交。</p>
+<img src="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/image-20200226220001121.png" class="" title="mb1">
+
+<hr>
+<h2 id="mapper动态代理-MyBatis接口开发"><a href="#mapper动态代理-MyBatis接口开发" class="headerlink" title="mapper动态代理(MyBatis接口开发)"></a>mapper动态代理(MyBatis接口开发)</h2><h6 id="原则-约定优于配置"><a href="#原则-约定优于配置" class="headerlink" title="原则:约定优于配置"></a>原则:约定优于配置</h6><p>配置方式:</p>
+<p>​    abc.xml</p>
+<p>硬编码方式</p>
+<p>​    abc.java</p>
+<p>约定:默认值就是myProject</p>
+<p>与传统配置的不同之处:省略掉statement，即根据约定直接定位出sql语句。</p>
+<p>约定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 1.方法名和mapper.xml文件中的id值相同</span></span><br><span class="line"><span class="comment">*  2.方法名的输入参数和mapper.xml文件中的标签parameterType类型一致</span></span><br><span class="line"><span class="comment">* 3.方法的返回值和mapper.xml文件中的resultType一致</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>接口和mapper一一对应：namespace的value=接口的全类名</p>
+<h4 id="构建接口"><a href="#构建接口" class="headerlink" title="构建接口"></a>构建接口</h4><p>所以说新建一个接口，根据前一个篇的mapper.xml的文件基础上改，注：我这里是把接口建在了mapper包下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Student <span class="title">queryStudentBystuNum</span><span class="params">(<span class="keyword">int</span> stuno)</span></span>;</span><br><span class="line"><span class="function">List&lt;Student&gt; <span class="title">queryAllStudent</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">addStudent</span><span class="params">(Student student)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">upDateStuByNo</span><span class="params">(Student student)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">deleteStuByNo</span><span class="params">(<span class="keyword">int</span> stuno)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里的接口要遵循上面的约定。</p>
+<h4 id="更改xml文件"><a href="#更改xml文件" class="headerlink" title="更改xml文件"></a>更改xml文件</h4><p>再mapper.xml file中，namespace也应该改成接口的名字</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"top.eshyee.mapper.StudentMapper"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来，就是修改测试类，曾经使用的<code>statement</code>的地方，目前就不用使用了。</p>
+<h4 id="使用接口"><a href="#使用接口" class="headerlink" title="使用接口"></a>使用接口</h4><p>这次拿删除学生举例,首先要从<code>session</code>中获取到这个接口，使用<code>getMapper</code>方法。然后从这个接口中要我刚刚写的那个删除的方法<code>deleteStuByNo()</code>,这里我写死删除no为3的 <del>倒霉孩子</del> ✨</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = Resources.getResourceAsReader(<span class="string">"conf.xml"</span>);</span><br><span class="line">SqlSessionFactory sessionfactory = <span class="keyword">new</span> 		SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">SqlSession session = sessionfactory.openSession();</span><br><span class="line">StudentMapper stuMapper = session.getMapper(StudentMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="keyword">int</span> count = stuMapper.deleteStuByNo(<span class="number">3</span>);</span><br><span class="line">session.commit();</span><br><span class="line">System.out.println(<span class="string">"删除成功，"</span> + count + <span class="string">"行受影响"</span>);</span><br><span class="line">session.close();</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h4><p>3号学生被删除并想你抛了一行log🌚</p>
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>约定相对于配置来说，出错率更少了，因为不用写statement，而是通过调用接口去实现xml的id的调用，对于写statement的String容易手残的老哥来说，是不错的选择。</p>
+<hr>
+<p>关于一些优化🍔</p>
+<h3 id="数据库连接配置"><a href="#数据库连接配置" class="headerlink" title="数据库连接配置"></a>数据库连接配置</h3><p>在<code>config.xml</code>中如果配置了很多的东西，这时在想去更改数据库配置的一些参数显得尤为麻烦，这是可以新建一个<code>properties</code>来写一些kv对，再在config中使用<code>&lt;properties&gt;</code>标签来传值貌似就会简化一部分操作。</p>
+<p>因此在<code>src</code>下新建一个db.properties文件。如下配置：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">driver</span>=<span class="string">oracle.jdbc.driver.OracleDriver</span></span><br><span class="line"><span class="attr">url</span>=<span class="string">jdbc:oracle:thin:@127.0.0.1:1521:ORCL</span></span><br><span class="line"><span class="attr">username</span>=<span class="string">scott</span></span><br><span class="line"><span class="attr">password</span>=<span class="string">tiger</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>config.xml</code>中添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"db.properties"</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>数据源中配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;driver&#125;"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;url&#125;"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;username&#125;"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;password&#125;"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如此，每次想对数据源做更改的时候只需改变kv对即可。</p>
+<h3 id="mybatis的全局参数设置更改"><a href="#mybatis的全局参数设置更改" class="headerlink" title="mybatis的全局参数设置更改"></a>mybatis的全局参数设置更改</h3><p>谨慎更改👨‍🔧</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置别名"><a href="#设置别名" class="headerlink" title="设置别名"></a>设置别名</h3><p><code>top.eshyee.entity.Student</code>太长了🤦‍♀️，想要改别名。</p>
+<p>(大小写不敏感)</p>
+<p>选择两种方式：</p>
+<h6 id="设置单个别名"><a href="#设置单个别名" class="headerlink" title="设置单个别名"></a>设置单个别名</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">alias</span>=<span class="string">"student"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="批量设置别名"><a href="#批量设置别名" class="headerlink" title="批量设置别名"></a>批量设置别名</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"top.eshyee.entity"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一些内置别名。</p>
+<h2 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h2><p>怎么方便怎么来呗🏊‍♀️</p>
+<hr>
+<p>关于类型处理器和resultmap</p>
+<h2 id="类型处理器-类型转换器"><a href="#类型处理器-类型转换器" class="headerlink" title="类型处理器(类型转换器)"></a>类型处理器(类型转换器)</h2><ol>
+<li><p>MyBatis自带一些常见的类型处理器</p>
+</li>
+<li><p>也可以自定义Mybatis类型处理器</p>
+</li>
+</ol>
+<p>JAVA 数据类型 –数据库（数据类型）</p>
+<p>比如：</p>
+<p>实体类 Student ：Boolean  stuSex true：男  /false：女</p>
+<p>表中Student ： number stuSex 1：男  / 0：女</p>
+<h3 id="自定义类型转换器"><a href="#自定义类型转换器" class="headerlink" title="自定义类型转换器"></a>自定义类型转换器</h3><h4 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h4><p>我要在Student表里面新建一个性别列 男生用1 表示 女生用0表示(number类型)，</p>
+<p>此时实体类中我男生用的true 女生用的false(Boolean,仅仅是举个例子)。</p>
+<p>数据类型不匹配此时数据类型不匹配。</p>
+<h4 id="创建类型转换器"><a href="#创建类型转换器" class="headerlink" title="创建类型转换器"></a>创建类型转换器</h4><p>需要实现TypeHandler接口 此接口有一个实现类 BaseTypeHandler</p>
+<p>因此实现转换器有两种方法 实现 接口TypeHandler 和 继承BaseTypeHandler(简单)</p>
+<p>所以这里采用后者，去<code>extend</code>this method。</p>
+<h5 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h5><p>新建一个Boolean的属性 叫做stuSex 。</p>
+<p><code>private Boolean stuSex</code>形成get set方法</p>
+<h5 id="转换器"><a href="#转换器" class="headerlink" title="转换器"></a>转换器</h5><p>新建一个转换器继承BaseTypeHandler，编译器会自动生成三个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	get是DB数据--&gt;java数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">getNullableResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> rs.getInt(columnName)==<span class="number">1</span>?<span class="keyword">true</span>:<span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">getNullableResult</span><span class="params">(ResultSet rs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> rs.getInt(columnIndex)==<span class="number">1</span>?<span class="keyword">true</span>:<span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">getNullableResult</span><span class="params">(CallableStatement cs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> cs.getInt(columnIndex)==<span class="number">1</span>?<span class="keyword">true</span>:<span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	set是java数据--&gt;DB数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNonNullParameter</span><span class="params">(PreparedStatement ps, <span class="keyword">int</span> i, Boolean parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(parameter) &#123;</span><br><span class="line">			ps.setInt(i, <span class="number">1</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			ps.setInt(i, <span class="number">0</span>);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<p>ps:PreparedStatement对象<br>i:PreparedStatement对象操作的参数的位置<br>parameter:Java值<br>jdbcType:jdbc操作的数据类型</p>
+<p>这里用到了三元运算符，想起了之前一个写个人网站用到的一个三元运算符🤦‍♂️(更)。</p>
+<h5 id="conf配置"><a href="#conf配置" class="headerlink" title="conf配置"></a>conf配置</h5><p>在config中加上转换器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeHandler</span> <span class="attr">handler</span>=<span class="string">"转换器类名"</span> <span class="attr">javaType</span>=<span class="string">"Boolean"</span> <span class="attr">jdbcType</span>=<span class="string">"INTEGER"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就算是好了 测试一下</p>
+<h5 id="mapper配置"><a href="#mapper配置" class="headerlink" title="mapper配置"></a>mapper配置</h5><p>使用了转换器的查询<br>    1如果类中属性和表中的字段类型都能合理识别(String-varchar2),则可以使用resultType resultType=”top.eshyee.entity.Student”<br>    否则(boolean-integer)使用resultMap<br>    2如果类中的属性名和表中的字段名都能够合理识别(stuNo-stuno)则可以使用resultType<br>    否则(id-stuno)使用resultMap</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentBystuNumConverter"</span> <span class="attr">resultMap</span>=<span class="string">"studentResult"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">		select * from student where stuno= #&#123;stuno&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">id</span>=<span class="string">"studentResult"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"stuNo"</span> <span class="attr">column</span>=<span class="string">"stuno"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuName"</span> <span class="attr">column</span>=<span class="string">"stuname"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuAge"</span> <span class="attr">column</span>=<span class="string">"stuage"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"graName"</span> <span class="attr">column</span>=<span class="string">"graname"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuSex"</span> <span class="attr">column</span>=<span class="string">"stusex"</span> <span class="attr">javaType</span>=<span class="string">"boolean"</span> <span class="attr">jdbcType</span>=<span class="string">"INTEGER"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="resultMap"><a href="#resultMap" class="headerlink" title="resultMap"></a>resultMap</h4><p>resultMap可以实现两个功能：<br>    1 类型转换<br>    2 属性-字段名之间的映射关系</p>
+<p>分为主键id和非主键result<br>如果实体类中的属性跟数据库中那个的字段名叫法不一样，从下面的映射关系中也可以更改 。</p>
+<p>这样就好了，可以在<code>test.java</code>中测试一下了。🥐</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以前用过别的方法来转换数据库数据与java数据 但是这个更系统一些吧。</p>
+<hr>
+<h2 id="输入参数和输出参数"><a href="#输入参数和输出参数" class="headerlink" title="输入参数和输出参数"></a>输入参数和输出参数</h2><h3 id="输入参数parameterType"><a href="#输入参数parameterType" class="headerlink" title="输入参数parameterType"></a>输入参数parameterType</h3><h4 id="简单类型"><a href="#简单类型" class="headerlink" title="简单类型"></a>简单类型</h4><p><strong>${}#{}比较</strong></p>
+<p>#{任意值}或者${value}(标识符只能是value)</p>
+<p>#{}会自动给String加上’’(自动类型转换)</p>
+<p>${}会原样输出，但是适合于动态排序(动态字段)</p>
+<p>#{}可以防止sql注入</p>
+<p>${}不可以</p>
+<p><strong>${}#{}相同之处</strong></p>
+<p>都可以获取对象的值，(嵌套类型对象)</p>
+<h4 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h4><p>#{属性名}或者${属性名}(对象的属性名例如stuNo)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentByAddress"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"address"</span>&gt;</span></span><br><span class="line">		select stuno,stuname,stuage from student </span><br><span class="line">		where homeaddress=#&#123;homeAddress&#125; or schooladdress='$&#123;schoolAddress&#125;'</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="嵌套类型输入参数为级联属性"><a href="#嵌套类型输入参数为级联属性" class="headerlink" title="嵌套类型输入参数为级联属性"></a>嵌套类型输入参数为级联属性</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentByAddress"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"Student"</span>&gt;</span></span><br><span class="line">		select stuno,stuname,stuage from student where homeaddress=#&#123;address.homeAddress&#125; or schooladdress='$&#123;address.schoolAddress&#125;'</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentBystuNameOrAge"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"Student"</span>&gt;</span></span><br><span class="line">		select stuno,stuname,stuage from student </span><br><span class="line">		where stuname like '%$&#123;stuName&#125;%' or stuage=#&#123;stuAge&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="传入为hashmap"><a href="#传入为hashmap" class="headerlink" title="传入为hashmap"></a>传入为hashmap</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentBystuNameOrAgewithHashmap"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span>&gt;</span></span><br><span class="line">		select stuno,stuname,stuage from student </span><br><span class="line">		where stuname like '%$&#123;stuName&#125;%' or stuage=#&#123;stuAge&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="调用存储过程"><a href="#调用存储过程" class="headerlink" title="调用存储过程"></a>调用存储过程</h3><p>存储过程的传入参数在mybatis中用map来传递(Hashmap)<br>CALLABLE设置sql 的调用方式是存储过程<br>输出参数通过map的get方法获取</p>
+<h4 id="查询某个年级的所有学生总数"><a href="#查询某个年级的所有学生总数" class="headerlink" title="查询某个年级的所有学生总数"></a>查询某个年级的所有学生总数</h4><h5 id="数据库里"><a href="#数据库里" class="headerlink" title="数据库里"></a>数据库里</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> queryCountByGradeWithProcadure(gName <span class="keyword">in</span> <span class="built_in">varchar</span>,scount <span class="keyword">out</span> <span class="built_in">number</span> )</span><br><span class="line">	<span class="keyword">as</span></span><br><span class="line">	<span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">into</span> scount <span class="keyword">from</span> student <span class="keyword">where</span> graname=gname;</span><br><span class="line">	<span class="keyword">end</span>;</span><br><span class="line">	/</span><br></pre></td></tr></table></figure>
+
+<h5 id="mapper中"><a href="#mapper中" class="headerlink" title="mapper中"></a>mapper中</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryCountByGradeWithPrecadure"</span> <span class="attr">statementType</span>=<span class="string">"CALLABLE"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span>&gt;</span></span><br><span class="line">		&#123;CALL queryCountByGradeWithProcadure( </span><br><span class="line">		#&#123;gName,jdbcType=VARCHAR,mode=IN&#125;,</span><br><span class="line">		#&#123;sCount,jdbcType=INTEGER,mode=OUT&#125; )&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="根据学号删除学生"><a href="#根据学号删除学生" class="headerlink" title="根据学号删除学生"></a>根据学号删除学生</h4><h5 id="数据库里-1"><a href="#数据库里-1" class="headerlink" title="数据库里"></a>数据库里</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> deleteStuBystunoWithProcedure(sno <span class="keyword">in</span> <span class="built_in">number</span>)</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> stuno=sno;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<h5 id="mapper中-1"><a href="#mapper中-1" class="headerlink" title="mapper中"></a>mapper中</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deletestuByStunoWithPrecadure"</span> <span class="attr">statementType</span>=<span class="string">"CALLABLE"</span> <span class="attr">parameterType</span>=<span class="string">"HashMap"</span>&gt;</span></span><br><span class="line">	&#123;CALL deleteStuBystunoWithProcedure(#&#123;sno,jdbcType=INTEGER,mode=IN&#125;)&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出参数"><a href="#输出参数" class="headerlink" title="输出参数"></a>输出参数</h3><h4 id="resultType"><a href="#resultType" class="headerlink" title="resultType"></a>resultType</h4><p>简单类型，实体对象类型，实体对象类型的集合之前有提到过，此处不再赘述。</p>
+<h5 id="输出为HashMap"><a href="#输出为HashMap" class="headerlink" title="输出为HashMap"></a>输出为HashMap</h5><p>通过别名作为map的key</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudentWithHash"</span> <span class="attr">resultType</span>=<span class="string">"HashMap"</span>&gt;</span></span><br><span class="line">	select stuno "no",stuname "name" from student</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="resultMap-1"><a href="#resultMap-1" class="headerlink" title="resultMap"></a>resultMap</h4><p>解决实体类型属性与数据表字段名不一致（前面有用到）</p>
+<p>也可以使用HashMap+resultType</p>
+<hr>
+<h2 id="关于动态sql"><a href="#关于动态sql" class="headerlink" title="关于动态sql"></a>关于动态sql</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><p>按姓名和年龄查询</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qStuByNOrAWithSQLTag"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">		select stuno ,stuname  from student where 1=1</span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"stuName!=null and stuName!= ''"</span>&gt;</span></span><br><span class="line">		student有stuname属性且不为null</span><br><span class="line">		and stuname=#&#123;stuName&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"stuAge!=null and stuAge!=0"</span>&gt;</span></span><br><span class="line">		student有stunage属性且不为null</span><br><span class="line">		and stuage=#&#123;stuAge&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里and会出问题</p>
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><p> where:处理第一个and</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qStuByNOrAWithSQLTag"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">		select stuno ,stuname  from student</span><br><span class="line">		<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"stuName!=null and stuName!= ''"</span>&gt;</span></span><br><span class="line">		and stuname=#&#123;stuName&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"stuAge!=null and stuAge!=0"</span>&gt;</span></span><br><span class="line">		and stuage=#&#123;stuAge&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><p>查询学号为1 2 4的学生学号信息</p>
+<p>迭代的类型：数组、对象数组、集合、属性</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组固定写法：array 这是约定</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStuwithNoWitharray"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"int[]"</span>&gt;</span></span><br><span class="line">		select * from student </span><br><span class="line">		<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"array!=null and array.length&gt;0"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">open</span>=<span class="string">"and stuno in("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"stuNo"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">		#&#123;stuNo&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="放入对象的属性中"><a href="#放入对象的属性中" class="headerlink" title="放入对象的属性中"></a>放入对象的属性中</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStuwithNoInGra"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Grade"</span>&gt;</span></span><br><span class="line">		select * from student </span><br><span class="line">		<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"stuNos!=null and stuNos.size&gt;0"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"stuNos"</span> <span class="attr">open</span>=<span class="string">"and stuno in("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"stuNo"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">		#&#123;stuNo&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStuwithNowithlist"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"top.eshyee.entity.Grade"</span>&gt;</span></span><br><span class="line">		select * from student </span><br><span class="line">		<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"list!=null and list.size&gt;0"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">open</span>=<span class="string">"and stuno in("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"stuNo"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">		#&#123;stuNo&#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h4><p>必须使用Object[]</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStuwithNowithObjArr"</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">parameterType</span>=<span class="string">"Object[]"</span>&gt;</span></span><br><span class="line">		select * from student </span><br><span class="line">		<span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"objectArraStuno"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 如果sql片段不在一个文件 </span></span><br><span class="line"><span class="comment">		&lt;include refid="top.eshyee.mapper.StudentMapper.objectArraStuno"&gt;&lt;/include&gt;</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="sql片段"><a href="#sql片段" class="headerlink" title="sql片段"></a>sql片段</h4><p>重复使用的提取出来</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"objectArraStuno"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"array!=null and array.length&gt;0"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">open</span>=<span class="string">"and stuno in("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"student"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">		#&#123;student.stuNo&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h2><p>关于关联查询主要重点是配置好mapper</p>
+<h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><p>a.业务扩展类</p>
+<p>核心:用resultType指定的类的属性包含多表查询的所有字段</p>
+<p>b. resultMap</p>
+<p>通过属性成员将2个类建立起联系</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 利用业务扩展类实现一对一 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qSByNWithO2O"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.StudentBussiness"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select s.*,c.* from student s inner join studentcard c</span><br><span class="line">    on s.cardid =c.cardid</span><br><span class="line">    where s.stuno=#&#123;stuNo&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 利用resultmap实现一对一 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qSByNWithMapO2O"</span> <span class="attr">resultMap</span>=<span class="string">"student_card_map"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select s.*,c.* from student s inner join studentcard c</span><br><span class="line">    on s.cardid =c.cardid</span><br><span class="line">    where s.stuno=#&#123;stuNo&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"student"</span> <span class="attr">id</span>=<span class="string">"student_card_map"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"stuNo"</span> <span class="attr">column</span>=<span class="string">"stuNo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuName"</span> <span class="attr">column</span>=<span class="string">"stuName"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuAge"</span> <span class="attr">column</span>=<span class="string">"stuAge"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"graName"</span> <span class="attr">column</span>=<span class="string">"graName"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuSex"</span> <span class="attr">column</span>=<span class="string">"stuSex"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 一一映射用association，一对多用collection --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"card"</span> <span class="attr">javaType</span>=<span class="string">"StudentCard"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"cardId"</span> <span class="attr">column</span>=<span class="string">"cardId"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"cardInfo"</span> <span class="attr">column</span>=<span class="string">"cardInfo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="一对多-多对一"><a href="#一对多-多对一" class="headerlink" title="一对多(多对一)"></a>一对多(多对一)</h3><p>(MyBatis:多对一，多对多的本质就是一对多的变化)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询1班的班级信息 和所有学生的信息 建立一对多关系 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qCAS"</span> <span class="attr">resultMap</span>=<span class="string">"class_student_classid"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select c.*,s.* from student s</span><br><span class="line">    inner join studentclass c</span><br><span class="line">    on c.classid=s.classid</span><br><span class="line">    where c.classid=#&#123;classId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"top.eshyee.entity.StudentClass"</span> <span class="attr">id</span>=<span class="string">"class_student_classid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"classId"</span> <span class="attr">column</span>=<span class="string">"classId"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"className"</span> <span class="attr">column</span>=<span class="string">"className"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 属性类型用javatype 属性的元素类型用oftype --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"student"</span> <span class="attr">ofType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"stuNo"</span> <span class="attr">column</span>=<span class="string">"stuNo"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuName"</span> <span class="attr">column</span>=<span class="string">"stuName"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuAge"</span> <span class="attr">column</span>=<span class="string">"stuAge"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"graName"</span> <span class="attr">column</span>=<span class="string">"graName"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuSex"</span> <span class="attr">column</span>=<span class="string">"stuSex"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3><p>多对多 可由两个多对一等方法实现！</p>
+<hr>
+<h2 id="log4j和延迟加载"><a href="#log4j和延迟加载" class="headerlink" title="log4j和延迟加载"></a>log4j和延迟加载</h2><p>在之前下载的mybatis包中找到log4j并导入到项目</p>
+<h3 id="开启日志"><a href="#开启日志" class="headerlink" title="开启日志"></a>开启日志</h3><p>如果不指定，Mybatis就会根据以下顺序寻找日志<br>SLF4J →Apache Commons Logging →Log4j 2→Log4j → JDK logging<br>日志级别:<br>DEBUG&lt; INFO&lt; WARN&lt; ERROR<br>如果设置为info， 则只显示info及以上级别的信息;<br>建议:<br>在开发时设置debug，在运行时设置为info或以上。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"LOG4J"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>每次运行就会出现诸如此类的debug</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DEBUG [main] - PooledDataSource forcefully closed&#x2F;removed all connections.</span><br><span class="line">DEBUG [main] - PooledDataSource forcefully closed&#x2F;removed all connections.</span><br><span class="line">DEBUG [main] - PooledDataSource forcefully closed&#x2F;removed all connections.</span><br><span class="line">DEBUG [main] - PooledDataSource forcefully closed&#x2F;removed all connections.</span><br><span class="line">DEBUG [main] - Opening JDBC Connection</span><br><span class="line">DEBUG [main] - Created connection 961160488.</span><br><span class="line">DEBUG [main] - Setting autocommit to false on JDBC Connection [oracle.jdbc.driver.T4CConnection@394a2528]</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置延迟加载"><a href="#配置延迟加载" class="headerlink" title="配置延迟加载"></a>配置延迟加载</h3><p><strong>嵌套查询多用于延迟加载的设计</strong></p>
+<p>具体如下</p>
+<h4 id="一对一：查学生和学生卡信息"><a href="#一对一：查学生和学生卡信息" class="headerlink" title="一对一：查学生和学生卡信息"></a>一对一：查学生和学生卡信息</h4><p>在xml中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 延迟加载 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qSByNWithMapO2OLazy"</span> <span class="attr">resultMap</span>=<span class="string">"student_card_Lazyload_map"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 先查学生 --&gt;</span></span><br><span class="line">    select * from student</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"student"</span> <span class="attr">id</span>=<span class="string">"student_card_Lazyload_map"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"stuNo"</span> <span class="attr">column</span>=<span class="string">"stuNo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuName"</span> <span class="attr">column</span>=<span class="string">"stuName"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuAge"</span> <span class="attr">column</span>=<span class="string">"stuAge"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"graName"</span> <span class="attr">column</span>=<span class="string">"graName"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"stuSex"</span> <span class="attr">column</span>=<span class="string">"stuSex"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 此次采用延迟加载:在查询学生时，并不立即加载学生证信息</span></span><br><span class="line"><span class="comment">  通过select在需要的时候再查学生证</span></span><br><span class="line"><span class="comment">  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"card"</span> <span class="attr">javaType</span>=<span class="string">"StudentCard"</span> <span class="attr">select</span>=<span class="string">"top.eshyee.mapper.StudentCardMapper.querycardbyid"</span> <span class="attr">column</span>=<span class="string">"cardid"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- &lt;id property="cardId" column="cardId"/&gt;</span></span><br><span class="line"><span class="comment"> &lt;result property="cardInfo" column="cardInfo"/&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>新建Cardmapper</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询学生信息 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"querycardbyid"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.StudentCard"</span>&gt;</span></span><br><span class="line">    select * from studentCard where cardid=#&#123;cardId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="一对多：查班级和学生信息"><a href="#一对多：查班级和学生信息" class="headerlink" title="一对多：查班级和学生信息"></a>一对多：查班级和学生信息</h4><p>新建班级mapper</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"qCASLazy"</span> <span class="attr">resultMap</span>=<span class="string">"class_student_classid_lazy"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select c.* from  studentclass c</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"top.eshyee.entity.StudentClass"</span> <span class="attr">id</span>=<span class="string">"class_student_classid_lazy"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"classId"</span> <span class="attr">column</span>=<span class="string">"classId"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"className"</span> <span class="attr">column</span>=<span class="string">"className"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 属性类型用javatype 属性的元素类型用oftype --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 延迟加载 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"student"</span> <span class="attr">ofType</span>=<span class="string">"top.eshyee.entity.Student"</span> <span class="attr">select</span>=<span class="string">"top.eshyee.mapper.StudentMapper.queryStuByClassId"</span> <span class="attr">column</span>=<span class="string">"classId"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在studentmapper中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 延迟加载一对多 查询班级中的所有学生 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStuByClassId"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"top.eshyee.entity.Student"</span>&gt;</span></span><br><span class="line">	select * from student where classId=#&#123;classId&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p>一对多和一对一的延迟加载配置方法相同</p>
+<hr>
+<h2 id="mybatis-缓存"><a href="#mybatis-缓存" class="headerlink" title="mybatis 缓存"></a>mybatis 缓存</h2><h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3><h4 id="一级缓存-同一个SqlSession对象"><a href="#一级缓存-同一个SqlSession对象" class="headerlink" title="一级缓存:同一个SqlSession对象"></a>一级缓存:同一个SqlSession对象</h4><img src="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/image-20200331082951809.png" class="" title="mb1">
+
+<p>MyBatis默认开启一级缓存，如果用同样的SqlSession对象查询相同的数据，则只会在第一次查询时向数据库发送SQL语句，并将查询的结果放入到SQLSESSION中(作为缓存在) ；后续再次查询该同样的对象时则直接从缓存中查询该对象即可(即省略了数据库的访问)。</p>
+<p>二级缓存</p>
+<p>Mybatis自带二级缓存: [同一个namespace]生成的mapper对象</p>
+<p>MyBati s默认情况没有开启二级缓存，需要手工打开。</p>
+<p>conf.xml中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 开启二级缓存 --&gt;</span><br><span class="line">&lt;setting name&#x3D;&quot;cacheEnable&quot; value&#x3D;&quot;true&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>mapper中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 声明此namespace开启二级缓存 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">cache</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>异常提示：NotSerializableException可知，MyBatis的二级缓存是将对象放入硬盘文件中</p>
+<p>序列化:内存-&gt;硬盘</p>
+<p>反序列化:硬盘-&gt;内存</p>
+<p>准备缓存的对象，必须实现了序列化接口( 如果开启的缓存<code>Namespace=&quot;top.eshyee.mapper.StudentMapper&quot;</code>可知序列化对象为Student，因此需要将Student序列化(序 列化Student类，以及Student的级联属性、和父类)</p>
+<p>触发将对象写入二级缓存的时机: SqlSession对象的close()方法</p>
+<p>回顾: namespace的值 就是接口的全类名(包名.类名) ，通过接口可以产生代理对象(Mapper对象)</p>
+<p>–&gt;namespace决定了Mapper对象的产生</p>
+<p>结论:只要产生的xxxMapper对象来自于同一个namespace，则这些对象共享二级缓存。</p>
+<p>如果是同一个SqISession对象进行多次相同的查询，则直接进入一级缓存查询;</p>
+<img src="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/image-20200331084348373.png" class="" title="mb1">
+
+<p>如果不是同一个SqISession对象进行多次相同的查询(但是均来自同一个namespace)则进入二级缓存查询</p>
+<p>如果一个namespace， 如果有多个xxMapper. xml的namespace值相同， 则通过这些xxxMapper. xml产生的xxMapper，仍然共享二级缓存。</p>
+<p>禁用：</p>
+<p>在需要禁用的select标签中的<code>usecache</code>属性改为<code>false</code></p>
+<p>清理：与清理一级缓存的方法相同，一般执行增删改时会清理掉缓存 ，设计的原因是为了防止脏数据</p>
+<p>commit();</p>
+<p>commit会清理一级和二级缓存;但是清理二级缓存时，不能是查询自身的commit()</p>
+<p>改标签</p>
+<p>在select标签中设置<code>flushCache= &quot;true&quot;</code></p>
+<p>命中率:<br>1 :0% 0.0</p>
+<p>2:50% 0.5</p>
+<p>3:2/3 0.666</p>
+<p>4:3/4 0.75</p>
+<p>三方提供的二级缓存:</p>
+<p>ehicache、memcache</p>
+<p>要想整合三方提供的二级缓存(或者自定义二级缓存) ，必须实现<code>org.apache.ibatis.cache.Cache</code>接口，该接口的默认实现类是<code>PerpetualCache</code></p>
+<p>整合ehcache二级缓存:</p>
+<p>Ehcache-core.jar<br>mybatis- Ehcache.jar<br>slf4j-api.jar</p>
+<p>编写ehcache配置文件Ehcache.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"ehcache.xsd"</span> <span class="attr">updateCheck</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">monitoring</span>=<span class="string">"autodetect"</span> <span class="attr">dynamicConfig</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 当二级缓存的对象超过内存限制时（缓存对象的个数&gt;maxElements InMemory</span></span><br><span class="line"><span class="comment"> ），存放入的硬盘路径 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">"D:\Ehcache"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- maxElementsInMemory:设置在内存中缓存对象的个数 </span></span><br><span class="line"><span class="comment"> maxElementsOnDisk:设置在硬盘中缓存对象的个数</span></span><br><span class="line"><span class="comment"> eternal: 设置缓存是否永远不过期</span></span><br><span class="line"><span class="comment"> overflowToDisk:当内存中缓存的对象个数超过maxElementsInMemory的时候，是否转移到硬盘中</span></span><br><span class="line"><span class="comment"> timeToIdleSeconds:当2次访问超过该值的时候，将缓存对象失效</span></span><br><span class="line"><span class="comment"> timeToliveSeconds:一个缓存对象最多存放的时间(生命周期)</span></span><br><span class="line"><span class="comment"> diskExpiryThreadIntervalSeconds:设置每隔多长时间，通过一个线程来清理硬盘中的缓存</span></span><br><span class="line"><span class="comment"> memoryStioreEvictionPolicy: 当超过缓存对象的最大值时，处理的策略 LRU，FIFO,LFU </span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">defaultCache</span> </span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">                  <span class="attr">maxElementsInMemory</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">maxElementsOnDisk</span>=<span class="string">"1000000"</span> </span></span><br><span class="line"><span class="tag">                  <span class="attr">eternal</span>=<span class="string">"false"</span> </span></span><br><span class="line"><span class="tag">                  <span class="attr">overflowToDisk</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">timeToIdleSeconds</span>=<span class="string">"100"</span> </span></span><br><span class="line"><span class="tag">                  <span class="attr">timeToLiveSeconds</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">diskExpiryThreadIntervalSeconds</span>=<span class="string">"120"</span> </span></span><br><span class="line"><span class="tag">                  <span class="attr">memoryStoreEvictionPolicy</span>=<span class="string">"LRU"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">defaultCache</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>配置mapper</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>= <span class="string">"org.mybatis.caches.ehcache.EhcacheCache"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>= <span class="string">"maxELementsInMemory"</span> <span class="attr">value</span>= <span class="string">"2000"</span> /&gt;</span></span><br><span class="line">    可以覆盖掉默认值</span><br><span class="line"><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MyBatis/" rel="tag">MyBatis</a>, <a class="has-link-grey -link" href="/tags/log4j/" rel="tag">log4j</a>, <a class="has-link-grey -link" href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/" rel="tag">一对多</a>, <a class="has-link-grey -link" href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" rel="tag">二级缓存</a>, <a class="has-link-grey -link" href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" rel="tag">关联查询</a>, <a class="has-link-grey -link" href="/tags/%E5%8A%A8%E6%80%81sql/" rel="tag">动态sql</a>, <a class="has-link-grey -link" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" rel="tag">存储过程</a>, <a class="has-link-grey -link" href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" rel="tag">延迟加载</a>, <a class="has-link-grey -link" href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/" rel="tag">类型处理器</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zfb.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/ggh.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/04/03/Spring-1/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring-1</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/30/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%94/">
+                <span class="level-item">Oracle系列学习(五)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/ava.jpg" alt="EShyee">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        EShyee
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        合格NPC
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China DongYing</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            28
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            40
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eshyee" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Steam" href="https://steamcommunity.com/id/eshyee">
+                
+                <i class="fab fa-steam"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Instagram" href="https://www.instagram.com/eshyee1/">
+                
+                <i class="fab fa-instagram"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="https://user.qzone.qq.com/851156977">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="哔哩哔哩" href="https://space.bilibili.com/167370813">
+                
+                <i class="fab fa-youtube"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="https://weibo.com/u/3628942965">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+        </div>
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=86 src="//music.163.com/outchain/player?type=2&id=440411401&auto=1&height=66"></iframe>
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://jq.qq.com/?_wv=1027&k=5nNf4OD" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">QQ</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">jq.qq.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://tiktok.com/@eshyee" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Tiktok</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">tiktok.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/">
+            <span class="level-start">
+                <span class="level-item">学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+            <span class="level-start">
+                <span class="level-item">数据结构</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E6%A0%88/">
+            <span class="level-start">
+                <span class="level-item">栈</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+            <span class="level-start">
+                <span class="level-item">需求分析</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+            <span class="level-start">
+                <span class="level-item">项目管理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/">
+            <span class="level-start">
+                <span class="level-item">技术</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">MyBatis系列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">Oracle系列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/%E5%BB%BA%E7%AB%99%E4%B9%8B%E8%B7%AF/">
+            <span class="level-start">
+                <span class="level-item">建站之路</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/">
+            <span class="level-start">
+                <span class="level-item">生活</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/">
+            <span class="level-start">
+                <span class="level-item">旅行</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/%E7%83%A7%E9%A5%AD/">
+            <span class="level-start">
+                <span class="level-item">烧饭</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/Cisco/" style="font-size: 10px;">Cisco</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/" style="font-size: 10px;">一对一</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/" style="font-size: 15px;">一对多</a> <a href="/tags/%E4%B8%8A%E6%B5%B7/" style="font-size: 10px;">上海</a> <a href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" style="font-size: 10px;">二级缓存</a> <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/" style="font-size: 10px;">交叉线</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 10px;">入门</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/" style="font-size: 10px;">共享栈</a> <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" style="font-size: 15px;">关联查询</a> <a href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" style="font-size: 15px;">初学者</a> <a href="/tags/%E5%8A%A8%E6%80%81sql/" style="font-size: 10px;">动态sql</a> <a href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">动态分配</a> <a href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">单链表</a> <a href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/" style="font-size: 10px;">双绞线</a> <a href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">双链表</a> <a href="/tags/%E5%9C%9F%E8%B1%86/" style="font-size: 10px;">土豆</a> <a href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/" style="font-size: 10px;">多对多</a> <a href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/" style="font-size: 10px;">头结点</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%B0%8F%E7%99%BD/" style="font-size: 10px;">小白</a> <a href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/" style="font-size: 15px;">崩溃的</a> <a href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">延迟加载</a> <a href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">循环链表</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/" style="font-size: 10px;">直通线</a> <a href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">类型处理器</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" style="font-size: 20px;">线性表</a> <a href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" style="font-size: 10px;">编制项目预算</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">软件项目管理</a> <a href="/tags/%E9%93%BE%E6%A0%88/" style="font-size: 10px;">链栈</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/" style="font-size: 10px;">需求分析</a> <a href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">静态分配</a> <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">静态链表</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/" style="font-size: 10px;">项目支出</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/" style="font-size: 10px;">顺序栈</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" style="font-size: 10px;">顺序表</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/11/Queue/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Queue">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-11T02:12:45.000Z">2020-04-11</time></div>
+                    <a href="/2020/04/11/Queue/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Queue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/03/eclipse%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AESpring/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="eclipse如何配置Spring">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T03:55:22.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/eclipse%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AESpring/" class="title has-link-black-ter is-size-6 has-text-weight-normal">eclipse如何配置Spring</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Spring/">Spring</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/03/Spring-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T01:57:49.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/Spring-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring-1</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-01T13:32:57.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/30/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%94/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Oracle系列学习(五)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T07:17:19.000Z">2020-03-30</time></div>
+                    <a href="/2020/03/30/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%94/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Oracle系列学习(五)</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cisco/">
+                        <span class="tag">Cisco</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MyBatis/">
+                        <span class="tag">MyBatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/log4j/">
+                        <span class="tag">log4j</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/">
+                        <span class="tag">一对一</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">一对多</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%8A%E6%B5%B7/">
+                        <span class="tag">上海</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">
+                        <span class="tag">二级缓存</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/">
+                        <span class="tag">交叉线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%A5%E9%97%A8/">
+                        <span class="tag">入门</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/">
+                        <span class="tag">共享栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/">
+                        <span class="tag">关联查询</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/">
+                        <span class="tag">初学者</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81sql/">
+                        <span class="tag">动态sql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">动态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">单链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/">
+                        <span class="tag">双绞线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">双链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9C%9F%E8%B1%86/">
+                        <span class="tag">土豆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">多对多</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/">
+                        <span class="tag">头结点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+                        <span class="tag">存储过程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B0%8F%E7%99%BD/">
+                        <span class="tag">小白</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/">
+                        <span class="tag">崩溃的</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">
+                        <span class="tag">延迟加载</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">循环链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/">
+                        <span class="tag">直通线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/">
+                        <span class="tag">类型处理器</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/">
+                        <span class="tag">线性表</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/">
+                        <span class="tag">编制项目预算</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+                        <span class="tag">软件项目管理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E6%A0%88/">
+                        <span class="tag">链栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+                        <span class="tag">需求分析</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">静态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">静态链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/">
+                        <span class="tag">项目支出</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/">
+                        <span class="tag">顺序栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
+                        <span class="tag">顺序表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/11/Queue/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Queue">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-11T02:12:45.000Z">2020-04-11</time></div>
+                    <a href="/2020/04/11/Queue/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Queue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/03/eclipse%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AESpring/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="eclipse如何配置Spring">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T03:55:22.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/eclipse%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AESpring/" class="title has-link-black-ter is-size-6 has-text-weight-normal">eclipse如何配置Spring</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Spring/">Spring</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/03/Spring-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T01:57:49.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/Spring-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring-1</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-01T13:32:57.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/30/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%94/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Oracle系列学习(五)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T07:17:19.000Z">2020-03-30</time></div>
+                    <a href="/2020/03/30/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%94/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Oracle系列学习(五)</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cisco/">
+                        <span class="tag">Cisco</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MyBatis/">
+                        <span class="tag">MyBatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/log4j/">
+                        <span class="tag">log4j</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/">
+                        <span class="tag">一对一</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">一对多</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%8A%E6%B5%B7/">
+                        <span class="tag">上海</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">
+                        <span class="tag">二级缓存</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/">
+                        <span class="tag">交叉线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%A5%E9%97%A8/">
+                        <span class="tag">入门</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/">
+                        <span class="tag">共享栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/">
+                        <span class="tag">关联查询</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/">
+                        <span class="tag">初学者</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81sql/">
+                        <span class="tag">动态sql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">动态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">单链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/">
+                        <span class="tag">双绞线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">双链表</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9C%9F%E8%B1%86/">
+                        <span class="tag">土豆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
+                        <span class="tag">多对多</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/">
+                        <span class="tag">头结点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+                        <span class="tag">存储过程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B0%8F%E7%99%BD/">
+                        <span class="tag">小白</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/">
+                        <span class="tag">崩溃的</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">
+                        <span class="tag">延迟加载</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">循环链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/">
+                        <span class="tag">直通线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/">
+                        <span class="tag">类型处理器</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/">
+                        <span class="tag">线性表</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/">
+                        <span class="tag">编制项目预算</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+                        <span class="tag">软件项目管理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E6%A0%88/">
+                        <span class="tag">链栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+                        <span class="tag">需求分析</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/">
+                        <span class="tag">静态分配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">静态链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/">
+                        <span class="tag">项目支出</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/">
+                        <span class="tag">顺序栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
+                        <span class="tag">顺序表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.svg" alt="MyBatis系列" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 EShyee&nbsp;
+                努力做一名合格的NPC🙍‍♂️
+                
+                
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="网易云" href="https://music.163.com/#/user/home?id=472514178">
+                        
+                        <i class="fab fa-music"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="发邮件" href="mailto: 851156977@qq.com">
+                        
+                        <i class="fab fa-email"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="go to eshyee" href="http://eshyee.top">
+                        
+                        <i class="fab fa-child"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://eshyee.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: false,
+            fold: 'folded'
+        }
+    }
+};
+</script>
+
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

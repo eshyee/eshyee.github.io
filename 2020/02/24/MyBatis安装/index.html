@@ -6,19 +6,26 @@
 <meta name="generator" content="Hexo 4.2.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta  />
+<meta  />
+<meta  />
+<title>MyBatis安装 - 合格NPC</title>
 
-<title>归档: 2020/3 - 合格NPC</title>
 
-
-    <meta name="description" content="还行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="合格NPC">
-<meta property="og:url" content="http://eshyee.github.io/archives/2020/03/page/3/index.html">
+    <meta name="description" content="Mybatis✔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis安装">
+<meta property="og:url" content="http://eshyee.github.io/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="合格NPC">
-<meta property="og:description" content="还行">
+<meta property="og:description" content="Mybatis✔">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://eshyee.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-02-24T07:18:52.000Z">
+<meta property="article:modified_time" content="2020-04-11T02:33:43.877Z">
 <meta property="article:author" content="EShyee">
+<meta property="article:tag" content="mybatis">
+<meta property="article:tag" content="入门">
+<meta property="article:tag" content="初学者">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://eshyee.github.io/images/og_image.png">
 
@@ -28,13 +35,13 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/ava.jpg">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atelier-forest-dark.css">
 
 
     
@@ -79,7 +86,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.svg" alt="合格NPC" height="28">
+                <img src="/images/logo1.svg" alt="MyBatis安装" height="28">
             
             </a>
         </div>
@@ -107,7 +114,7 @@
             <div class="navbar-end">
                 
                     
-                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                    <a class="navbar-item" target="_blank" rel="noopener" title="在GitHub上找到我" href="https://github.com/eshyee">
                         
                         <i class="fab fa-github"></i>
                         
@@ -129,116 +136,197 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-24T07:18:52.000Z">2020-02-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1063 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                MyBatis安装
+            
+        </h1>
+        <div class="content">
+            <p>Mybatis✔</p>
+<a id="more"></a>
 
-<div class="card widget">
+<p>环境：</p>
+<ol>
+<li><p>JDK 13.0.2</p>
+</li>
+<li><p>tomcat 9.0.3</p>
+</li>
+<li><p>mybatis 3.5.4</p>
+</li>
+<li><p>mysql 8</p>
+</li>
+</ol>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>早期为：ibatis：apache</p>
+<p>2010年被Google收购改称：Mybatis</p>
+<p>主要作用：简化JDBC操作，实现数据的持久化。</p>
+<p>ORM：Object Relational Mapping，可以使开发人员像操作对象一样操作数据库</p>
+<p>mybatis是ORM的一种实现</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>之前看过的一个教程是使用Idea的，也就是直接使用依赖库导入，这次看的是导入jar使用。</p>
+<h3 id="去官网"><a href="#去官网" class="headerlink" title="去官网"></a>去<a href="https://mybatis.org/mybatis-3/" target="_blank" rel="noopener" title="此时是mybatis3">官网</a></h3><img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/mb1.png" class="" title="mb1">
+
+<p>选择Getting Started</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/mb2.png" class="" title="mb2">
+
+<p>会有Maven方式，当然使用Idea就可以直接复制代码框内代码到idea中，但这次选择jar的超链接。</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/mb4.png" class="" title="mb4">
+
+<p>就来到了熟悉的github，在最新版本下，有三个选项，这里选择第一个zip包下载。</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/image-20200224154635459.png" class="" width="20200224154635459">
+
+<p>下好之后是个zip，</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/zipmb.png" class="" title="zipmb">
+
+<p>打开以后目录文件如图，</p>
+<p>lib文件夹存放mybatis的一些依赖包，</p>
+<p>license就是<del>字面意思</del> 许可证，</p>
+<p><code>mybatis-3.5.4.jar</code>即要用到的jar，</p>
+<p>.pdf即使用说明书，</p>
+<p>NOTICE也是<del>字面意思</del> 注意事项。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>简单实用一下：</p>
+<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>打开eclipse，新建一个JAVA项目，因为mybatis是操控数据库的，所以暂时可以先间隔Javaproject试一下。</p>
+<p>这里起名“TestMyBatis”，将<code>mybatis-3.5.4.jar</code>拖到src里面，顺便add to buildpath，添加环境。</p>
+<h3 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h3><p>打开cmd或者使用navicat，因为我的navicat建数据库总是会有数据编码混乱的问题，我一般建表都是用cmd。</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/persontable.png" class="" title="persontable">
+
+<h3 id="创建实体类及映射关系"><a href="#创建实体类及映射关系" class="headerlink" title="创建实体类及映射关系"></a>创建实体类及映射关系</h3><p>创建实体类 Person</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/person.png" class="" title="person">
+
+<p>构建这个类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String id;</span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String id, String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>();</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建配置文件映射表和类的映射 <code>.xml</code>文件</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/this.png" class="" title="this">
+
+<p>点这里转换视图</p>
+<p>在刚刚的.pdf文件中有大概的配置方法，打开后找到“<strong>Exploring Mapped SQL Statements</strong>”</p>
+<p>下面有</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.mybatis.example.BlogMapper"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectBlog"</span> <span class="attr">resultType</span>=<span class="string">"Blog"</span>&gt;</span>    </span><br><span class="line">        select * from Blog where id = #&#123;id&#125;  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>直接复制，到刚刚的xml中，更改<code>namespace</code> 后面的内容为自己的xml<code>top.eshyee.entity.personMapper</code> </p>
+<p>改完之后</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span>  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"top.eshyee.entity.personMapper"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryPersonById"</span> <span class="attr">resultType</span>=<span class="string">"Person"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span>&gt;</span></span><br><span class="line">		select * from person where id= #&#123;id&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在创建一个配置文件，在src下创建一个叫<code>config.xml</code>的文件。</p>
+<p>在pdf中查找“<strong>Building SqlSessionFactory from XML</strong>”</p>
+<p>这里需要提前准备好一个用来链接的jar <em>MySQL connector</em> </p>
+<p>网址：<a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/connector/j/</a></p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/connector.png" class="" title="connector">
+
+<p>选zip，下好之后，里面乱七八糟的东西就不细致分析了，会点工地英语看看就好。主要使用<code>mysql-connector-java-8.0.19.jar</code>。拖到eclipse ，add一下环境。</p>
+<p>配置xml如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Config 3.0//EN"</span>  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.cj.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/test?useSSL=false<span class="symbol">&amp;amp;</span>serverTimezone=UTC"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"你的用户名"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"你的密码"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"top/eshyee/entity/personMapper.xml"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>ok写个测试用例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="comment">//加载config</span></span><br><span class="line">		Reader reader =Resources.getResourceAsReader(<span class="string">"config.xml"</span>);</span><br><span class="line">		SqlSessionFactory sessionFactory=<span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		SqlSession session= sessionFactory.openSession();</span><br><span class="line">		String statement =<span class="string">"top.eshyee.entity.personMapper.queryPersonById"</span>;</span><br><span class="line">		Person person=session.selectOne(statement,<span class="string">"1234567890"</span>);</span><br><span class="line">    <span class="comment">//这里的1234567890是我接下来要插入的字符串</span></span><br><span class="line">		System.out.println(person.toString());</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时在person下写一个toString()方法，这个可以自己来定，只要能看到person里的值就🉑。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试以下~~在数据库中插入一行数据</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/mb6.png" class="" title="mb6">
+
+<p>run一下test</p>
+<img src="/2020/02/24/MyBatis%E5%AE%89%E8%A3%85/mb7.png" class="" title="mb7">
+
+<p>🆗</p>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li>写完之后run的时候除了问题，报了一坨错其中有个<strong>timezone</strong>…想起来url写的<code>jdbc:mysql://localhost:3306/test</code>,然后后面加了<code>?useSSL=false&amp;serverTimezone=UTC</code>,结果还不对，就百度了一下<code>&amp;</code>在xml中是一种很神奇的存在得写成<code>&amp;amp;</code>.</li>
+<li>Resource导包的时候选择<code>org.apache.ibatis.io.*;</code> </li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相对于写DButil方便了不少。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/mybatis/" rel="tag">mybatis</a>, <a class="has-link-grey -link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a>, <a class="has-link-grey -link" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" rel="tag">初学者</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        三月 2020
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-03T03:23:33.000Z">2020-03-03</time>
-                        <a href="/2020/03/03/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Oracle系列学习(二)</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">Oracle系列</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zfb.jpg" alt="支付宝"></div>
+</a>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-02T15:31:57.000Z">2020-03-02</time>
-                        <a href="/2020/03/02/%E5%85%B3%E4%BA%8E%E5%9C%9F%E8%B1%86%F0%9F%A5%94/" class="title has-link-black-ter is-size-6 has-text-weight-normal">关于土豆🥔</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a> / <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB/%E7%83%A7%E9%A5%AD/">烧饭</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-02T00:42:33.000Z">2020-03-02</time>
-                        <a href="/2020/03/02/MyBatis%E7%B3%BB%E5%88%97-%E4%B8%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列(三)</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/ggh.jpg" alt="微信"></div>
+</a>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-01T14:51:52.000Z">2020-03-01</time>
-                        <a href="/2020/03/01/%E4%B8%8A%E6%B5%B7%E4%B9%8B%E8%A1%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">上海之行</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a> / <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/">旅行</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
         </div>
     </div>
 </div>
 
 
 
-    
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2020/03/page/2/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Oracle系列学习(一)</span>
+            </a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2020/03/page/4/">下一页</a>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/23/%E7%BB%88%E4%BA%8E%E9%97%B2%E4%B8%8B%E6%9D%A5%EF%BC%8C%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%88%91%E5%BB%BABlog%E4%B9%8B%E8%B7%AF/">
+                <span class="level-item">终于闲下来，说一说我建Blog之路</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/2020/03/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/2020/03/page/2/">2</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/2020/03/page/3/">3</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -284,7 +372,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            35
+                            28
                         </p>
                     </a>
                 </div>
@@ -296,7 +384,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -308,7 +396,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            43
+                            40
                         </p>
                     </a>
                 </div>
@@ -325,21 +413,21 @@
         <div class="level is-mobile">
             
             <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="Github" href="https://github.com/eshyee">
+                title="Steam" href="https://steamcommunity.com/id/eshyee">
                 
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="Facebook" href="https://facebook.com/eshyee">
-                
-                <i class="fab fa-facebook"></i>
+                <i class="fab fa-steam"></i>
                 
             </a>
             
             <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="QQ" href="https://user.qzone.qq.com/2085713294">
+                title="Instagram" href="https://www.instagram.com/eshyee1/">
+                
+                <i class="fab fa-instagram"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="https://user.qzone.qq.com/851156977">
                 
                 <i class="fab fa-qq"></i>
                 
@@ -348,19 +436,20 @@
             <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="哔哩哔哩" href="https://space.bilibili.com/167370813">
                 
-                <i class="fab fa-tv"></i>
+                <i class="fab fa-youtube"></i>
                 
             </a>
             
             <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="RSS" href="/">
+                title="RSS" href="https://weibo.com/u/3628942965">
                 
-                <i class="fas fa-rss"></i>
+                <i class="fab fa-weibo"></i>
                 
             </a>
             
         </div>
         
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=86 src="//music.163.com/outchain/player?type=2&id=440411401&auto=1&height=66"></iframe>
     </div>
 </div>
     
@@ -373,28 +462,6 @@
             链接
         </h3>
         <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://space.bilibili.com/167370813" target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">bilibili</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">space.bilibili.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://weibo.com/u/3628942965" target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">Weibo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">weibo.com</span>
-                    </span>
-                </a>
-            </li>
         
             <li>
                 <a class="level is-mobile" href="https://jq.qq.com/?_wv=1027&k=5nNf4OD" target="_blank" rel="noopener">
@@ -486,23 +553,15 @@
                 <span class="level-item">技术</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">17</span>
+                <span class="level-item tag">9</span>
             </span>
         </a><ul><li>
-        <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis/">
-            <span class="level-start">
-                <span class="level-item">MyBatis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">
             <span class="level-start">
                 <span class="level-item">MyBatis系列</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%8A%80%E6%9C%AF/Oracle%E7%B3%BB%E5%88%97/">
@@ -563,7 +622,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/Cisco/" style="font-size: 10px;">Cisco</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/parameterType/" style="font-size: 10px;">parameterType</a> <a href="/tags/resultType/" style="font-size: 10px;">resultType</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/" style="font-size: 13.33px;">一对一</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/" style="font-size: 13.33px;">一对多</a> <a href="/tags/%E4%B8%8A%E6%B5%B7/" style="font-size: 10px;">上海</a> <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/" style="font-size: 10px;">交叉线</a> <a href="/tags/%E4%BC%98%E5%8C%96/" style="font-size: 10px;">优化</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 13.33px;">入门</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/" style="font-size: 10px;">共享栈</a> <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" style="font-size: 13.33px;">关联查询</a> <a href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" style="font-size: 16.67px;">初学者</a> <a href="/tags/%E5%8A%A8%E6%80%81sql/" style="font-size: 10px;">动态sql</a> <a href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">动态分配</a> <a href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/" style="font-size: 13.33px;">单链表</a> <a href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/" style="font-size: 10px;">双绞线</a> <a href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/" style="font-size: 13.33px;">双链表</a> <a href="/tags/%E5%9C%9F%E8%B1%86/" style="font-size: 10px;">土豆</a> <a href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/" style="font-size: 13.33px;">多对多</a> <a href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/" style="font-size: 10px;">头结点</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%B0%8F%E7%99%BD/" style="font-size: 10px;">小白</a> <a href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/" style="font-size: 13.33px;">崩溃的</a> <a href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">延迟加载</a> <a href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">循环链表</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.33px;">数据库</a> <a href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/" style="font-size: 10px;">直通线</a> <a href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">类型处理器</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" style="font-size: 20px;">线性表</a> <a href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" style="font-size: 10px;">编制项目预算</a> <a href="/tags/%E8%A1%A5%E6%A1%A3/" style="font-size: 10px;">补档</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">软件项目管理</a> <a href="/tags/%E9%93%BE%E6%A0%88/" style="font-size: 10px;">链栈</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/" style="font-size: 10px;">需求分析</a> <a href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">静态分配</a> <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">静态链表</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/" style="font-size: 10px;">项目支出</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/" style="font-size: 10px;">顺序栈</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" style="font-size: 10px;">顺序表</a>
+        <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/Cisco/" style="font-size: 10px;">Cisco</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/" style="font-size: 10px;">一对一</a> <a href="/tags/%E4%B8%80%E5%AF%B9%E5%A4%9A/" style="font-size: 15px;">一对多</a> <a href="/tags/%E4%B8%8A%E6%B5%B7/" style="font-size: 10px;">上海</a> <a href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" style="font-size: 10px;">二级缓存</a> <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/" style="font-size: 10px;">交叉线</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 10px;">入门</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E6%A0%88/" style="font-size: 10px;">共享栈</a> <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" style="font-size: 15px;">关联查询</a> <a href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/" style="font-size: 15px;">初学者</a> <a href="/tags/%E5%8A%A8%E6%80%81sql/" style="font-size: 10px;">动态sql</a> <a href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">动态分配</a> <a href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">单链表</a> <a href="/tags/%E5%8F%8C%E7%BB%9E%E7%BA%BF/" style="font-size: 10px;">双绞线</a> <a href="/tags/%E5%8F%8C%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">双链表</a> <a href="/tags/%E5%9C%9F%E8%B1%86/" style="font-size: 10px;">土豆</a> <a href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/" style="font-size: 10px;">多对多</a> <a href="/tags/%E5%A4%B4%E7%BB%93%E7%82%B9/" style="font-size: 10px;">头结点</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%B0%8F%E7%99%BD/" style="font-size: 10px;">小白</a> <a href="/tags/%E5%B4%A9%E6%BA%83%E7%9A%84/" style="font-size: 15px;">崩溃的</a> <a href="/tags/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">延迟加载</a> <a href="/tags/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">循环链表</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/%E7%9B%B4%E9%80%9A%E7%BA%BF/" style="font-size: 10px;">直通线</a> <a href="/tags/%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">类型处理器</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" style="font-size: 20px;">线性表</a> <a href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/" style="font-size: 10px;">编制项目预算</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">软件项目管理</a> <a href="/tags/%E9%93%BE%E6%A0%88/" style="font-size: 10px;">链栈</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/" style="font-size: 10px;">需求分析</a> <a href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D/" style="font-size: 10px;">静态分配</a> <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">静态链表</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%94%AF%E5%87%BA/" style="font-size: 10px;">项目支出</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/" style="font-size: 10px;">顺序栈</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" style="font-size: 10px;">顺序表</a>
     </div>
 </div>
     
@@ -575,6 +634,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/11/Queue/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Queue">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-11T02:12:45.000Z">2020-04-11</time></div>
+                    <a href="/2020/04/11/Queue/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Queue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -616,18 +694,18 @@
         
         <article class="media">
             
-            <a href="/2020/04/03/MyBatis-%E5%85%AB/" class="media-left">
+            <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis(八)">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T01:53:55.000Z">2020-04-03</time></div>
-                    <a href="/2020/04/03/MyBatis-%E5%85%AB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis(八)</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-01T13:32:57.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis/">MyBatis</a>
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
                     </p>
                 </div>
             </div>
@@ -652,25 +730,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/30/%E8%8E%B7%E5%BE%97%E7%AE%A1%E7%90%86%E5%B1%82%E8%AE%B8%E5%8F%AF%E5%8F%8A%E6%8C%91%E9%80%89%E5%9B%A2%E9%98%9F%E9%98%9F%E5%91%98/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="获得管理层许可及挑选团队队员">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T02:21:05.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/%E8%8E%B7%E5%BE%97%E7%AE%A1%E7%90%86%E5%B1%82%E8%AE%B8%E5%8F%AF%E5%8F%8A%E6%8C%91%E9%80%89%E5%9B%A2%E9%98%9F%E9%98%9F%E5%91%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">获得管理层许可及挑选团队队员</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -688,7 +747,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -699,7 +758,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">24</span>
+                    <span class="level-item tag">19</span>
                 </span>
             </a>
         </li>
@@ -710,7 +769,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -764,23 +823,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/parameterType/">
-                        <span class="tag">parameterType</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/resultType/">
-                        <span class="tag">resultType</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/">
                         <span class="tag">一对一</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -799,6 +844,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">
+                        <span class="tag">二级缓存</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/">
                         <span class="tag">交叉线</span>
                         <span class="tag is-grey">1</span>
@@ -806,16 +858,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/%E4%BC%98%E5%8C%96/">
-                        <span class="tag">优化</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%85%A5%E9%97%A8/">
                         <span class="tag">入门</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -836,7 +881,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/">
                         <span class="tag">初学者</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -885,7 +930,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
                         <span class="tag">多对多</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -962,13 +1007,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E7%BC%96%E5%88%B6%E9%A1%B9%E7%9B%AE%E9%A2%84%E7%AE%97/">
                         <span class="tag">编制项目预算</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E8%A1%A5%E6%A1%A3/">
-                        <span class="tag">补档</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1053,6 +1091,25 @@
         
         <article class="media">
             
+            <a href="/2020/04/11/Queue/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Queue">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-11T02:12:45.000Z">2020-04-11</time></div>
+                    <a href="/2020/04/11/Queue/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Queue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/04/03/eclipse%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AESpring/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="eclipse如何配置Spring">
@@ -1091,18 +1148,18 @@
         
         <article class="media">
             
-            <a href="/2020/04/03/MyBatis-%E5%85%AB/" class="media-left">
+            <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis(八)">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MyBatis系列">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T01:53:55.000Z">2020-04-03</time></div>
-                    <a href="/2020/04/03/MyBatis-%E5%85%AB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis(八)</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-01T13:32:57.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/MyBatis%E7%B3%BB%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">MyBatis系列</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis/">MyBatis</a>
+                        <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="has-link-grey -link" href="/categories/%E6%8A%80%E6%9C%AF/MyBatis%E7%B3%BB%E5%88%97/">MyBatis系列</a>
                     </p>
                 </div>
             </div>
@@ -1127,25 +1184,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/30/%E8%8E%B7%E5%BE%97%E7%AE%A1%E7%90%86%E5%B1%82%E8%AE%B8%E5%8F%AF%E5%8F%8A%E6%8C%91%E9%80%89%E5%9B%A2%E9%98%9F%E9%98%9F%E5%91%98/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="获得管理层许可及挑选团队队员">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T02:21:05.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/%E8%8E%B7%E5%BE%97%E7%AE%A1%E7%90%86%E5%B1%82%E8%AE%B8%E5%8F%AF%E5%8F%8A%E6%8C%91%E9%80%89%E5%9B%A2%E9%98%9F%E9%98%9F%E5%91%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">获得管理层许可及挑选团队队员</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1163,7 +1201,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1174,7 +1212,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">24</span>
+                    <span class="level-item tag">19</span>
                 </span>
             </a>
         </li>
@@ -1185,7 +1223,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1239,23 +1277,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/parameterType/">
-                        <span class="tag">parameterType</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/resultType/">
-                        <span class="tag">resultType</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/%E4%B8%80%E5%AF%B9%E4%B8%80/">
                         <span class="tag">一对一</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1274,6 +1298,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">
+                        <span class="tag">二级缓存</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/%E4%BA%A4%E5%8F%89%E7%BA%BF/">
                         <span class="tag">交叉线</span>
                         <span class="tag is-grey">1</span>
@@ -1281,16 +1312,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/%E4%BC%98%E5%8C%96/">
-                        <span class="tag">优化</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%85%A5%E9%97%A8/">
                         <span class="tag">入门</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1311,7 +1335,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%88%9D%E5%AD%A6%E8%80%85/">
                         <span class="tag">初学者</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1360,7 +1384,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
                         <span class="tag">多对多</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1442,13 +1466,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/%E8%A1%A5%E6%A1%A3/">
-                        <span class="tag">补档</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
                         <span class="tag">软件项目管理</span>
                         <span class="tag is-grey">1</span>
@@ -1521,7 +1538,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.svg" alt="合格NPC" height="28">
+                    <img src="/images/logo1.svg" alt="MyBatis安装" height="28">
                 
                 </a>
                 <p class="is-size-7">
@@ -1537,25 +1554,25 @@
                 <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
                 
                 <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="网易云" href="https://music.163.com/#/user/home?id=472514178">
                         
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
+                        <i class="fab fa-music"></i>
                         
                     </a>
                 </p>
                 
                 <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="发邮件" href="mailto: 851156977@qq.com">
                         
-                        <i class="fab fa-github"></i>
+                        <i class="fab fa-email"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="go to eshyee" href="http://eshyee.top">
+                        
+                        <i class="fab fa-child"></i>
                         
                     </a>
                 </p>
@@ -1581,15 +1598,13 @@ var IcarusThemeSettings = {
     },
     article: {
         highlight: {
-            clipboard: true,
-            fold: 'unfolded'
+            clipboard: false,
+            fold: 'folded'
         }
     }
 };
 </script>
 
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
