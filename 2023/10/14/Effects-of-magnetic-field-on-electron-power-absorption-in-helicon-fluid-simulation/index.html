@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Effects of magnetic field on electron power absorption in helicon fluid simulation | SHYEE-PLASMA</title><meta name="author" content="SHYEE"><meta name="copyright" content="SHYEE"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="磁场对螺旋流体模拟中电子功率吸收的影响 摘要本研究开发了一种名为 “北京大学螺旋放电”（PHD）的代码，可以模拟背景磁场大于 500 G 和压力小于 1 Pa 的螺旋放电过程。代码中使用了两个流体方程。PHD 模拟得出了两个重要发现：（1）等离子体密度随背景磁场的时间演化呈现出第二次快速增长（称为第二次密度跃迁），类似于螺旋子等离子体中的模式转换；（2）在存在磁场的情况下，电子功率吸收的峰值位置出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effects of magnetic field on electron power absorption in helicon fluid simulation">
+<meta property="og:url" content="https://eshyee.github.io/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/index.html">
+<meta property="og:site_name" content="SHYEE-PLASMA">
+<meta property="og:description" content="磁场对螺旋流体模拟中电子功率吸收的影响 摘要本研究开发了一种名为 “北京大学螺旋放电”（PHD）的代码，可以模拟背景磁场大于 500 G 和压力小于 1 Pa 的螺旋放电过程。代码中使用了两个流体方程。PHD 模拟得出了两个重要发现：（1）等离子体密度随背景磁场的时间演化呈现出第二次快速增长（称为第二次密度跃迁），类似于螺旋子等离子体中的模式转换；（2）在存在磁场的情况下，电子功率吸收的峰值位置出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://source.unsplash.com/1920x1080/?plasma">
+<meta property="article:published_time" content="2023-10-14T08:09:12.000Z">
+<meta property="article:modified_time" content="2023-10-24T12:14:15.439Z">
+<meta property="article:author" content="SHYEE">
+<meta property="article:tag" content="文献">
+<meta property="article:tag" content="翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/1920x1080/?plasma"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://eshyee.github.io/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: SHYEE","link":"Link: ","source":"Source: SHYEE-PLASMA","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Effects of magnetic field on electron power absorption in helicon fluid simulation',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-24 20:14:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/pic/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/1920x1080/?plasma')"><nav id="nav"><span id="blog-info"><a href="/" title="SHYEE-PLASMA"><span class="site-name">SHYEE-PLASMA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Effects of magnetic field on electron power absorption in helicon fluid simulation</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-10-24T12:14:15.439Z" title="Updated 2023-10-24 20:14:15">2023-10-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E7%8C%AE/">文献</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">5.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>17min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>磁场对螺旋流体模拟中电子功率吸收的影响</p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本研究开发了一种名为 “北京大学螺旋放电”（PHD）的代码，可以模拟背景磁场大于 500 G 和压力小于 1 Pa 的螺旋放电过程。代码中使用了两个流体方程。PHD 模拟得出了两个重要发现：（1）等离子体密度随背景磁场的时间演化呈现出第二次快速增长（称为第二次密度跃迁），类似于螺旋子等离子体中的模式转换；（2）在存在磁场的情况下，电子功率吸收的峰值位置出现在中心轴附近，这与没有磁场的情况不同。这些结果可能有助于加深对放电机制的理解。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>螺旋等离子体具有高等离子体密度、低压运行、稳态放电、高功率耦合效率以及等离子体区域无需电极等理想特性。除了用于等离子体研究以及可变比冲磁等离子体火箭、氦质子等离子体推进器和氦质子双层推进器等应用[1-7]，它们还因其多种优势而被用于材料加工[1, 8]。</p>
+<p>关于螺旋子等离子体放电机制的统一理论尚未建立[9]。氦质子等离子体主要表现出电磁和静电两种耦合模式。电磁模式为弱阻尼，称为氦子波，而静电模式为强阻尼，称为 Trivelpiece-Gould (T-G) 波 [10-12]。陈指出，朗道阻尼机制在螺旋子放电中发挥了重要作用 [13]；这一点也得到了实验验证 [14]。进一步的实验研究表明，快速电子的数量不足以提供完全电离，这证明朗道阻尼并不重要[15, 16]。一些关于功率沉积的模拟，如基于 ANTENA2 和 HELIC 的模拟表明，T-G 波是电离机制的重要组成部分 [11，17]。此外，实验也验证了 T-G 波的存在 [18]。目前，人们普遍认为螺旋波和 T-G 波可能是导致电离的主要因素[1]。</p>
+<p>表 1.一些螺旋仪及其典型运行参数。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/96033279192200.png"></p>
+<p>数值模拟是研究谐振子等离子体的有效方法。特别是，通过模拟可以很容易地获得空间和时间上每一点的所有物理量；相比之下，这些物理量通常很难通过实验获得。完整的模拟包括功率沉积、传输过程和电离过程 [19]。Bose 等人建立了一个详细的二维轴对称流体模型，并结合麦克斯韦方程对波的传播、等离子体传输和电离过程进行了数值模拟。研究发现，随着磁场强度的增加，天线激发的波会向等离子体更深处传播[8]。Yang 等人提出了一种利用三维流体力学方程的螺旋子等离子体放电直接数值模拟模型。他们研究了不同天线电流下的放电特性以及螺旋子放电中低场峰的出现 [19，20]。Jaafarian 等人利用粒子在小室中的蒙特卡罗碰撞模拟技术研究了工作参数对螺旋子放电的影响[21]。CST [10]、HELIC [17]、MAXEB [11]、ANTENA2 [22]、SPIREs [23] 和 ADAMANT [24] 被用来研究电离机制。</p>
+<p>如表 1 所示，许多螺旋子装置在低压（∼0.5 Pa）、强磁场（∼1kG）和高功率（∼kW）条件下工作。迄今为止，数值模拟研究只关注波的传播和功率沉积，而电离和传输过程通常被忽视[10, 17, 22-24]。据我们所知，在背景磁场超过 500 G 和压力小于 1Pa 的同一时间内，包括功率沉积、传输过程和电离过程的模拟尚未见报道，尽管这些参数可以通过实验实现。因此，我们开发了北京大学螺旋放电（PHD）代码来研究这些参数下的螺旋子放电过程。PHD 模型在平行磁场方向使用了伏极扩散近似，大大提高了计算效率。此外，我们还首次发现了螺旋子放电过程模拟中的二次密度跃迁。</p>
+<p>名古屋 III 型天线、半螺旋天线、博斯韦尔天线和单环天线等多种类型的天线都可以产生太阳等离子体[1, 32, 33]。前三种天线主要激发 &#x3D;m±1 极模式，而单环天线主要激发 &#x3D;m 0 模式。我们结合北京大学等离子体试验（PPT）装置[31]的实验研究，对单环天线产生的 &#x3D; m 0 谐子等离子体的放电过程进行了研究。图 1 是 PPT 实验装置的示意图。PPT 实验使用亥姆霍兹线圈产生背景磁场，而 PHD 模拟使用均匀背景磁场。我们将流体方程和泊松方程与麦克斯韦方程相结合，对螺旋子放电过程（包括电子功率吸收、电离过程和传输过程）进行了数值模拟。本文的其余部分安排如下。第 2 节介绍了模拟模型和放电配置。第 3 节讨论了基准工作，包括 PHD 与 COMSOL MultiphysicsTM 和 PPT 实验结果的比较。第 4 节详细介绍了在各种背景磁场下获得的主要模拟结果。第 5 节讨论了这些结果并提出了主要结论。</p>
+<h1 id="2-模拟模型"><a href="#2-模拟模型" class="headerlink" title="2.模拟模型"></a>2.模拟模型</h1><p>本研究建立了一个圆柱坐标下的双流体排放模型。我们首先讨论本研究中考虑的假设和近似值。物理量在极坐标方向上是均匀的，即所有变量的 <img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/96369168704300.png">，矢量有三个分量。粒子流用漂移-扩散近似法描述。</p>
+<p>电子能量分布函数（EEDF）是麦克斯韦式的。此外，中性原子和离子的温度被认为恒定在常温（300 K）。输入功率仅来自电子功率吸收和天线的焦耳热。只考虑了氩的基态电离反应，而忽略了其他化学反应，如潘宁电离、复合反应和发光。负离子和高价正离子也被忽略。接下来我们将考虑非麦克斯韦 EEDF，因为在实验中已经观察到 [34-37]。之前的实验表明，中性剖面以及电离导致的中性损耗会显著影响等离子体剖面或其动态行为 [38-42]。未来将考虑更复杂的中性动力学，如中性温度、压力平衡等。</p>
+<p>值得注意的是，我们对平行磁场方向（平行方向）的粒子流采用了伏极扩散近似。在均匀背景磁场和周期性边界条件下，我们可以将平行方向输运模型从漂移扩散近似简化为伏极扩散近似。等离子体密度和温度相似，误差率约为 5%。我们的研究发现，在求解泊松方程时，低压和高磁场条件下会出现数值不稳定性。这是因为平行方向和垂直方向的扩散系数相差几个数量级。为了克服数值不稳定性，我们使用了伏极扩散近似。使用近似值的时间步长可比不使用近似值的时间步长大 100 多倍，即计算效率提高了 100 多倍。</p>
+<h2 id="等离子体模型"><a href="#等离子体模型" class="headerlink" title="等离子体模型"></a>等离子体模型</h2><p>PHD 代码采用氩放电，模型中考虑的粒子是电子、离子和中性原子。等离子体模型的控制方程[43]如下。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/96640714955800.png" alt="(1)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/96658470720900.png" alt="(2)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/96674739182700.png" alt="(3)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/96697522016400.png" alt="(4)"></p>
+<p>n<sub>α</sub>、D<sub>α</sub>、Г<sub>α</sub> (α&#x3D;e,i,n)分别为颗粒密度、通量、扩散率和流动性。中性原子密度的计算公式为n<sub>n</sub> &#x3D; 2.41 x 10<sup>14</sup> p<sub>n</sub>cm<sup>-3</sup>,其中p<sub>n</sub>为气压，其单位为Pa。下标 e、i 和 n 分别表示电子、离子和中性原子。T<sub>e</sub> 是电子温度，单位为 eV。此外，e、V 和ε<sub>0</sub> 分别是基本电荷、电势和自由空间的介电常数。与电荷分离 E<sub>s</sub> 相对应的静电场由电势梯度给出，即 E<sub>s</sub> &#x3D; -▽V·H<sub>i</sub> &#x3D; 15.7eV 是第一电离能，基态电离的速率系数为<img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/97580702251500.png">。方程 (1) 中的通量 Г<sub>α</sub> 是由修正的漂移-扩散近似法给出的：</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/97649456510300.png" alt="(5)"></p>
+<p>其中，B<sub>0</sub> 为外部静磁场，μ<sub>α</sub> 为迁移率。我们沿 z 方向设置了一个均匀的背景磁场，即B<sub>0</sub> &#x3D; B<sub>0</sub>e<sub>z</sub>。电子迁移率μ<sub>e</sub> 和电子扩散系数 D<sub>e</sub> 的计算公式为<img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/97930878324100.png">和<img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/97945230656700.png">。其中，电子碰撞频率 ν<sub>e</sub> 由 ν<sub>e</sub> &#x3D; ν<sub>en</sub>+ν<sub>ei</sub> [19] 得出。ν<sub>en</sub> 和 ν<sub>ei</sub> 分别是电子与中性原子的碰撞频率和电子与离子的碰撞频率。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98080742800900.png" alt="(6)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98094582460500.png" alt="(7)"></p>
+<p>其中，lnΛ 是库仑对数，δ<sub>en</sub> 是电子与中性原子之间的碰撞截面。<br>方程 (5) 包括三元方程和三元未知数。我们可以用以下方程求解方程 (5)</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98170717224400.png" alt="(8)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98190423563700.png" alt="(9)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98206407145200.png" alt="(10)"></p>
+<p>采用平行通量的伏极扩散近似，方程 (10) 变为</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98230014961900.png" alt="(11)"></p>
+<p>其中<img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98257901401100.png">是两极扩散系数。</p>
+<p>中性原子的通量只考虑方程 (2) 中的扩散项</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98300658460100.png" alt="(12)"></p>
+<p>在公式 (3) 中，计算能量通量q<sub>e</sub>时忽略了磁场对电子温度传输的影响。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98349957237000.png" alt="(13)"></p>
+<p>p<sub>tot</sub> 是电子吸收功率，计算公式如下：</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98388205908300.png" alt="(14)"></p>
+<p>等离子体电流 J<sub>p</sub> 和感应电场 E<sub>mf</sub> 由麦克斯韦方程计算得出。</p>
+<h2 id="麦克斯韦方程"><a href="#麦克斯韦方程" class="headerlink" title="麦克斯韦方程"></a>麦克斯韦方程</h2><p>高频电场 E<sub>mf</sub> 和感应磁场 B<sub>p</sub> 是通过麦克斯韦方程和等离子体电流演化方程计算得出的，计算公式如下：</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98494375753000.png" alt="(15)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98509511122700.png" alt="(16)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98524222654400.png" alt="(17)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98537750599500.png" alt="(18)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98550958344600.png" alt="19"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98564822116300.png" alt="(20)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98577204520600.png" alt="(21)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98590182765300.png" alt="(22)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98600949721400.png" alt="23"></p>
+<p>其中，m<sub>e</sub>、μ<sub>0</sub>、ε<sub>r</sub>、分别为电子质量、自由空间的磁导率和自由空间的相对介电常数。**<em>J</em>**<sub>a</sub> 是天线电流，计算公式为</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98764542247000.png" alt="(24)"></p>
+<p>S<sub>a</sub>是天线的横截面积，**<em>I</em>**<sub>a</sub> 是电流振幅。总输入功率由等离子体吸收的电子功率和天线的焦耳热产生。电流幅值 <strong><em>I</em></strong><sub>a</sub> 根据电子吸收功率进行调整，以保持恒定的总功率。等离子体电流 <strong><em>J</em></strong><sub>p</sub> 由电子电流产生。因此，方程 (21)-(23) 也表示电子的运动。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98860535457300.png" alt="图 2.放电配置（不按比例）。"></p>
+<h2 id="初始条件"><a href="#初始条件" class="headerlink" title="初始条件"></a>初始条件</h2><p>模拟的初始条件如下：</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98913734303700.png" alt="(25)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98928237379600.png" alt="(26)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98945088711800.png" alt="(27)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/98956036777100.png" alt="(28)"></p>
+<p>参考文献[43]和 PHD 模拟表明，稳态与一定范围的等离子体密度无关。然而，在低压和强磁场条件下，初始等离子体密度必须较大（约 10<sup>10</sup>cm<sup>-3</sup>）。否则，等离子体密度不会增加。实验中采用的这种大等离子体密度值可归因于电容模式，而 PHD 并未考虑这种模式。另一个重要方面是电磁场初始条件的设定。我们计算了初始等离子体密度的 E<sub>mf</sub> 和B<sub>p</sub>的 “本征 “结构，并将其设置为初始条件。我们设定 E<sub>mf</sub>&#x3D;B<sub>p</sub>&#x3D;0，然后在放电过程开始前计算 20 个射频（RF）周期的麦克斯韦方程，即等离子体状态保持不变，包括n<sub>e</sub>,n<sub>i</sub>和T<sub>e</sub>我们的评估结果表明，这种方法可在较短时间内收敛，而使用其他初始条件则会导致发散。</p>
+<h2 id="排放配置和边界条件"><a href="#排放配置和边界条件" class="headerlink" title="排放配置和边界条件"></a>排放配置和边界条件</h2><p>图2显示了放电配置。真空室的边界位于 r<sub>0</sub>&#x3D;0.075m处,铝屏蔽位于R<sub>0</sub>&#x3D;0.125m处。径向宽度为 10 mm、轴向宽度为 30 mm 的单环天线的位置分别为r<sub>a</sub>&#x3D;0.09 m和z<sub>a</sub>&#x3D;0.3m。这种放电结构与 PPT 的等离子体源区大致相同。</p>
+<p>边界条件如下</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99680532851200.png" alt="(29)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99693204956200.png" alt="(30)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99743621450500.png" alt="(31)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99755956829200.png" alt="(32)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99769392288300.png" alt="(33)"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99785909363800.png" alt="(34)"></p>
+<p>我们只考虑了等离子体源区域的放电过程。为了减少边界的影响，我们对 z 方向上的所有变量都采用了周期性边界条件。</p>
+<h2 id="数值方法"><a href="#数值方法" class="headerlink" title="数值方法"></a>数值方法</h2><p>对于流体方程 (1)-(3)，我们采用了空间交错网格，即标量占一个完整网格点，矢量占半个网格点。空间离散采用中心差分法。时间离散采用全隐式格式，并通过连续松弛（SOR）求解。</p>
+<p>对于泊松方程 (4)，我们也采用了中心差空间离散法，并用 SOR 求解。为了克服时间步长的限制，我们采用了一种半隐式方法来求解电动势[45, 46]。这种方法的主要思想是利用当前时间步长的电场和等离子体密度分布来预测下一时间步长的电场。</p>
+<p>方程 (15)-(23) 采用有限差分时域法。我们在空间离散化中使用了Yee 的交错网格[47]，在时间离散化中使用了两步交替隐式格式法。</p>
+<h1 id="PHD-与-COMSOL-和-PPT-的比较"><a href="#PHD-与-COMSOL-和-PPT-的比较" class="headerlink" title="PHD 与 COMSOL 和 PPT 的比较"></a>PHD 与 COMSOL 和 PPT 的比较</h1><p>本节分为两部分。在没有背景磁场的情况下，对 PHD 和 COMSOL Multiphysics 软件进行了简单的基准比较。此外，还将 PHD 代码的结果与 PPT 的实验结果进行了比较。除非另有说明，仿真参数和常数均取自表 2。</p>
+<p>表 2.模拟参数和常数。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/99802933876800.png"></p>
+<h2 id="使用-COMSOL-进行基准测试"><a href="#使用-COMSOL-进行基准测试" class="headerlink" title="使用 COMSOL 进行基准测试"></a>使用 COMSOL 进行基准测试</h2><p>COMSOL 是一款商业软件，广泛用于许多科学模拟。考虑到其电感耦合等离子体模块的可靠性以及在背景磁场下获得的结果并不广为人知，我们使用该模块建立了一个基准。仿真参数如表 3 所示。为了使模拟条件更接近 COMSOL 的模拟条件，我们考虑了一系列与 COMSOL 一致的涉及可转移原子的化学反应[43, 48, 49]。轴向端板的边界条件与侧壁的边界条件相同，电子碰撞频率 ne 也与 COMSOL 中的相同。</p>
+<p>表 3.模拟参数。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/102242626839200.png"></p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/102124606811500.png" alt="图 3.最大值n&lt;sub&gt;e&lt;/sub&gt;的时间演变。"></p>
+<p>图 3 显示了电子密度随时间的演变。PHD 计算出的n<sub>e</sub> 的时间演变与 COMSOL 得出的结果非常相似。电子密度稳态结构的形状也很相似；此外，如图 4（a）和（b）所示，当色标调整到相似范围时，它们的形状更加相似。最大等离子体密度的两个径向位置都在轴线上，轴向位置与天线位置相同。等离子体主要位于天线附近。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/102713591100300.png" alt="图 4. cm&lt;sup&gt;-3&lt;/sup&gt;中n&lt;sub&gt;e&lt;/sub&gt;的稳态结构（t=2000 T&lt;sub&gt;rf&lt;/sub&gt;,T&lt;sub&gt;rf&lt;/sub=7.37x10&lt;sup&gt;-8&lt;/sup&gt;为射频周期），由 (a) PHD 和 (b) COMSOL 模拟；(c) 电子密度的径向结构（z=0.3 m）。"></p>
+<p>我们进一步比较了z&#x3D;0.3 m处的电子密度径向分布，如图 4（c）所示。使用 COMSOL 得出的最大电子密度为 9.88x10<sup>11</sup> cm<sup>-3</sup>,而使用 PHD 得出的最大电子密度为1.05x10<sup>12</sup>cm<sup>-3</sup>。两者相差约 6%，这在放电过程中是可以容忍的。</p>
+<h2 id="PHD-模拟与-PPT-实验的比较"><a href="#PHD-模拟与-PPT-实验的比较" class="headerlink" title="PHD 模拟与 PPT 实验的比较"></a>PHD 模拟与 PPT 实验的比较</h2><p>我们将本次 PHD 模拟的结果与之前 PPT 实验的结果进行了比较。需要注意的是，在 PPT 实验中，实验等离子体密度只能在扩散区进行评估，而 PHD 只模拟了源区，以节省计算资源。图 5 显示了最大离子密度与 (a) 功率 P<sub>0</sub>,(b) 气体压力 p<sub>n</sub>,和 (c) 磁场 B<sub>0</sub> 的关系。模拟值和实验值的大小相似，趋势一致。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/102960036786700.png" alt="图 5.最大离子密度与 (a) 功率 P&lt;sub&gt;0&lt;/sub&gt;,(b)气体压力 p&lt;sub&gt;n&lt;/sub&gt; 和 (c) 磁场 B&lt;sub&gt;0&lt;/sub&gt;的关系。"></p>
+<p>压力曲线在 0.6 Pa 以下的一致性较好。原因可能是随着压力的增加，源区和扩散区之间的等离子体密度差增大。总的来说，模拟结果与实验结果在定性上是一致的，定量比较的结果并不十分相似。这可能与模拟配置的简化、建立模型时使用的若干假设、边界条件的选择等有关。</p>
+<p>就磁场曲线而言，在强磁场条件下，PHD 与 PPT 之间的偏差似乎越来越大。可能的原因如下。(1) PPT 实验中颗粒的主要损失是侧壁和端板，而 PHD 模拟只考虑了侧壁。(2) 模拟中使用的是经典扩散，颗粒的传输可能比实验结果慢。因此，粒子的损失变小，等离子体密度变大。(3) 诊断位置离源头较远，因此会有一定的变化。此外，朗缪尔探针在强磁场下的诊断误差可能会变大。</p>
+<p>总之，两次模拟的生长过程和电子密度曲线相似，数值差异很小。因此，PHD 代码在一定程度上是可靠的。</p>
+<h1 id="背景磁场变化时的放电过程"><a href="#背景磁场变化时的放电过程" class="headerlink" title="背景磁场变化时的放电过程"></a>背景磁场变化时的放电过程</h1><p>本节主要介绍无磁场和有磁场时的放电过程。放电情况在P<sub>0</sub>&#x3D;2000W、p<sub>n</sub>&#x3D;0.35Pa、0≤B<sub>0</sub>≤1180G条件下进行。如图 6 所示，电子密度经历了线性增长和非线性饱和，最终达到稳态。可以看出，背景磁场越强，稳态等离子体密度越高。有趣的是，我们发现在磁场存在的情况下，密度在达到稳态之前迅速增加。我们称之为第二次密度跃迁，这与螺旋子等离子体中的模式转换类似。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/115913718601700.png" alt="图 6.不同B&lt;sub&gt;0&lt;/sub&gt;条件下最大n&lt;sub&gt;e&lt;/sub&gt;值的时间变化。"></p>
+<p>在B<sub>0</sub> &#x3D; 1180G的情况下，第二密度跃迁时间约为 t&#x3D;3000 <strong><em>T</em></strong><sub>rf</sub>。B &#x3D; 1180G时的电子密度约为无磁场时的 82 倍。这里有两种可能的解释。首先，可能存在一个共振等离子体密度，它是磁场 B<sub>0</sub> 和气体压力 p<sub>n</sub> 的函数。在这个特定的等离子体密度下，电磁波和等离子体达到共振状态。这种共振会导致高电子功率吸收。其次，磁场抑制了等离子体的传输，从而减少了等离子体在壁上的损耗。因此，等离子体密度会增加。然而，第二次密度跃迁的确切起源仍不清楚。</p>
+<p>图 7 显示了 n<sub>e</sub> 的稳态结构。随着磁场的增大，轴向分布的均匀性增加，等离子体逐渐从局部区域扩散到整个真空区域。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/116250559916700.png" alt="图 7.以 cm&lt;sup&gt;-3&lt;/sup&gt;为单位的 n&lt;sub&gt;e&lt;/sub&gt; 的稳态结构。"></p>
+<p>图 8 显示了稳定状态下电子温度 Te 和电子吸收功率 Ptot 的周期平均分布。Ptot 的负值意味着电子失去能量，电子的能量转化为波能。在此，我们将简要讨论放电发生的方式。电子功率的吸收会提高电子温度，从而使电离截面变大，进而产生大量电离过程。如果源项与等离子体损耗相平衡，就会达到稳定状态。随着磁场的增加，电子温度降低。除B &#x3D; 50G的情况外，最大 Te 的轴向位置与天线的轴向位置相同。此外，在有磁场的情况下，最大电子功率吸收发生在中心轴附近，而在无磁场的情况下，则出现在边界附近，如图 8（b）所示。在螺旋推进器配置中也观察到了天线附近或源壁附近的高温区[50-54]。PHD 模拟结果在一定程度上再现了这一现象。另一个有趣的现象是，当引入磁场时，电子功率吸收区域在 z 方向从一个峰值变为两个峰值。通过仔细观察，我们发现径向图案的数量会随着磁场的增加而增加。具体解释如下</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/116669166231300.png" alt="图 8.稳定状态下 (a) Te（单位：eV）和 (b) 电子吸收功率 Ptot（单位：W m&lt;sup&gt;-3&lt;/sup&gt;）的周期平均结构。"></p>
+<p>通常认为，由于阻尼率较弱，螺旋波可以向中心轴传播。周期性边界条件很可能产生驻波解。在实验中也观察到了驻波螺旋波[55-57]。因此，我们推测这些系统中的主波是驻波螺旋子波。图 9 显示了不同时刻极性电场E<sub>mfθ</sub>和感应磁场B<sub>pz</sub>的振幅。在初始时刻（t &#x3D; 40 <strong><em>T</em></strong><sub>rf</sub>），E<sub>mfθ</sub>的振幅从天线位置开始衰减。当触发第二次跃迁（t &#x3D; 3160 <strong><em>T</em></strong><sub>rf</sub>）和第三次跃迁（t &#x3D; 3400 <strong><em>T</em></strong><sub>rf</sub>）时，它变成了驻波结构，等离子体中的振幅高于天线位置。然而，电场在稳态（t &#x3D; 20000 <strong><em>T</em></strong><sub>rf</sub>）时并不是一个明显的驻波结构，这可能是在实验中不易测得高驻波比（用等离子体中最大E<sub>mfθ</sub>&#x2F;最小E<sub>mfθ</sub>表示）结果的原因。驻波产生了电子功率吸收的两个轴向和中心峰值。磁场越大，密度越高。密度越高，径向波长越短。因此，径向图案的数量也会增加。</p>
+<p>从图 6-8 可以看出，电子密度、电子温度和电子功率吸收之间存在合理的关系。模拟结果符合放电定律。</p>
+<p><img src="/./pic/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/116826493366700.png"></p>
+<p>图 9.在 2000 W、0.35 Pa、1180 G 的情况下，不同时刻 (a) 极电场E<sub>mfθ</sub>的振幅（单位 V m<sup>-1</sup>）和 (b) 感应磁场 B 的振幅（单位 T），其中t &#x3D; 40 <strong><em>T</em></strong><sub>rf</sub>、t &#x3D; 3160 <strong><em>T</em></strong><sub>rf</sub>、t &#x3D; 3400 <strong><em>T</em></strong><sub>rf</sub>、t &#x3D; 20000 <strong><em>T</em></strong><sub>rf</sub>分别对应图 6 中的 A、B、C、D 点。</p>
+<h1 id="讨论和结论"><a href="#讨论和结论" class="headerlink" title="讨论和结论"></a>讨论和结论</h1><p>本研究建立了一个包含电子功率吸收、电离过程和传输过程的双流体放电模型，并利用该模型获得了数值解。PHD 代码可用于模拟低压（<del>0.5 Pa）和强背景磁场（</del>1kG）下的放电过程。在无磁场条件下得到的结果与使用 COMSOL 得到的结果基本一致，在典型的螺旋子放电参数下得到的结果基本符合放电过程的规律。扫描参数的结果在定性上与实验结果一致，但在定量上并不一致。与无背景磁场的情况相比，强磁场下的等离子体密度要高出一个数量级，这与实验验证的放电定律是一致的。在有磁场的情况下，稳定状态下的最大电子功率吸收发生在中心轴附近。这可能是由于驻留的螺旋波造成的。在完整的放电过程中发现了第二次密度跃迁。这些结果有助于我们理解放电机制。特别是，随着功率的增加出现稳态密度跃迁是一个重要的结果。然而，由于应用了周期性边界条件，等离子体损耗不足，因此无法获得全面的结果。这是本研究的局限性。总的来说，本研究的模拟是初步的，在边界条件、放电配置、垂直温度传输、对称性破坏、天线优化、陨落原子反应等方面还需要进一步研究。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eshyee.github.io">SHYEE</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eshyee.github.io/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/">https://eshyee.github.io/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%96%87%E7%8C%AE/">文献</a><a class="post-meta__tags" href="/tags/%E7%BF%BB%E8%AF%91/">翻译</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/1920x1080/?plasma" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Relationship of mode transitions and standing waves in helicon plasmas</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/08/30/Characteristics-of-temporal-evolution-of-particle-density-and-electron-temperature-in-helicon-discharge/" title="Characteristics of temporal evolution of particle density and electron temperature in helicon discharge"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-30</div><div class="title">Characteristics of temporal evolution of particle density and electron temperature in helicon discharge</div></div></a></div><div><a href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</div></div></a></div><div><a href="/2023/08/29/Design-of-a-novel-high-efficiency-antenna-for-helicon-plasma-sources/" title="Design of a novel high efficiency antenna for helicon plasma sources"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-29</div><div class="title">Design of a novel high efficiency antenna for helicon plasma sources</div></div></a></div><div><a href="/2023/09/18/Physical-Properties-of-a-Low-Power-Helicon-Source-Operating-on-a-High-Frequency-Discharge-with-a-Capacitive-Component/" title="Physical Properties of a Low-Power Helicon Source Operating on a High-Frequency Discharge with a Capacitive Component"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-18</div><div class="title">Physical Properties of a Low-Power Helicon Source Operating on a High-Frequency Discharge with a Capacitive Component</div></div></a></div><div><a href="/2023/07/08/A-1D-cylindrical-kinetic-wave-code-for-helicon-plasma-sources/" title="A 1D cylindrical kinetic wave code for helicon plasma sources"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-08</div><div class="title">A 1D cylindrical kinetic wave code for helicon plasma sources</div></div></a></div><div><a href="/2023/07/19/Discharge-Directionality-and-Dominance-of-Right-Handed-Modes-in-Helicon-Plasmas-due-to-Radial-Electron-Density-Gradients/" title="Discharge Directionality and Dominance of Right-Handed Modes in Helicon Plasmas due to Radial Electron Density Gradients"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-19</div><div class="title">Discharge Directionality and Dominance of Right-Handed Modes in Helicon Plasmas due to Radial Electron Density Gradients</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/pic/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SHYEE</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eshyee"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/eshyee" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:eshyee@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">等离子体实验室</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%A8%A1%E6%8B%9F%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">2.模拟模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">等离子体模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">麦克斯韦方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text">初始条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E6%94%BE%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">排放配置和边界条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">数值方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHD-%E4%B8%8E-COMSOL-%E5%92%8C-PPT-%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">4.</span> <span class="toc-text">PHD 与 COMSOL 和 PPT 的比较</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-COMSOL-%E8%BF%9B%E8%A1%8C%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="toc-number">4.1.</span> <span class="toc-text">使用 COMSOL 进行基准测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHD-%E6%A8%A1%E6%8B%9F%E4%B8%8E-PPT-%E5%AE%9E%E9%AA%8C%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">4.2.</span> <span class="toc-text">PHD 模拟与 PPT 实验的比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E7%A3%81%E5%9C%BA%E5%8F%98%E5%8C%96%E6%97%B6%E7%9A%84%E6%94%BE%E7%94%B5%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">背景磁场变化时的放电过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A8%E8%AE%BA%E5%92%8C%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">讨论和结论</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"/></a><div class="content"><a class="title" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge">Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge</a><time datetime="2025-02-12T06:31:17.000Z" title="Created 2025-02-12 14:31:17">2025-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Relationship of mode transitions and standing waves in helicon plasmas"/></a><div class="content"><a class="title" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas">Relationship of mode transitions and standing waves in helicon plasmas</a><time datetime="2023-10-25T11:30:28.000Z" title="Created 2023-10-25 19:30:28">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Effects of magnetic field on electron power absorption in helicon fluid simulation"/></a><div class="content"><a class="title" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation">Effects of magnetic field on electron power absorption in helicon fluid simulation</a><time datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"/></a><div class="content"><a class="title" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</a><time datetime="2023-10-07T03:15:01.000Z" title="Created 2023-10-07 11:15:01">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/28/vue/" title="vue"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue"/></a><div class="content"><a class="title" href="/2023/09/28/vue/" title="vue">vue</a><time datetime="2023-09-28T02:48:17.000Z" title="Created 2023-09-28 10:48:17">2023-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By SHYEE</div><div class="framework-info"></div><div class="footer_custom_text">Hi, welcome to <a target="_blank" rel="noopener" href="http://shyee.club">SHYEECLUB</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="http://shyee.club/js/test.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Bean的作用域 | SHYEE-PLASMA</title><meta name="author" content="SHYEE"><meta name="copyright" content="SHYEE"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Bean的作用域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bean的作用域">
+<meta property="og:url" content="https://eshyee.github.io/2021/03/12/Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/index.html">
+<meta property="og:site_name" content="SHYEE-PLASMA">
+<meta property="og:description" content="Bean的作用域">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://source.unsplash.com/1920x1080/?plasma">
+<meta property="article:published_time" content="2021-03-11T23:19:44.000Z">
+<meta property="article:modified_time" content="2023-07-03T13:19:56.433Z">
+<meta property="article:author" content="SHYEE">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/1920x1080/?plasma"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://eshyee.github.io/2021/03/12/Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: SHYEE","link":"Link: ","source":"Source: SHYEE-PLASMA","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Bean的作用域',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-03 21:19:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/pic/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/1920x1080/?plasma')"><nav id="nav"><span id="blog-info"><a href="/" title="SHYEE-PLASMA"><span class="site-name">SHYEE-PLASMA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Bean的作用域</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-03-11T23:19:44.000Z" title="Created 2021-03-12 07:19:44">2021-03-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-07-03T13:19:56.433Z" title="Updated 2023-07-03 21:19:56">2023-07-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>5min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Bean的作用域"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h2><span id="more"></span>
+
+<blockquote>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>singleton</p>
+<p>单例(默认值)， 在每个SpringIOC容器中，一个bean定义对应一个对象实例</p>
+<p>prototype</p>
+<p>一个bean定义对应多个对象实例</p>
+<p>request</p>
+<p>在一次HTTP请求中,一个bean定义对应一-个实例，即每次HTTP请求将会有各自的bean实例，它们依据某个bean定义创建而成。该作用域仅在基于Web的Spring ApplicationContext的情况下有效。</p>
+<p>session</p>
+<p>在一个HTTP Session 中，一个bean定义对应一个实例。该作用域仅在基于Web 的SpringApplicationContext的情况下有效</p>
+<p>global session</p>
+<p>在一个全局的HTTP Session中,一个bean定义对应一个实例。典型情况下，仅在使用portlet context的时候有效。该作用域仅在基于Web的Spring ApplicationContext的情况下有效</p>
+</blockquote>
+<p>注解形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span> (<span class="string">&quot;stu&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>配置文件形式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;student&quot;</span> <span class="attr">class</span>=<span class="string">&quot; com.ehshyee.entity.Student&quot;</span>&gt;</span></span><br><span class="line">    value :简单类型</span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;stuNo&quot;</span><span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;stuName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;张三&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;stuAge&quot;</span> <span class="attr">value</span>=<span class="string">&quot;23&quot;</span>&gt;</span>&lt;/ property&gt;</span><br><span class="line">    ref:其他类型</span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;address&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;myaddress&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>分别对其获取两个学生 查看是否为同一个</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">stul</span> <span class="operator">=</span> (Student) context.getBean(S:<span class="string">&quot;student&quot;</span>) ;</span><br><span class="line"><span class="type">Student</span> <span class="variable">stu2</span> <span class="operator">=</span> (Student) context.getBean(S:<span class="string">&quot;student&quot;</span>) ;</span><br><span class="line">System.out.println(stul =stu2) ;</span><br></pre></td></tr></table></figure>
+
+<p>均返回<code>true</code></p>
+<p>在xml中scope默认是<code>singleton</code> 可改为<code>prototype</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;student&quot;</span> <span class="attr">class</span>=<span class="string">&quot; top.ehshyee.entity.Student&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>改后返回<code>false</code></p>
+<p>注解中添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@scope(&quot;prototype&quot;)</span><span class="comment">//默认singleton</span></span><br></pre></td></tr></table></figure>
+
+<p>对于实例产生的时机 </p>
+<p>一些测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;student无参构造&quot;</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(<span class="type">int</span> stuNo, String stuName, <span class="type">int</span> stuAge)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>();</span><br><span class="line">    <span class="built_in">this</span>.stuNo = stuNo;</span><br><span class="line">    <span class="built_in">this</span>.stuName = stuName;</span><br><span class="line">    <span class="built_in">this</span>.stuAge = stuAge;</span><br><span class="line">    <span class="comment">//有参构造</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>singleton | prototype</p>
+<p>执行时机(产生bean的时机) :</p>
+<p>（<strong>default</strong>）singleton:容器在初始化时，就会创建对象（唯一的一个）;以后再getBean时，不再产生新的bean.singleton也支持延迟加载(懒加载) :在第一次使用时产生。</p>
+<p>prototype:容器在初始化时，不创建对象;只是在每次使用时(每次从容器获取对象时,context.getBean(Xxxx))，再创建对象，并且，每次getBean()都会创建一个新的对象。</p>
+<p>延迟加载（注解形式）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@lazy</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="条件注解-–-gt-SpringBoot"><a href="#条件注解-–-gt-SpringBoot" class="headerlink" title="条件注解 –&gt;SpringBoot"></a>条件注解 –&gt;SpringBoot</h2><p>可以让某一个Bean在某些条件下加入Ioc容器，其他情况下不加IoC容器。</p>
+<p>a.准备bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Car</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EnegerCar</span> <span class="keyword">implements</span> <span class="title class_">Car</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OilCar</span> <span class="keyword">implements</span> <span class="title class_">Car</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>b.增加条件Bean：给每个Bean设置条件，必须实现Condition接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OilCarCondition</span> <span class="keyword">implements</span> <span class="title class_">Condition</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> &#123;</span><br><span class="line">        <span class="comment">//如果当前环境的车类型是Oil，则加入OilCar</span></span><br><span class="line">        <span class="comment">//获取环境</span></span><br><span class="line">        Environment environment=conditionContext.getEnvironment();</span><br><span class="line">        String carType=environment.getProperty(<span class="string">&quot;car.type&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> carType.contains(<span class="string">&quot;oil&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EnergyCarCondition</span> <span class="keyword">implements</span> <span class="title class_">Condition</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> &#123;</span><br><span class="line">        <span class="comment">//如果当前环境的车类型是energy，则加入energyCar</span></span><br><span class="line">        <span class="comment">//获取环境</span></span><br><span class="line">        <span class="type">Environment</span> <span class="variable">environment</span> <span class="operator">=</span> conditionContext.getEnvironment();</span><br><span class="line">        <span class="type">String</span> <span class="variable">carType</span> <span class="operator">=</span> environment.getProperty(<span class="string">&quot;car.type&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> carType.contains(<span class="string">&quot;energy&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c.根据条件加入IOC容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Conditional</span> (OilCarCondition.class)</span><br><span class="line"><span class="keyword">public</span> Car <span class="title function_">oilCar</span> <span class="params">()</span></span><br><span class="line">&#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">oilCar</span>()&#125;</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Conditional</span> (EnergyCarCondition.class)</span><br><span class="line"><span class="keyword">public</span> Car <span class="title function_">energyCar</span> <span class="params">()</span></span><br><span class="line">&#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">EnergyCar</span> ()&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<p>在VM option中添加参数为oil<code>-Dcar.type=oil</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> testAnnotation &#123;</span><br><span class="line">    <span class="comment">//注解方式</span></span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span> (MyConfig.class);</span><br><span class="line">    String[] beanDefinitionNames = context.getBeanDefinitionNames();</span><br><span class="line">    <span class="keyword">for</span> (String name : beanDefinitionNames) &#123;</span><br><span class="line">        System.out.println(name) ;</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="给IoC加入Bean的方法"><a href="#给IoC加入Bean的方法" class="headerlink" title="给IoC加入Bean的方法"></a>给IoC加入Bean的方法</h2><p>注解:</p>
+<p>​	三层组件: 扫描器+三层注解</p>
+<p>​	非三层组件@Confiquration: </p>
+<ol>
+<li>@Bean+返回值</li>
+<li>@import</li>
+<li>FactoryBean(工厂 Bean)</li>
+</ol>
+<h3 id="import使用"><a href="#import使用" class="headerlink" title="@import使用:"></a>@import使用:</h3><p>①直接编写到@Import中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Confiquration</span></span><br><span class="line"><span class="meta">@Import</span> ( &#123;Apple.class, Banana.class&#125; )</span><br><span class="line"><span class="comment">//bean是id 是全类名</span></span><br></pre></td></tr></table></figure>
+
+<p>②自定义ImportSelector接口的实现类，通过selectimports方法实现,方法的返回值就是要纳入IoC容器的Bean),并告知系统自己编写的实现类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyImportSelector</span> <span class="keyword">implements</span> <span class="title class_">ImportSelector</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String[] selectImports (AnnotationMetadata importingClassMetadata) &#123;</span><br><span class="line">        <span class="comment">//return new string[0] ;//返回值就是要加入IOC容器的bean的全类名</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[]&#123; <span class="string">&quot;top.eshyee.entity.Apple&quot;</span>, <span class="string">&quot;top.eshyee.entity.Banana&quot;</span>&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(Orage.class,MyImportSelector.class)</span></span><br></pre></td></tr></table></figure>
+
+<p>③编写ImportBeanDefinitionRegistrar接口的实现类,重写方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyImportBeanDefinitionRegistrar</span> <span class="keyword">implements</span> <span class="title class_">ImportBeanDefinitionRegistrar</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">registerBeanDefinitions</span><span class="params">(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry)</span> &#123;</span><br><span class="line">        BeanDefinition beanDefinition <span class="keyword">new</span> <span class="title class_">RootBeanDefinition</span>(Orange.class) ;</span><br><span class="line">        <span class="comment">// or BeanDefinition beanDefinition new RootBeanDefinition(&quot;top.eshyee.entity.Orange&quot;) ;</span></span><br><span class="line">        registry.registerBeanDefinition(<span class="string">&quot;myorange&quot;</span>,beanDefinition);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(MyImportBeanDefinitionRegistrar)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="FactoryBean-工厂-Bean"><a href="#FactoryBean-工厂-Bean" class="headerlink" title="FactoryBean(工厂 Bean)"></a>FactoryBean(工厂 Bean)</h3><p>写注册类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyEactoryBean</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getobject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Apple</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Class&lt;?&gt; getobjectType() &#123;</span><br><span class="line">        <span class="keyword">return</span> Apple.class ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>bean中实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> FactoryBean&lt;Apple&gt; <span class="title function_">myFactoryBean</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyFactoryBean</span>() ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拿myFactoryBean中的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object <span class="title function_">obj</span> <span class="params">(context. getBean( <span class="string">&quot;myFactoryBean&quot;</span>)</span> );</span><br><span class="line">System.out.println(obj) ;</span><br><span class="line">object <span class="title function_">obj</span> <span class="params">(context. getBean( <span class="string">&quot;&amp;myFactoryBean&quot;</span>)</span> );</span><br><span class="line">System.out.println(obj) ;</span><br></pre></td></tr></table></figure>
+
+<p><code>&amp;</code>:不加&amp;获取的是最内部真实的Apple;</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eshyee.github.io">SHYEE</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eshyee.github.io/2021/03/12/Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/">https://eshyee.github.io/2021/03/12/Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring/">Spring</a><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/1920x1080/?plasma" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/12/2021-03-21(1)/" title="计算机操作系统"><img class="cover" src="http://eshyee.top/picture/1611380909570.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">计算机操作系统</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/12/C++%E5%B0%8Ftips/" title="C++小tips"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">C++小tips</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/02/24/SSM%E6%95%B4%E5%90%88/" title="SSM"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-24</div><div class="title">SSM</div></div></a></div><div><a href="/2021/02/24/Spring%20-%20MyBatis/" title="Spring - MyBatis"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-24</div><div class="title">Spring - MyBatis</div></div></a></div><div><a href="/2021/02/24/Spring%20web%20%E5%BC%80%E5%8F%91/" title="Spring web 开发"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-24</div><div class="title">Spring web 开发</div></div></a></div><div><a href="/2021/01/18/Spring%20%E5%85%A5%E9%97%A8/" title="Spring 入门"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-18</div><div class="title">Spring 入门</div></div></a></div><div><a href="/2021/02/24/SpringMVC/" title="SpringMVC"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-24</div><div class="title">SpringMVC</div></div></a></div><div><a href="/2021/02/24/Spring/" title="Spring"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-24</div><div class="title">Spring</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/pic/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SHYEE</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eshyee"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/eshyee" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:eshyee@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">等离子体实验室</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">Bean的作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%B3%A8%E8%A7%A3-%E2%80%93-gt-SpringBoot"><span class="toc-number">2.</span> <span class="toc-text">条件注解 –&gt;SpringBoot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99IoC%E5%8A%A0%E5%85%A5Bean%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">给IoC加入Bean的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#import%E4%BD%BF%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">@import使用:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FactoryBean-%E5%B7%A5%E5%8E%82-Bean"><span class="toc-number">3.2.</span> <span class="toc-text">FactoryBean(工厂 Bean)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"/></a><div class="content"><a class="title" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge">Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge</a><time datetime="2025-02-12T06:31:17.000Z" title="Created 2025-02-12 14:31:17">2025-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Relationship of mode transitions and standing waves in helicon plasmas"/></a><div class="content"><a class="title" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas">Relationship of mode transitions and standing waves in helicon plasmas</a><time datetime="2023-10-25T11:30:28.000Z" title="Created 2023-10-25 19:30:28">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Effects of magnetic field on electron power absorption in helicon fluid simulation"/></a><div class="content"><a class="title" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation">Effects of magnetic field on electron power absorption in helicon fluid simulation</a><time datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"/></a><div class="content"><a class="title" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</a><time datetime="2023-10-07T03:15:01.000Z" title="Created 2023-10-07 11:15:01">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/28/vue/" title="vue"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue"/></a><div class="content"><a class="title" href="/2023/09/28/vue/" title="vue">vue</a><time datetime="2023-09-28T02:48:17.000Z" title="Created 2023-09-28 10:48:17">2023-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By SHYEE</div><div class="framework-info"></div><div class="footer_custom_text">Hi, welcome to <a target="_blank" rel="noopener" href="http://shyee.club">SHYEECLUB</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="http://shyee.club/js/test.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

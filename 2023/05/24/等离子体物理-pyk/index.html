@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>等离子体物理_pyk | SHYEE-PLASMA</title><meta name="author" content="SHYEE"><meta name="copyright" content="SHYEE"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="麦克斯韦方程组一般形式  对(2.2.2)两边求散度（左乘拉普拉斯算子），再联立(2.2.3)就可以推出电荷守恒方程(2.2.5) 洛伦兹力定律F &#x3D; q(E+v x B) v是粒子速度 B&#x3D; u0 ·H 是磁感应强度矢量 玻尔兹曼方程引入一个六位相空间(r,v)中的分布函数f(r,v,t),r代表位置，t代表速度。 可以得到无碰撞玻尔兹曼方程，或弗拉索夫（Vlasov）方程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="等离子体物理_pyk">
+<meta property="og:url" content="https://eshyee.github.io/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/index.html">
+<meta property="og:site_name" content="SHYEE-PLASMA">
+<meta property="og:description" content="麦克斯韦方程组一般形式  对(2.2.2)两边求散度（左乘拉普拉斯算子），再联立(2.2.3)就可以推出电荷守恒方程(2.2.5) 洛伦兹力定律F &#x3D; q(E+v x B) v是粒子速度 B&#x3D; u0 ·H 是磁感应强度矢量 玻尔兹曼方程引入一个六位相空间(r,v)中的分布函数f(r,v,t),r代表位置，t代表速度。 可以得到无碰撞玻尔兹曼方程，或弗拉索夫（Vlasov）方程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://source.unsplash.com/1920x1080/?plasma">
+<meta property="article:published_time" content="2023-05-24T14:31:04.000Z">
+<meta property="article:modified_time" content="2023-05-26T13:48:47.507Z">
+<meta property="article:author" content="SHYEE">
+<meta property="article:tag" content="等离子体">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/1920x1080/?plasma"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://eshyee.github.io/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: SHYEE","link":"Link: ","source":"Source: SHYEE-PLASMA","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '等离子体物理_pyk',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-26 21:48:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/pic/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/1920x1080/?plasma')"><nav id="nav"><span id="blog-info"><a href="/" title="SHYEE-PLASMA"><span class="site-name">SHYEE-PLASMA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">等离子体物理_pyk</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-24T14:31:04.000Z" title="Created 2023-05-24 22:31:04">2023-05-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-05-26T13:48:47.507Z" title="Updated 2023-05-26 21:48:47">2023-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93/">等离子体</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>5min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="等离子体物理_pyk"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="麦克斯韦方程组"><a href="#麦克斯韦方程组" class="headerlink" title="麦克斯韦方程组"></a>麦克斯韦方程组</h1><p>一般形式</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/1D6A5C77DD8DAFC4A5964A8CE8C8C498.jpg" alt=" "></p>
+<p>对(2.2.2)两边求散度（左乘拉普拉斯算子），再联立(2.2.3)就可以推出电荷守恒方程(2.2.5)</p>
+<h1 id="洛伦兹力定律"><a href="#洛伦兹力定律" class="headerlink" title="洛伦兹力定律"></a>洛伦兹力定律</h1><p>F &#x3D; q(E+v x B)</p>
+<p>v是粒子速度</p>
+<p>B&#x3D; u0 ·H 是磁感应强度矢量</p>
+<h1 id="玻尔兹曼方程"><a href="#玻尔兹曼方程" class="headerlink" title="玻尔兹曼方程"></a>玻尔兹曼方程</h1><p>引入一个六位相空间(r,v)中的分布函数f(r,v,t),r代表位置，t代表速度。</p>
+<p>可以得到无碰撞玻尔兹曼方程，或弗拉索夫（Vlasov）方程</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/C63440A1FCE157A0572C6B274E057392.jpg" alt="2.3.2"></p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-41.png" alt=" "></p>
+<p>对其两边加上碰撞项，就得到玻尔兹曼方程</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-42.png" alt="2.3.3"></p>
+<h1 id="宏观量"><a href="#宏观量" class="headerlink" title="宏观量"></a>宏观量</h1><p>粒子密度</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-43.png" alt="2.3.4"></p>
+<p>粒子通量</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-44.png" alt="2.3.5"></p>
+<p>单位体积内粒子的动能</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-45.png" alt="2.3.6"></p>
+<h1 id="动量守恒方程-amp-能量守恒方程"><a href="#动量守恒方程-amp-能量守恒方程" class="headerlink" title="动量守恒方程&amp;能量守恒方程"></a>动量守恒方程&amp;能量守恒方程</h1><p>对玻尔兹曼方程两端成v，然后对速度积分，就是动量守恒方程</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-46.png" alt="2.3.9"></p>
+<p>其常见表达式为</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-47.png" alt="2.3.15"></p>
+<p>对玻尔兹曼方程两端同乘1&#x2F;2mv^2，并对速度积分，能得到能量守恒方程</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-48.png" alt="2.3.21"></p>
+<h1 id="麦克斯韦分布"><a href="#麦克斯韦分布" class="headerlink" title="麦克斯韦分布"></a>麦克斯韦分布</h1><p>在没有空间梯度和加速度项的稳态情况下，玻尔兹曼方程简化为</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-49.png" alt="2.4.1"></p>
+<p>c代表同种粒子之间的碰撞，其解为一个有高斯形式的速度分布函数f(v)</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-50.png" alt="2.4.2"></p>
+<p>最终可以解出C和ξ可以得到</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-51.png" alt="2.4.7"></p>
+<h1 id="等离子体在均匀场中的运动"><a href="#等离子体在均匀场中的运动" class="headerlink" title="等离子体在均匀场中的运动"></a>等离子体在均匀场中的运动</h1><h2 id="回旋频率"><a href="#回旋频率" class="headerlink" title="回旋频率"></a>回旋频率</h2><h2 id="回旋半径"><a href="#回旋半径" class="headerlink" title="回旋半径"></a>回旋半径</h2><h2 id="ExB漂移"><a href="#ExB漂移" class="headerlink" title="ExB漂移"></a>ExB漂移</h2><h1 id="电磁波"><a href="#电磁波" class="headerlink" title="电磁波"></a>电磁波</h1><h1 id="静电波"><a href="#静电波" class="headerlink" title="静电波"></a>静电波</h1><h1 id="介电张量"><a href="#介电张量" class="headerlink" title="介电张量"></a>介电张量</h1><h1 id="波的色散关系"><a href="#波的色散关系" class="headerlink" title="波的色散关系"></a>波的色散关系</h1><h1 id="磁化等离子体中的波"><a href="#磁化等离子体中的波" class="headerlink" title="磁化等离子体中的波"></a>磁化等离子体中的波</h1><p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/0960A420F60DE4125AA02629259C81BE.jpg" alt="包括离子运动的磁化等离子体基本波的色散关系曲线 "></p>
+<h1 id="IV曲线"><a href="#IV曲线" class="headerlink" title="IV曲线"></a>IV曲线</h1><h2 id="chatGPT"><a href="#chatGPT" class="headerlink" title="chatGPT"></a>chatGPT</h2><p>我们可以利用IV曲线上的斜率来计算等离子体密度。在低压下，当电流随电压增加呈指数增长时，IV曲线上的斜率与等离子体密度成正比。因此，我们可以使用以下公式来计算等离子体密度：</p>
+<p>n_e &#x3D; (I_s&#x2F;2πrLqA) * [(dV&#x2F;dI) &#x2F; V_p]</p>
+<p>其中，n_e 表示等离子体密度；I_s 表示饱和电流；r 是探针半径；L 是探针长度；q 是电子电量；A 是探针截面积；dV&#x2F;dI 是IV曲线的斜率；V_p 是等离子体的诱导电压。</p>
+<p>需要注意的是，这种方法只能用于计算等离子体密度的数量级，而无法得到精确值。同时，由于该方法对实验条件要求较高，可能存在误差。</p>
+<p>对于弱等离子体（即电离度较低），可以使用Langmuir剖面计算等离子体密度：<br>n_e &#x3D; (I_sat &#x2F; A) * ((4ε_0me)&#x2F;(e^2π^2))^(1&#x2F;2)</p>
+<p>其中，n_e表示等离子体密度；I_sat表示探针饱和电流；A表示探针表面积；ε_0表示真空介电常数；m_e表示电子质量；e表示元电荷。</p>
+<p>对于强等离子体（即电离度较高），可以使用Saha-Boltzmann方程计算电子密度：<br>n_e &#x3D; (2πm_e k_B T_e&#x2F;h^2)^(3&#x2F;2) * (N_i&#x2F;N)^2 * exp((-E_i&#x2F;k_B T_e)* (1-β))</p>
+<p>其中，N_i表示第i种粒子的数密度；N表示总数密度；T_e表示等离子体电子温度；k_B表示玻尔兹曼常数；h表示普朗克常数；E_i表示第i种粒子的电离势；β表示热化学平衡指数，通常在1左右。</p>
+<h2 id="Wang"><a href="#Wang" class="headerlink" title="Wang"></a>Wang</h2><p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-37.png" alt=" "></p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-38.png" alt=" "></p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-39.png" alt=" "></p>
+<p>Vp是IV曲线的拐点</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-40.png" alt="Vp"></p>
+<h1 id="EEDF"><a href="#EEDF" class="headerlink" title="EEDF"></a>EEDF</h1><p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-35.png" alt="6.6.15"></p>
+<details>
+<summary>chatGPT方案--展开查看</summary>
+<!-- <pre><code> -->
+
+<p>等离子体的EEDF（能量电子分布函数）描述了等离子体中电子的能级分布情况，是等离子体物理学中一个重要的参数。以下是计算等离子体EEDF的基本步骤：</p>
+<p>选取合适的实验方法来测量等离子体的电子能谱。常用的实验方法包括：光电子显微镜、辐射法、气体磁谱计等。</p>
+<p>对于得到的电子能谱进行预处理，并将其转换为电子能量分布函数。通常，可以使用不同的数值技术和算法来进行预处理和转换。</p>
+<p>根据转换后的电子能量分布函数，计算出等离子体的EEDF。这可以通过应用Boltzmann方程或其他相关方程进行计算。Boltzmann方程给出了EEDF的形式，可以写成下面的形式：</p>
+<p>f(E) &#x3D; A * exp(-E&#x2F;kT_e)</p>
+<p>其中，E是电子能量；T_e是电子温度；A是归一化常数。</p>
+<p>对于复杂等离子体，例如非平衡等离子体，可能需要考虑更多的因素并采用更加复杂的模型来计算EEDF。在这种情况下，可以结合数值模拟和实验数据来进行计算和分析。<br>计算等离子体EEDF的公式通常基于Boltzmann方程，其形式如下：</p>
+<p>f(E) &#x3D; A * exp(-E&#x2F;kT_e)</p>
+<p>其中，f(E)是电子能量分布函数；E是电子能量；T_e是等离子体电子温度；A是归一化常数。</p>
+<p>计算EEDF需要确定电子能量分布函数中的参数，包括归一化常数A和电子温度T_e。这可以通过将实验数据与理论模型进行比较来获得。</p>
+<p>对于平衡态等离子体，可以使用以下公式计算电子密度n_e和电子温度T_e：</p>
+<p>n_e &#x3D; n_0 * exp(-E_i&#x2F;kT_e)</p>
+<p>T_e &#x3D; (2&#x2F;3)*(kT_n&#x2F;m_e)</p>
+<p>其中，n_0是等离子体中的中性原子或分子浓度；E_i是电离势；T_n是等离子体中的中性粒子温度；m_e是电子质量；k是玻尔兹曼常数。</p>
+<p>归一化常数A是EEDF中的一个重要参数，它通常用于确保电子能量分布函数f(E)的总积分为1。确定归一化常数A的方法可能因实验条件和等离子体类型而异，但以下是一些常见的方法：</p>
+<p>使用计算机模拟来估计归一化常数A。可以通过对Boltzmann方程进行数值求解来获得电子能量分布函数，并根据总积分为1的条件来确定归一化常数A。</p>
+<p>使用实验数据来确定归一化常数A。这可以通过将实验得到的电子能谱与理论模型进行比较来实现。首先，需要计算出理论上的电子能谱，并使用已知的归一化常数A来匹配实验结果。然后，通过比较实验数据和模型预测值的差异来调整归一化常数A的值。</p>
+<p>采用标准归一化常数。有时候，也可以使用标准归一化常数（例如，SI制中的1&#x2F;m^3）来简化计算过程。这意味着电子能量分布函数f(E)将被除以总电子密度n_e，以确保总积分为1。</p>
+<!-- </code></pre> -->
+</details>
+
+<h1 id="EEPF"><a href="#EEPF" class="headerlink" title="EEPF"></a>EEPF</h1><p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-36.png" alt="6.6.18"></p>
+<hr>
+<p>单粒子方程</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-29.png" alt=" 1 "></p>
+<p>第一项是压力梯度项</p>
+<p>第二项是qn洛伦兹力</p>
+<p>第三项是碰撞项</p>
+<p>离子束守恒（速率平衡方程）</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-30.png" alt=" "></p>
+<p>右边分别是产生项-损失项</p>
+<p>对于1式中u比较小，所以可以省略，最终化简为以下式子</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-32.png" alt=" "></p>
+<p>电子电流</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-31.png" alt=" "></p>
+<p>u是平均速度</p>
+<p>综上就可以推出欧姆定律（？）</p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-33.png" alt=" "></p>
+<p><img src="/pic/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/image-34.png" alt=" "></p>
+<p>又知道j &#x3D;电导率xE，所以根据上式就可以得出等离子体的电导率.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eshyee.github.io">SHYEE</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eshyee.github.io/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/">https://eshyee.github.io/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93/">等离子体</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/1920x1080/?plasma" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/02/A-flowing-plasma-model-to-describe-drift-waves-in-a-cylindrical-helicon-discharge/" title="A flowing plasma model to describe drift waves in a cylindrical helicon discharge"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">A flowing plasma model to describe drift waves in a cylindrical helicon discharge</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/24/%E6%99%AE%E6%9E%97%E6%96%AF%E9%A1%BF%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E8%AF%BE/" title="普林斯顿等离子体课"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">普林斯顿等离子体课</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/05/24/%E6%99%AE%E6%9E%97%E6%96%AF%E9%A1%BF%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E8%AF%BE/" title="普林斯顿等离子体课"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">普林斯顿等离子体课</div></div></a></div><div><a href="/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/" title="等离子体前置知识"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">等离子体前置知识</div></div></a></div><div><a href="/2023/05/05/%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6/" title="螺旋等离子体推进器及其羽流中的波传播与吸收"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-05</div><div class="title">螺旋等离子体推进器及其羽流中的波传播与吸收</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/pic/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SHYEE</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eshyee"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/eshyee" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:eshyee@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">等离子体实验室</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">麦克斯韦方程组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E4%BC%A6%E5%85%B9%E5%8A%9B%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">洛伦兹力定律</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%96%B9%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">玻尔兹曼方程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8F%E8%A7%82%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">宏观量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92%E6%96%B9%E7%A8%8B-amp-%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92%E6%96%B9%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">动量守恒方程&amp;能量守恒方程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E5%88%86%E5%B8%83"><span class="toc-number">6.</span> <span class="toc-text">麦克斯韦分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E5%9C%A8%E5%9D%87%E5%8C%80%E5%9C%BA%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8"><span class="toc-number">7.</span> <span class="toc-text">等离子体在均匀场中的运动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%97%8B%E9%A2%91%E7%8E%87"><span class="toc-number">7.1.</span> <span class="toc-text">回旋频率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%97%8B%E5%8D%8A%E5%BE%84"><span class="toc-number">7.2.</span> <span class="toc-text">回旋半径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ExB%E6%BC%82%E7%A7%BB"><span class="toc-number">7.3.</span> <span class="toc-text">ExB漂移</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%A3%81%E6%B3%A2"><span class="toc-number">8.</span> <span class="toc-text">电磁波</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E7%94%B5%E6%B3%A2"><span class="toc-number">9.</span> <span class="toc-text">静电波</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%94%B5%E5%BC%A0%E9%87%8F"><span class="toc-number">10.</span> <span class="toc-text">介电张量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A2%E7%9A%84%E8%89%B2%E6%95%A3%E5%85%B3%E7%B3%BB"><span class="toc-number">11.</span> <span class="toc-text">波的色散关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E5%8C%96%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E4%B8%AD%E7%9A%84%E6%B3%A2"><span class="toc-number">12.</span> <span class="toc-text">磁化等离子体中的波</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IV%E6%9B%B2%E7%BA%BF"><span class="toc-number">13.</span> <span class="toc-text">IV曲线</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#chatGPT"><span class="toc-number">13.1.</span> <span class="toc-text">chatGPT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wang"><span class="toc-number">13.2.</span> <span class="toc-text">Wang</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EEDF"><span class="toc-number">14.</span> <span class="toc-text">EEDF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EEPF"><span class="toc-number">15.</span> <span class="toc-text">EEPF</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"/></a><div class="content"><a class="title" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge">Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge</a><time datetime="2025-02-12T06:31:17.000Z" title="Created 2025-02-12 14:31:17">2025-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Relationship of mode transitions and standing waves in helicon plasmas"/></a><div class="content"><a class="title" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas">Relationship of mode transitions and standing waves in helicon plasmas</a><time datetime="2023-10-25T11:30:28.000Z" title="Created 2023-10-25 19:30:28">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Effects of magnetic field on electron power absorption in helicon fluid simulation"/></a><div class="content"><a class="title" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation">Effects of magnetic field on electron power absorption in helicon fluid simulation</a><time datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"/></a><div class="content"><a class="title" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</a><time datetime="2023-10-07T03:15:01.000Z" title="Created 2023-10-07 11:15:01">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/28/vue/" title="vue"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue"/></a><div class="content"><a class="title" href="/2023/09/28/vue/" title="vue">vue</a><time datetime="2023-09-28T02:48:17.000Z" title="Created 2023-09-28 10:48:17">2023-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By SHYEE</div><div class="framework-info"></div><div class="footer_custom_text">Hi, welcome to <a target="_blank" rel="noopener" href="http://shyee.club">SHYEECLUB</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="http://shyee.club/js/test.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

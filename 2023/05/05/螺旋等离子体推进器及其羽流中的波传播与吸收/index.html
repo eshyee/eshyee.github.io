@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>螺旋等离子体推进器及其羽流中的波传播与吸收 | SHYEE-PLASMA</title><meta name="author" content="SHYEE"><meta name="copyright" content="SHYEE"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="螺旋等离子体推进器及其羽流中的波传播与吸收摘要采用二维全波频域冷等离子体模型研究了螺旋形等离子体推力器中电磁功率的传播和吸收，包括远羽流区和周围空间。结果表明，功率的一小部分在羽流区被吸收，功率在源中的沉积基本不受模拟区域大小、金属障碍物的存在或环境中的等离子体密度的影响。电子回旋共振(ECR)表面始终存在于下游，有效地防止沿羽流向空间以外的辐射。在存在过密的环境等离子体时，就像在真空室中预期的那">
+<meta property="og:type" content="article">
+<meta property="og:title" content="螺旋等离子体推进器及其羽流中的波传播与吸收">
+<meta property="og:url" content="https://eshyee.github.io/2023/05/05/%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6/index.html">
+<meta property="og:site_name" content="SHYEE-PLASMA">
+<meta property="og:description" content="螺旋等离子体推进器及其羽流中的波传播与吸收摘要采用二维全波频域冷等离子体模型研究了螺旋形等离子体推力器中电磁功率的传播和吸收，包括远羽流区和周围空间。结果表明，功率的一小部分在羽流区被吸收，功率在源中的沉积基本不受模拟区域大小、金属障碍物的存在或环境中的等离子体密度的影响。电子回旋共振(ECR)表面始终存在于下游，有效地防止沿羽流向空间以外的辐射。在存在过密的环境等离子体时，就像在真空室中预期的那">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://source.unsplash.com/1920x1080/?plasma">
+<meta property="article:published_time" content="2023-05-05T08:43:36.000Z">
+<meta property="article:modified_time" content="2023-05-05T08:45:37.045Z">
+<meta property="article:author" content="SHYEE">
+<meta property="article:tag" content="等离子体">
+<meta property="article:tag" content="文献翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/1920x1080/?plasma"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://eshyee.github.io/2023/05/05/%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: SHYEE","link":"Link: ","source":"Source: SHYEE-PLASMA","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '螺旋等离子体推进器及其羽流中的波传播与吸收',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-05 16:45:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/pic/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/1920x1080/?plasma')"><nav id="nav"><span id="blog-info"><a href="/" title="SHYEE-PLASMA"><span class="site-name">SHYEE-PLASMA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">螺旋等离子体推进器及其羽流中的波传播与吸收</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-05T08:43:36.000Z" title="Created 2023-05-05 16:43:36">2023-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-05-05T08:45:37.045Z" title="Updated 2023-05-05 16:45:37">2023-05-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E7%8C%AE/">文献</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">6.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>19min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="螺旋等离子体推进器及其羽流中的波传播与吸收"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="螺旋等离子体推进器及其羽流中的波传播与吸收"><a href="#螺旋等离子体推进器及其羽流中的波传播与吸收" class="headerlink" title="螺旋等离子体推进器及其羽流中的波传播与吸收"></a>螺旋等离子体推进器及其羽流中的波传播与吸收</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>采用二维全波频域冷等离子体模型研究了螺旋形等离子体推力器中电磁功率的传播和吸收，包括远羽流区和周围空间。结果表明，功率的一小部分在羽流区被吸收，功率在源中的沉积基本不受模拟区域大小、金属障碍物的存在或环境中的等离子体密度的影响。电子回旋共振(ECR)表面始终存在于下游，有效地防止沿羽流向空间以外的辐射。在存在过密的环境等离子体时，就像在真空室中预期的那样，场在这个转变之后完全消失，真空室边界条件对这个表面之前的波场影响很小。在没有环境等离子体的情况下，等离子体与真空界面处存在双波态转变，影响了羽流区数值模拟的准确性。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Helicon等离子体推进器(HPTs)是目前正在研发的电力推进装置[1-9]。它们的工作依赖于通过电感器&#x2F;天线产生的振荡电磁场对圆柱形容器中的磁约束等离子体进行加热[10,11]，并在外部磁喷嘴(MN)中对等离子体进行膨胀和加速，在分离发生之前产生磁推力[12-14]。由于无电极，与传统的电力推进技术(如网格离子推进器或霍尔推进器)相比，HPTs具有一定的优势，例如潜在的寿命延长，整体系统和电气架构的简化。MN拓扑结构易于控制，表明具有较高的节流性。此外，由于缺乏带有敏感材料插入的空心阴极，因此有可能使用替代推进剂。然而，报道的推力效率仍然低于20%[6,16]，在理解驱动HPT性能的物理机制方面仍然存在悬而未决的问题，特别是电磁波对等离子体的加热问题。</p>
+<p>电磁场的传播和吸收是该装置运行的核心，也是本工作的研究对象。这些过程取决于天线的几何形状和电流、源的形状、磁拓扑结构和强度、等离子体密度图，以及在较小程度上影响有效碰撞的等离子体温度。反过 来，电磁功率沉积决定了设备中的等离子体特性。当两个方面是紧密耦合、电磁问题的时间表(10−7年代,或数十兆赫)要快得多的等离子体运输问题(离子转运时间的顺序10−5 s)。这使得单独的近似研究这些现象,这种方法已成功用于分析源等离子体动力学缓慢一方面[日],和内部电磁场问题另一方面(21、22)。</p>
+<p>在使用的MHz级频率(通常为13.56 MHz)下，离子对快速场的响应可以忽略不计，电子响应决定了传播和吸收特性。当等离子体密度n已大于1012 ~ 1013 m−3，外加磁场强度Ba大于1 ~ 10 G时，激发频率ω小于电子等离子体频率ωpe和电子回旋频率ωce，即:ω&lt;ωpe,ωce。这意味着左极化(L)波是倏灭的，只有右极化(R)哨声波在HPT等离子体内传播，且只有当其波矢量k落在与磁场矢量Ba[23]半角αc的锥内时才会传播。在这个锥的表面，k→∞，因此它被称为共振锥。传统上，当k基本上与Ba平行时，这种波被称为helicon (H)波[10,24](波长较长)，当k基本上与共振锥平行时，这种波被称为trivelake - gould (TG)[25]波(波长较短)(因此有一个重要的k⊥分量)。对于高Ba，有一些k‖的值，其中k有两个解，一个与H波有关，另一个与TG波有关。这被称为双波状态(DWR)[26]。相比之下，在较低的Ba下，每个传播k‖只有一个k⊥的值，这被称为单波态(SWR)。一般来说，H波和TG波都有助于等离子体加热，但更大份额的功率沉积有时归因于TG波，特别是在等离子体表面附近[27]。</p>
+<p>随着等离子体向MN中扩展，磁场强度和等离子体密度逐渐减小。在羽流下游的某些表面，电子回旋共振(ECR)最终发生在ω &#x3D; ωce。在典型工作频率下，ECR表面外的共振磁场强度为4.84 g，且只要等离子体持续过密(ω&lt;ωpe)，磁场就会消失。最终，临界密度转变(ω &#x3D; ωpe)也会达到，尽管这通常发生在离器件很远的地方。</p>
+<p>此外，部分电磁激励可能泄漏到周围的周边空间。这里的情况取决于环境条件:在完美真空中，L波和R波传播均匀，不受Ba的影响，速度为c，波长为几十米，明显大于器件尺寸。在高密度HPT等离子体与真空的界面处，L波截止和临界密度跃迁迅速连续发生。</p>
+<p>然而，在等离子体稀薄的环境中，传播仍然由n和Ba决定。外围空间也存在ecr跃迁，并可能对波场产生重大影响。特别是，当等离子体密度高于临界密度时，R波的传播性质与器件内部相同——哨声波沿与Ba成一定角度传播，在ECR表面外消失。而且，当密度大约是临界值的两倍时，L波不会传播。这些环境条件与实验室真空室的实验有关，它旨在代表飞行条件，但只能达到非完全真空。</p>
+<p>最简单的一维径向模型已经显示了圆柱形等离子体源内部存在H波和TG波[21,28,29];然而，它们忽略了n和Ba轴向不均匀性的影响。全波二维非对称码过去已被开发来解决这一问题[30,31]，但在轴向对准磁场Ba &#x3D; Baz1z的假设下。最近，Tian等[32]放宽了这一限制，在模型中加入了一小部分发散的MN羽流，从而可以分析磁场拓扑结构对波传播的影响。Melazzi等[21]采用了另一种依赖矩量法求解天线表面电流密度和等离子体内体积极化电流的方法。相关的，Sánchez-Villar等[33]提出了一个全波有限元方法工具，已成功地用于模拟另一种类型的无极推力器，电子回旋共振推力器。</p>
+<p>现有的HPTs电磁场研究仅限于等离子体源和极近羽流。这就忽略了关于传播和吸收问题的几个主要问题，例如这个有限的模拟域是否足以理解等离子体作为一个整体的功率吸收;或者部分射频辐射能否沿着羽流向下游逃逸，并在那里被吸收。据我们所知，在HPTs的操作中，远处ECR表面的作用尚未被考虑。最后，有必要问一下周围环境的影响是什么，即微弱的等离子体或金属障碍物是否会通过打开&#x2F;关闭传播路径改变吸收性能。</p>
+<p>本工作扩展了[32]的二维有限差分频域(FDFD)模型，改进了数值实现和更大域的插值例程，并用于模拟高频脉冲发生器源、环境和远羽在ECR表面以外的RF场的传播和吸收，将轴对称域的尺寸从轴向15 cm增加到67 cm，径向2 cm增加到20 cm，实现了对ECR跃迁的完整模拟。此外，通过传输编码得到了一个真实的等离子体密度图，一个是内部等离子体动力学[34]，另一个是MN[12]的外部扩张，并使用了基于该密度的碰撞图，而不是简单的等离子体密度展开和整个域的恒定碰撞频率。本文通过四个不同的仿真案例来探讨上述问题。最后，我们确定并评论了在求解发生在高密度HPT等离子体和完美真空之间的临界密度转变的波场时发现的建模和数值困难。</p>
+<p>该研究的参考设备是一个中等尺寸的HPT(约350-500 W)，类似于SENER航空航天公司和UC3M[35]联合开发的HPT05原型。</p>
+<p>本文的其余部分结构如下:第2节描述了等离子体波模型、数值实现以及模拟的几何和等离子体剖面输入。第3节讨论了在四种不同的模拟情况下获得的电磁场和功率沉积剖面。最后，在第4节中讨论了模拟和模拟临界密度跃迁电磁场的困难，以及数值结果的收敛性。第5节总结了这项工作的结论。</p>
+<h2 id="电磁模型"><a href="#电磁模型" class="headerlink" title="电磁模型"></a>电磁模型</h2><p>二维频域电磁模型考虑图1所示的物理域。HPT源及其近羽流标记为区域1，磁导远羽流标记为区域2，装置外围标记为区域3。已知性质的轴对称等离子体填充区域1和2。区域是根据等离子传输码确定的，该传输码用于获得第2.2节所述波码的输入剖面。此外，在区域3中可能存在环境等离子体，这取决于研究案例。除了对称轴外，该区域在代表真空室的金属壁上终止，这可以被认为是完美的导体。此外，域内的磁线圈和HPT支撑设备箱(电源处理单元，气体供给系统等)被视为完全导体金属箱。</p>
+<p>图1的畴由位于源周围的半螺旋天线中频率ω&#x2F;(2π) &#x3D; 13.56 MHz的已知外加电流J a激发。外加磁场Ba也如图所示。Ba拓扑结构在源内部缓慢收敛，在羽流中发散，磁喉大约位于表1。设计和操作参数。参数全仿真域尺寸67 cm × 20 cm室长lc 12.5 cm室半径rc 1.25 cm天线类型半转螺旋线圈电流11 × 103安培转天线频率f &#x3D; ω&#x2F;(2π) 13.56 MHz天线功率350w天线环半径ra 1.75 cm天线长度la 7.5 cm天线中心位置za 27.5 cm天线厚度dt 0.5 cm发射药种类Xe发射药质量流量1.0 mg s−1推力管出口。当磁场强度在远离源的地方减小时，出现一个ECR表面，ω &#x3D; ωce。按照[26]的命名法，等离子体源和部分羽流位于深空区，只有当Ba降低时，等离子体才会进入深空区(靠近ERC表面)。</p>
+<p>HPT的尺寸和特性如表1所示。四个仿真案例定义如下:</p>
+<p>案例R:这是主要的仿真案例，在讨论中作为参考。区域3充满了密度为n &#x3D; 1014 m−3的稀薄等离子体，这对于典型的实验室真空室操作来说是一个相当低的值。这就导致了推进器周边空间的过密等离子体。内部金属元件(线圈、电子元件……)被视为完美的电导体(PEC)。</p>
+<p>案例T:该案例与案例R相同，除了内部金属盒子从模拟中移除，因此对场是透明的。这种情况与情况R的比较说明了障碍物对电磁场传播的影响。</p>
+<p>情形V:与情形R的区别在于，去除区域3的等离子体密度，n &#x3D; 0，即区域3为完全真空。这种情况与情况R的比较显示了环境等离子体的影响，以及发生在等离子体真空边缘的临界密度转变的复杂性。</p>
+<p>案例S:这个缩小版的案例R将积分域限制在区域1和区域3的最小部分，使域成为矩形，大小为[20-40]cm × [0-4] cm。</p>
+<p>在下面，我们使用一个圆柱形右手向量基{1z, 1r, 1θ}。平行于或垂直于局部外加磁场的单位向量也可以形成辅助向量基{1‖，1⊥，1θ}。</p>
+<h3 id="模型公式"><a href="#模型公式" class="headerlink" title="模型公式"></a>模型公式</h3><p>采用冷等离子体模型来描述等离子体对电磁场的线性化响应。虽然等离子体本身是轴对称的，但我们允许存在非轴对称场，我们将其分解为方位m模式。任意矢量F (z, r， θ， t)表示为这些模态叠加的实部，</p>
+<h2 id="结果和讨论"><a href="#结果和讨论" class="headerlink" title="结果和讨论"></a>结果和讨论</h2><p>在参考模拟情形R中，等离子体处处都是过密的，即ωpe &gt;ω。此外，如第6节所述，模拟中存在源周围的金属障碍物。图5的第一行显示了E1 θ的幅值和相位，即m &#x3D; 1模态的方位电场。射频场显然受到ECR表面的限制，因为它必须在ECR表面之外消失。总的来说，在圆柱形源内部(区域1)，场最强，表明与致密等离子体耦合良好。当场在羽流(区域2)和外围(区域3)衰减时，很明显，它们不是零:电磁场在这些区域传播，并不局限于源。圆柱形源的后部磁场较小。在等离子体源内部有一个部分驻波结构，这可以从局部的幅度下降和近180度的台阶上得到证明。从区域2的单调相位开始，沿轴向存在向右行波直到ECR表面，其传播方向基本上为轴向。通过在图5的相图中取一个完整的360度相位周期的距离，可以估计其波长约为20厘米。请注意，由于高磁场，波长比源管大。当等离子体密度n≈5 × 1017 m−3，磁场强度Ba≈100 G时(得到ωpe &#x3D; 4.0 × 1010 rad s−1，ωce &#x3D; 1.8 × 109 rad s−1)，H波的解析波长近似λ≈2πde√ωce&#x2F;ω，其中&#x3D; c&#x2F;ωpe为局部电子表皮深度，这是z≈40 cm处轴附近的特征值。有趣的是，随着密度和磁场沿羽流的减小，分析波长的变化很小。</p>
+<p>在远离轴的地方，随着r的增加，这个轴向波形成了一个不可忽略的k⊥波向量，即它的传播与磁场矢量成一定的角度。羽流中较大的磁场存在于横向区域的磁管中，这表明Ba在一定程度上决定了电磁场的传播路径。传播停止在ECR表面，场的大小迅速下降超过它。</p>
+<p>区域3的电场不可忽略，特别是靠近天线处，其传播也受Ba方向的影响。在磁线圈上方的空间中可以观察到低量级的小波长结构，在那里辐射是弥漫的，并形成驻波模式。这种辐射似乎被限制在区域3的ECR表面和区域1和2的密度更大的等离子体之间。</p>
+<p>功率沉积剖面q1显示在图6的第一个面板中。最大的吸收与最大的场无关，并且发生在圆柱源的致密等离子体内部(约95%)。不可忽略的一部分功率在下游的MN中被吸收，在ECR表面之前，这表明在模型中包括该区域2对理解功率吸收的相关性。</p>
+<p>在ECR表面存在薄的吸收层;然而，这一层在磁场矢量的部分引导下，在区域3的区域顶部偏离ECR。天线发射的能量中只有不到0.6%的能量被ECR表面以外的空间吸收，在那里溶液是消失的。这一结果表明，当在自由空间中工作时，ECR表面可以作为有效的屏蔽来防止辐射损失，即阻止射频功率逃离HPT等离子体及其邻近区域，只要环境密度过大。</p>
+<p>在模拟情况T中，去除域内的金属部分并没有导致波场或功率沉积剖面的任何重大变化，可以从图5和图6的第二行中观察到。唯一明显的区别是向设备后部移动的射频场略高，之前被金属障碍物阻挡，并且在区域3的后部有一些额外的吸收。这些金属盒子的小影响表明，这种类型的障碍基本上不影响解决方案。</p>
+<p>在情形V中，将环境改变为完美真空对射频场(以及数值解的精度)有更显著的影响。这种情况在图5和图6的最后一行中表示。首先，区域3中等离子体的缺失也消除了在该区域的ECR表面发生共振的可能性，现在它对场是透明的。事实上，在没有等离子体密度的情况下，Ba的值和方向对于波的传播问题就变得无关紧要了。这意味着场可以接近代表真空室的金属边界条件。请注意，在自由空间中，任何向外传播的功率都会引起辐射损失;然而，在目前的设置中，代表实验室真空室的操作，这种功率被边界条件反射回区域，直到所有的功率被区域1和2的等离子体吸收。在情形R中，在区域3中存在的微弱等离子体的短波结构在情形V中消失，辐射部分被浸入区域的导电盒所分隔。然而，ECR面在区域2继续活跃。其次，区域1和2的场本质上成为驻波，如图5的幅度图中E1 θ &#x3D; 0的节点线所示，这表明在这种情况下，壁面反射确实起了作用。传播方向形成了一个主要的垂直分量k⊥到Ba，观测到的波长较短，特别是在MN羽流的外围部分。这表明TG模式的作用更相关，与H模式相比，TG模式对应的波长更短，传播更垂直。与前面的情况一样，等离子体羽流内的传播在ECR处结束。第三，羽流中场的重要性比以前的情况更大，特别是在下游，功率吸收也是如此。</p>
+<p>尽管有这些一般性的观察结果，值得注意的是，模拟情形V在网格细化后的羽流区域没有表现出与其他情形相同的数值收敛特征。这个问题及其假定的原因将在第4节中讨论。</p>
+<p>图7显示了源区域功率沉积剖面的放大视图，并包括情况s的小域模拟。四种解表明，功率吸收剖面基本上独立于模拟情况。这个结论之所以有价值，有两个原因。首先，它支持了建模过程的鲁棒性，因为推力器周围细节的变化对源内能量沉积的计算没有重大影响，而能量沉积占吸收的更大份额。事实上，源内部的功率似乎几乎独立于腔室条件和羽流中的传播。其次，这些结果表明，当只需要计算源吸收的功率时，可以通过只包含该区域的较小仿真域(仿真情形S)可靠地得到。</p>
+<p>与[32]中所示的吸收图相比，图7中的沉积只显示了一个高吸收区域，覆盖了源的大部分区域。这与本工作中使用的等离子体条件(特别是轴为1500 G)是一致的，这与[32](轴为150高斯)的等离子体条件不同，导致Helicon模式波长增加。</p>
+<p>为了结束本节，简要讨论了方位模态m &#x3D; 1的相关性。以往的研究[10,32]已经确定了m &#x3D;±1方位模在不同天线类型的螺旋源功率耦合中的主导地位。事实上，这个天线的设计主要是为了激发+1模式。因此，上述结果仅考虑了这种主导模式。为了评估这种方法的有效性，图8比较了m &#x3D;±1，±3在模拟情况R的整个域内的功率吸收(螺旋天线只激发奇数模式)。可以推断，在模态m &#x3D;+1之后，下一个重要的模态是m &#x3D;−1。高m模的功率吸收下降较快。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>利用有限差分、频域、全波模型研究了电磁场在高功率脉冲发生器(HPT)中的传播和吸收，包括远羽流区域和周围空间，目的是了解羽流中沉积的功率量以及环境对电磁问题的影响。等离子体密度和应用磁场来自于类似HPT05原型推进器的等离子体传输模拟，被用作研究的输入。虽然大部分的能量吸收发生在圆柱形源内部，但等离子体羽流所吸收的能量的一部分是不可忽略的。电场沿MN向上传播到始终存在于下游的ECR表面。波长和传播方向对应于绕着装置轴的螺旋波。在羽流边缘，波具有更短的波长和更重要的垂直波矢量分量，接近TG模式。</p>
+<p>在器件及其羽流附近存在密度为n &gt; 2.3 × 1012 m−3的微弱等离子体，对于通常的激发频率(13.56 MHz)，足以使该区域过密(ωpe &gt;ω)。这是实验室真空室实验中常见的情况，抽吸并不完美。即使在太空环境中，微弱的低密度等离子体也可能包裹着推进器，使周围空间的ECR表面保持活跃。在这些条件下，ECR表面已经被证明集中了一些功率吸收，并在限制辐射远离设备方面发挥了基本作用，因为场在它之外变得消失了。特别是，这与有限尺寸真空室实验的“自由空间”代表性有很大关系，这些实验通常由导电金属制成，因此构成了一个封闭的、反射的场腔。如果ECR表面位于腔室内，这些反射壁对场的影响变得可以忽略不计，因为它们只与场消失的空间区域接触。</p>
+<p>在严格的真空条件下，ECR表面在周围空间中没有任何作用，因为在这种情况下，没有电子与场共振，辐射损失的路径在远离推进器的径向上打开(但不是沿着羽流，那里的等离子体继续过密，并且在ECR跃迁之后场继续消失)。实际上，由于在模拟中使用了反射包围盒，传播和吸收图发生了变化，并显示出驻波结构。</p>
+<p>区域内的反射箱(代表推进器的支撑设备)的影响很小。此外，源区域的功率吸收被认为是稳定的，并且在模拟中基本相同，这表明影响羽流和环境区域的所有方面对于源功率吸收都是多余的。这增加了先前工作中进行的小域、纯源模拟的可信度，尽管它们遗漏了羽流中能量吸收的信息。</p>
+<p>最后，数值收敛研究表明，除真空环境外，所有情况都具有良好的收敛特性，在真空环境中，等离子体羽流与真空界面处的强病态临界密度过渡面，加上那里的数值阶梯网格条件，被认为是小尺度数值噪声的来源。在这项工作中使用的实现是基于一种新的插值方案，它在一定程度上缓解了这个问题，并将噪声限制在一个小区域，而不影响其他地方的结果。尽管如此，未来的工作必须解决这些转变的理论建模和数值处理。在第4节中提出了一些额外的研究途径，即在该区域使用增强阻尼，并将网格几何形状与过渡对齐，也许可以切换到其他方案，如有限元，以简化非结构化网格的实现。</p>
+<p>验证现有波模型的实验数据需要直接测量电磁场及其相位，特别是在等离子体源内部，而不干扰推进器的工作。目前，作者不知道存在这样的数据。然而，耦合等离子体输运和波动模拟(使用与本工作相同的FDTD求解器)在间接测量(如推力和几个效率)方面与类似HTP设置的实验研究比较得相当好。特别是对于HPT05原型，数值[20]和实验[6]的结果显示，在类似的工作状态下，在推力效率等关键性能数据上约有30%的相对差异(尽管比较并不完美，因为[6]的配置具有略高的天线功率)。在这个方向上的进一步工作和新的、更精确的实验测量仍然需要缩小验证差距。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eshyee.github.io">SHYEE</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eshyee.github.io/2023/05/05/%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6/">https://eshyee.github.io/2023/05/05/%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93/">等离子体</a><a class="post-meta__tags" href="/tags/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/1920x1080/?plasma" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/09/%E4%BD%BF%E7%94%A8comsol%E4%BB%BF%E7%9C%9FICP/" title="使用comsol仿真ICP"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">使用comsol仿真ICP</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">机器学习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/05/24/%E6%99%AE%E6%9E%97%E6%96%AF%E9%A1%BF%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E8%AF%BE/" title="普林斯顿等离子体课"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">普林斯顿等离子体课</div></div></a></div><div><a href="/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%89%A9%E7%90%86-pyk/" title="等离子体物理_pyk"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">等离子体物理_pyk</div></div></a></div><div><a href="/2023/05/24/%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/" title="等离子体前置知识"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">等离子体前置知识</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/pic/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SHYEE</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eshyee"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/eshyee" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:eshyee@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">等离子体实验室</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6"><span class="toc-number">1.</span> <span class="toc-text">螺旋等离子体推进器及其羽流中的波传播与吸收</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E7%A3%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">电磁模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%85%AC%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">模型公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%92%8C%E8%AE%A8%E8%AE%BA"><span class="toc-number">1.4.</span> <span class="toc-text">结果和讨论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">1.5.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"/></a><div class="content"><a class="title" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge">Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge</a><time datetime="2025-02-12T06:31:17.000Z" title="Created 2025-02-12 14:31:17">2025-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Relationship of mode transitions and standing waves in helicon plasmas"/></a><div class="content"><a class="title" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas">Relationship of mode transitions and standing waves in helicon plasmas</a><time datetime="2023-10-25T11:30:28.000Z" title="Created 2023-10-25 19:30:28">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Effects of magnetic field on electron power absorption in helicon fluid simulation"/></a><div class="content"><a class="title" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation">Effects of magnetic field on electron power absorption in helicon fluid simulation</a><time datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"/></a><div class="content"><a class="title" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</a><time datetime="2023-10-07T03:15:01.000Z" title="Created 2023-10-07 11:15:01">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/28/vue/" title="vue"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue"/></a><div class="content"><a class="title" href="/2023/09/28/vue/" title="vue">vue</a><time datetime="2023-09-28T02:48:17.000Z" title="Created 2023-09-28 10:48:17">2023-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By SHYEE</div><div class="framework-info"></div><div class="footer_custom_text">Hi, welcome to <a target="_blank" rel="noopener" href="http://shyee.club">SHYEECLUB</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="http://shyee.club/js/test.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

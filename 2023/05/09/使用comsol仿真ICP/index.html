@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>使用comsol仿真ICP | SHYEE-PLASMA</title><meta name="author" content="SHYEE"><meta name="copyright" content="SHYEE"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="直接版 打开comsol 点击打开案例库 选择ICP，打开 计算，导出结果  手动版感应耦合等离子体对于感应放电，求解频域中的磁失势 感应耦合等离子体相当于等离子体和磁场的耦合建模 磁场和等离子体耦合等离子体计算得到的电导率耦合到磁场，用于计算电磁场分布 磁场计算得到的热源耦合到等离子体接口中  查找资料（文献）从COMSOL官网查找ICP 选择ICP_torch 可以看到官网给定的参数，将这段参">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用comsol仿真ICP">
+<meta property="og:url" content="https://eshyee.github.io/2023/05/09/%E4%BD%BF%E7%94%A8comsol%E4%BB%BF%E7%9C%9FICP/index.html">
+<meta property="og:site_name" content="SHYEE-PLASMA">
+<meta property="og:description" content="直接版 打开comsol 点击打开案例库 选择ICP，打开 计算，导出结果  手动版感应耦合等离子体对于感应放电，求解频域中的磁失势 感应耦合等离子体相当于等离子体和磁场的耦合建模 磁场和等离子体耦合等离子体计算得到的电导率耦合到磁场，用于计算电磁场分布 磁场计算得到的热源耦合到等离子体接口中  查找资料（文献）从COMSOL官网查找ICP 选择ICP_torch 可以看到官网给定的参数，将这段参">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://source.unsplash.com/1920x1080/?plasma">
+<meta property="article:published_time" content="2023-05-09T12:32:12.000Z">
+<meta property="article:modified_time" content="2023-05-09T12:56:11.454Z">
+<meta property="article:author" content="SHYEE">
+<meta property="article:tag" content="comsol">
+<meta property="article:tag" content="仿真">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/1920x1080/?plasma"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://eshyee.github.io/2023/05/09/%E4%BD%BF%E7%94%A8comsol%E4%BB%BF%E7%9C%9FICP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: SHYEE","link":"Link: ","source":"Source: SHYEE-PLASMA","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用comsol仿真ICP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-09 20:56:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/pic/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/1920x1080/?plasma')"><nav id="nav"><span id="blog-info"><a href="/" title="SHYEE-PLASMA"><span class="site-name">SHYEE-PLASMA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">使用comsol仿真ICP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-09T12:32:12.000Z" title="Created 2023-05-09 20:32:12">2023-05-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-05-09T12:56:11.454Z" title="Updated 2023-05-09 20:56:11">2023-05-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BB%BF%E7%9C%9F/">仿真</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>13min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="使用comsol仿真ICP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="直接版"><a href="#直接版" class="headerlink" title="直接版"></a>直接版</h1><ol>
+<li>打开comsol</li>
+<li>点击打开案例库</li>
+<li>选择ICP，打开</li>
+<li>计算，导出结果</li>
+</ol>
+<h1 id="手动版"><a href="#手动版" class="headerlink" title="手动版"></a>手动版</h1><h2 id="感应耦合等离子体"><a href="#感应耦合等离子体" class="headerlink" title="感应耦合等离子体"></a>感应耦合等离子体</h2><p>对于感应放电，求解频域中的磁失势<br><img src="/pic/image1.png" alt="Alt text"></p>
+<p>感应耦合等离子体相当于等离子体和磁场的耦合建模</p>
+<h2 id="磁场和等离子体耦合"><a href="#磁场和等离子体耦合" class="headerlink" title="磁场和等离子体耦合"></a>磁场和等离子体耦合</h2><p>等离子体计算得到的电导率耦合到磁场，用于计算电磁场分布</p>
+<p>磁场计算得到的热源耦合到等离子体接口中</p>
+<p><img src="/pic/image2.png" alt="等离子体电导耦合"></p>
+<h2 id="查找资料（文献）"><a href="#查找资料（文献）" class="headerlink" title="查找资料（文献）"></a>查找资料（文献）</h2><p>从COMSOL官网查找ICP</p>
+<p>选择ICP_torch</p>
+<p>可以看到官网给定的参数，将这段参数保存为<code>xxx.txt</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">T0 <span class="number">300</span><span class="punctuation">[</span>K<span class="punctuation">]</span> <span class="string">&quot;环境温度&quot;</span></span><br><span class="line">Pext <span class="number">11</span><span class="punctuation">[</span>kW<span class="punctuation">]</span> <span class="string">&quot;线圈激励功率&quot;</span></span><br><span class="line">f0 <span class="number">3</span><span class="punctuation">[</span>MHz<span class="punctuation">]</span> <span class="string">&quot;线圈激励频率&quot;</span></span><br><span class="line">r_3 <span class="number">125</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;轴向长度：计算域&quot;</span></span><br><span class="line">L_3 <span class="number">200</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;高度：计算域和鞘管&quot;</span></span><br><span class="line">d_1 <span class="number">2</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;厚度：载流子管&quot;</span></span><br><span class="line">L_0 <span class="number">50</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;高度：载流子管和中心管&quot;</span></span><br><span class="line">r_1 <span class="number">3.7</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;内半径：载流子管&quot;</span></span><br><span class="line">d_2 <span class="number">2.2</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;厚度：中心管&quot;</span></span><br><span class="line">r_2 <span class="number">18.8</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;内半径：中心管&quot;</span></span><br><span class="line">d_3 <span class="number">3.5</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;厚度：鞘管&quot;</span></span><br><span class="line">r_0 <span class="number">25</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;内半径：鞘管&quot;</span></span><br><span class="line">d_c <span class="number">6</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;直径：线圈&quot;</span></span><br><span class="line">r_c <span class="number">33</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;轴向长度：线圈中心&quot;</span></span><br><span class="line">L_1 <span class="number">63</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;高度：下线圈的中心&quot;</span></span><br><span class="line">L_2 <span class="number">121</span><span class="punctuation">[</span>mm<span class="punctuation">]</span> <span class="string">&quot;高度：上线圈的中心&quot;</span></span><br><span class="line">Q_1 <span class="number">1</span><span class="punctuation">[</span>l/min<span class="punctuation">]</span> <span class="string">&quot;气流：载流子管&quot;</span></span><br><span class="line">Q_2 <span class="number">3</span><span class="punctuation">[</span>l/min<span class="punctuation">]</span> <span class="string">&quot;气流：中心管&quot;</span></span><br><span class="line">Q_3 <span class="number">31</span><span class="punctuation">[</span>l/min<span class="punctuation">]</span> <span class="string">&quot;气流：鞘管&quot;</span></span><br><span class="line">M <span class="number">0.04</span><span class="punctuation">[</span>kg/mole<span class="punctuation">]</span> <span class="string">&quot;摩尔质量：氩&quot;</span></span><br><span class="line">mv_stp <span class="number">22.4</span><span class="punctuation">[</span>l/mole<span class="punctuation">]</span> <span class="string">&quot;stp 下的摩尔体积&quot;</span></span><br><span class="line">mdot1 M*Q_1/mv_stp <span class="string">&quot;质量流率：载流子管&quot;</span></span><br><span class="line">mdot2 M*Q_2/mv_stp <span class="string">&quot;质量流率：中心管&quot;</span></span><br><span class="line">mdot3 M*Q_3/mv_stp <span class="string">&quot;质量流率：鞘管&quot;</span></span><br><span class="line">rho_stp <span class="number">1.91</span><span class="punctuation">[</span>kg/m^<span class="number">3</span><span class="punctuation">]</span> <span class="string">&quot;stp 下的氩密度&quot;</span></span><br><span class="line">A1 pi*(r_1)^<span class="number">2</span> <span class="string">&quot;横截面积：载气流&quot;</span></span><br><span class="line">A2 pi*(r_2^<span class="number">2</span>-(r_1+d_1)^<span class="number">2</span>) <span class="string">&quot;横截面积：中心气流&quot;</span></span><br><span class="line">A3 pi*(r_0^<span class="number">2</span>-(r_2+d_2)^<span class="number">2</span>) <span class="string">&quot;横截面积：鞘管气流&quot;</span></span><br><span class="line">v1 mdot1/rho_stp/A1 <span class="string">&quot;速度：载气流&quot;</span></span><br><span class="line">v2 mdot2/rho_stp/A2 <span class="string">&quot;速度：中心气流&quot;</span></span><br><span class="line">v3 mdot3/rho_stp/A3 <span class="string">&quot;速度：鞘管气流&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>假定热等离子体处于部分至完全的局部热力学平衡 (LTE) 条件下，因此这类等离子体可以被视为导电流体混合物，可以使用磁流体动力学 (MHD) 方程来建模。本模型介绍如何使用 “平衡放电，面外电流”接口（可用于二维和二维轴对称）来模拟电感耦合等离子体炬中产生的等离子体。</p>
+<p>需要建模的ICP等离子体的几何结构</p>
+<p><img src="/pic/image3.png" alt="Alt text"></p>
+<p>电感耦合等离子体炬的几何结构，炬由三个同心石英管组成，气体从底部注入，从顶部喷出。在此模型中，通过在 3MHz 下运行的三匝线圈将 11 kW 的固定功率传递到等离子体。</p>
+<h2 id="模型定义"><a href="#模型定义" class="headerlink" title="模型定义"></a>模型定义</h2><ul>
+<li>等离子体炬通过完全轴对称的构型进行建模。</li>
+<li>等离子体内部的电流由面外 （即方位角方向）的感应电流控制。</li>
+<li>线圈由横截面为圆形、直径为6mm的平行载流环组成。这意味着忽略了线圈电流的轴向分量。</li>
+<li>大气压下的纯氩等离子体稳态层流。</li>
+<li>局部热力学平衡 (LTE) 条件下的光学薄等离子体。</li>
+</ul>
+<p><img src="/pic/image4.png" alt="Alt text"></p>
+/pic/image4.png
+
+<p>ICP炬示意图。气体从底部（v1、v2和v3）进入，从顶部流出。</p>
+<p>在本模型中，以3MHz的频率向三匝线圈提供激励。然后，通过焦耳热使在鞘管（等离子体约束管）中流动的气体电离。</p>
+<p>本模型通过使用频域-稳态研究结合单匝线圈特征来求解，其中为系统设置了固定功率(11kW)。通过固定功率，线圈中的电流和电势会随着等离子体电导率的增加发生变化。</p>
+<p>本模型中包含三种不同气流速度（载流子管的速度 v1、中心管的速度 v2、鞘管的速度v3）的纯氩气。在“平衡放电”条件下从材料库中加载与温度相关的氩的物理属性。请注意，物理属性的温度范围从500K到25,000K。另请注意，由于数值稳定性的原因，我们使用最小电导率1S&#x2F;m。</p>
+<p>如果初始温度过低，得到的解很可能对应于最小电导率的平坦分布（默认为1S&#x2F;m）。这显然是一个没有意义的解，事实上这是最容易获得的解。为了避免这种情况，从更接近实验值的较高温度开始。务必绘制电导率图，以查看是否设置为最小电导率。</p>
+<h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><p>打开COMSOL，新建-模型向导</p>
+<p>选择二维轴对称</p>
+<p>物理场选择 等离子体-电感耦合等离子体-添加</p>
+<p>选择研究-频域-瞬态</p>
+<p>这个求解器是一个双向耦合求解器</p>
+<h2 id="根节点"><a href="#根节点" class="headerlink" title="根节点"></a>根节点</h2><p>选择单位mm</p>
+<h2 id="几何-1"><a href="#几何-1" class="headerlink" title="几何 1"></a>几何 1</h2><p>在<strong>模型开发器</strong>窗口的<strong>组件1（comp1）</strong>节点下，单击<strong>几何1</strong>。</p>
+<p>在<strong>几何</strong>的<strong>设置</strong>窗口中，定位到<strong>单位</strong>栏</p>
+<p>从<strong>长度单位列表</strong>中选择mm</p>
+<h2 id="全局定义"><a href="#全局定义" class="headerlink" title="全局定义"></a>全局定义</h2><h3 id="参数1"><a href="#参数1" class="headerlink" title="参数1"></a>参数1</h3><p>在<strong>模型开发器</strong>窗口的<strong>全局定义</strong>节点下，单击<strong>参数1</strong></p>
+<p>在<strong>参数</strong>的<strong>设置</strong>窗口中，定位到<strong>参数</strong>栏。</p>
+<p>单击<strong>从文件加载</strong>。</p>
+<p>选择之前的<code>xxx.txt</code>，定义计算域</p>
+<h2 id="几何1"><a href="#几何1" class="headerlink" title="几何1"></a>几何1</h2><h3 id="矩形1（r1）"><a href="#矩形1（r1）" class="headerlink" title="矩形1（r1）"></a>矩形1（r1）</h3><p>在<strong>几何</strong>工具栏中点击<strong>矩形</strong>。</p>
+<p>在<strong>矩形</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>宽度</strong>文本框中键入 “r_3”。</p>
+<p>在<strong>高度</strong>文本框中键入 “L_3”。</p>
+<p>定义载流子管</p>
+<h3 id="矩形2（r2）"><a href="#矩形2（r2）" class="headerlink" title="矩形2（r2）"></a>矩形2（r2）</h3><p>在<strong>几何</strong>工具栏中单击<strong>矩形</strong>。</p>
+<p>在<strong>矩形</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>宽度</strong>文本框中键入 “d_1”。</p>
+<p>在<strong>高度</strong>文本框中键入 “L_0”。</p>
+<p>定位到<strong>位置</strong>栏。在<strong>r</strong>文本框中键入 “r_1”。</p>
+<p>定义中心管。</p>
+<h3 id="矩形3（r3）"><a href="#矩形3（r3）" class="headerlink" title="矩形3（r3）"></a>矩形3（r3）</h3><p>在<strong>几何</strong>工具栏中单击<strong>矩形</strong>。</p>
+<p>在<strong>矩形</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>宽度</strong>文本框中键入 “d_2”。</p>
+<p>在<strong>高度</strong>文本框中键入 “L_0”。</p>
+<p>定位到<strong>位置</strong>栏。在<strong>r</strong>文本框中键入 “r_2”。</p>
+<p>定义管</p>
+<h3 id="矩形4-r4"><a href="#矩形4-r4" class="headerlink" title="矩形4(r4)"></a>矩形4(r4)</h3><p>在<strong>几何</strong>工具栏中单击<strong>矩形</strong>。</p>
+<p>在<strong>矩形</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>宽度</strong>文本框中键入 “d_3”。</p>
+<p>在<strong>高度</strong>文本框中键入 “L_3”。</p>
+<p>定位到<strong>位置</strong>栏。在<strong>r</strong>文本框中键入 “r_0”。</p>
+<p>定义线圈。</p>
+<h3 id="圆1-c1"><a href="#圆1-c1" class="headerlink" title="圆1(c1)"></a>圆1(c1)</h3><p>在<strong>几何</strong>工具栏中单击<strong>圆</strong>。</p>
+<p>在<strong>圆</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>半径</strong>文本框中键入“d_c&#x2F;2”。</p>
+<p>定位到<strong>位置</strong>栏。在<strong>r</strong>文本框中键入“r_c”。</p>
+<p>在<strong>z</strong>文本框中键入“L_1”。</p>
+<h3 id="圆2-c2"><a href="#圆2-c2" class="headerlink" title="圆2(c2)"></a>圆2(c2)</h3><p>在<strong>几何</strong>工具栏中单击<strong>圆</strong>。</p>
+<p>在<strong>圆</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>半径</strong>文本框中键入“d_c&#x2F;2”。</p>
+<p>定位到<strong>位置</strong>栏。在<strong>r</strong>文本框中键入 “r_c”。</p>
+<p>在<strong>z</strong>文本框中键入“(L_1+L_2)&#x2F;2”。</p>
+<h3 id="圆3-c3"><a href="#圆3-c3" class="headerlink" title="圆3(c3)"></a>圆3(c3)</h3><p>在<strong>几何</strong>工具栏中单击<strong>圆</strong>。</p>
+<p>在<strong>圆</strong>的<strong>设置</strong>窗口中，定位到<strong>大小和形状</strong>栏。</p>
+<p>在<strong>半径</strong>文本框中键入 “d_c&#x2F;2”。</p>
+<p>定位到<strong>位置</strong>栏。在<strong>r</strong>文本框中键入 “r_c”。</p>
+<p>在<strong>z</strong>文本框中键入 “L_2”。</p>
+<p>单击<strong>构建所有对象</strong>。</p>
+<p>定义其他域类型以便于选择。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="空气"><a href="#空气" class="headerlink" title="空气"></a>空气</h3><p>在定义工具栏中单击 显式。</p>
+<p>在显式的设置窗口中，在标签文本框中键入 “空气”。</p>
+<p>选择 “域” 5。</p>
+<h3 id="等离子体"><a href="#等离子体" class="headerlink" title="等离子体"></a>等离子体</h3><p>在定义工具栏中单击 显式。</p>
+<p>在显式的设置窗口中，在标签文本框中键入 “等离子体”。</p>
+<p>选择 “域” 1。</p>
+<h3 id="石英"><a href="#石英" class="headerlink" title="石英"></a>石英</h3><p>在定义工具栏中单击 显式。</p>
+<p>在显式的设置窗口中，在标签文本框中键入 “石英”。</p>
+<p>选择 “域” 2–4。</p>
+<h3 id="线圈"><a href="#线圈" class="headerlink" title="线圈"></a>线圈</h3><p>在定义工具栏中单击 显式。</p>
+<p>在显式的设置窗口中，在标签文本框中键入 “线圈”。</p>
+<p>选择 “域” 6–8。</p>
+<p>使用材料库添加模型中使用的不同材料。</p>
+<h2 id="添加材料"><a href="#添加材料" class="headerlink" title="添加材料"></a>添加材料</h2><p>在主屏幕工具栏中，单击 添加材料以打开添加材料窗口。</p>
+<p>转到添加材料窗口。</p>
+<p>在模型树中选择内置材料 &gt;Air。</p>
+<p>单击窗口工具栏中的添加到组件。</p>
+<p>在模型树中选择 AC&#x2F;DC&gt;Copper。</p>
+<p>单击窗口工具栏中的添加到组件。</p>
+<p>在模型树中选择 AC&#x2F;DC&gt;Quartz。</p>
+<p>单击窗口工具栏中的添加到组件。</p>
+<p>在模型树中选择材料 &gt;Argon。</p>
+<p>单击窗口工具栏中的添加到组件。</p>
+<p>在主屏幕工具栏中，单击 添加材料以关闭添加材料窗口。</p>
+<h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><h3 id="Air-mat1"><a href="#Air-mat1" class="headerlink" title="Air (mat1)"></a>Air (mat1)</h3><p>在模型开发器窗口的组件 1 (comp1)&gt; 材料节点下，单击 Air (mat1)。</p>
+<p>在材料的设置窗口中，定位到几何实体选择栏。</p>
+<p>从选择列表中选择空气。</p>
+<h3 id="Copper-mat2"><a href="#Copper-mat2" class="headerlink" title="Copper (mat2)"></a>Copper (mat2)</h3><p>在模型开发器窗口中，单击 Copper (mat2)。</p>
+<p>在材料的设置窗口中，定位到几何实体选择栏。</p>
+<p>从选择列表中选择线圈。</p>
+<h3 id="Quartz-mat3"><a href="#Quartz-mat3" class="headerlink" title="Quartz (mat3)"></a>Quartz (mat3)</h3><p>在模型开发器窗口中，单击 Quartz (mat3)。</p>
+<p>在材料的设置窗口中，定位到几何实体选择栏。</p>
+<p>从选择列表中选择石英。</p>
+<h3 id="Argon-mat4"><a href="#Argon-mat4" class="headerlink" title="Argon (mat4)"></a>Argon (mat4)</h3><p>在模型开发器窗口中，单击 Argon (mat4)。</p>
+<p>在材料的设置窗口中，定位到几何实体选择栏。</p>
+<p>从选择列表中选择等离子体。</p>
+<p>调整组成模型的每个物理场的选择和特征。</p>
+<p>磁场接口用于整个计算域，本例使用 “单导体线圈”特征将激励功率传递到等离子体。</p>
+<h2 id="磁场-MF"><a href="#磁场-MF" class="headerlink" title="磁场 (MF)"></a>磁场 (MF)</h2><p>在模型开发器窗口的组件 1 (comp1) 节点下，单击磁场 (mf)。</p>
+<p>在磁场的设置窗口中，单击以展开离散化栏。</p>
+<p>从磁矢势列表中选择线性单元。</p>
+<h3 id="线圈-1"><a href="#线圈-1" class="headerlink" title="线圈 1"></a>线圈 1</h3><p>在物理场工具栏中单击 域，然后选择线圈。</p>
+<p>在线圈的设置窗口中，定位到域选择栏。</p>
+<p>从选择列表中选择线圈。</p>
+<p>定位到线圈栏。选中线圈组复选框。</p>
+<p>从线圈激励列表中选择功率。</p>
+<p>在 Pcoil 文本框中键入 “Pext”。</p>
+<p>模型中忽略了空气中的传热。</p>
+<h2 id="流体传热-HT"><a href="#流体传热-HT" class="headerlink" title="流体传热 (HT)"></a>流体传热 (HT)</h2><p>在模型开发器窗口的组件 1 (comp1) 节点下，单击流体传热 (ht)。</p>
+<p>选择 “域” 1 和 4。</p>
+<h3 id="固体-1"><a href="#固体-1" class="headerlink" title="固体 1"></a>固体 1</h3><p>在物理场工具栏中单击 域，然后选择固体。</p>
+<p>选择 “域” 4。</p>
+<h3 id="初始值-1"><a href="#初始值-1" class="headerlink" title="初始值 1"></a>初始值 1</h3><p>务必从高温开始。</p>
+<p>在模型开发器窗口中，单击初始值 1。</p>
+<p>在初始值的设置窗口中，定位到初始值栏。</p>
+<p>在 T 文本框中键入 “6000”。</p>
+<p>为传热模型的实体部分 （管和线圈）添加 “固体传热”特征。</p>
+<h3 id="温度-1"><a href="#温度-1" class="headerlink" title="温度 1"></a>温度 1</h3><p>在物理场工具栏中单击 边界，然后选择温度。</p>
+<p>选择 “边界” 2、 8、 13、 15 和 17。</p>
+<p>在温度的设置窗口中，定位到温度栏。</p>
+<p>在 T0 文本框中键入 “T0”。</p>
+<h3 id="流出-1"><a href="#流出-1" class="headerlink" title="流出 1"></a>流出 1</h3><p>在物理场工具栏中单击 边界，然后选择流出。</p>
+<p>在图形工具栏中单击 缩放到窗口大小按钮。</p>
+<p>选择 “边界” 3。</p>
+<p>单相流仅应用于等离子体区域。</p>
+<h2 id="层-流-SPF"><a href="#层-流-SPF" class="headerlink" title="层 流 (SPF)"></a>层 流 (SPF)</h2><p>由于密度变化并不小，我们不能将流动视为不可压缩流动。因此，将流动设置为弱可压缩流动。</p>
+<p>在模型开发器窗口的组件 1 (comp1) 节点下，单击层流 (spf)。</p>
+<p>在层流的设置窗口中，定位到物理模型栏。</p>
+<p>从可压缩性列表中选择弱可压缩流动。</p>
+<p>定位到域选择栏。从选择列表中选择等离子体。</p>
+<p>单击以展开方程栏。从方程形式列表中选择稳态。</p>
+<h3 id="入口-1"><a href="#入口-1" class="headerlink" title="入口 1"></a>入口 1</h3><p>在物理场工具栏中单击 边界，然后选择入口。</p>
+<p>添加具有合适速度的入口。</p>
+<p>选择 “边界” 2。</p>
+<p>在入口的设置窗口中，定位到速度栏。</p>
+<p>在 U0 文本框中键入 “v1”。</p>
+<h3 id="入口-2"><a href="#入口-2" class="headerlink" title="入口 2"></a>入口 2</h3><p>在物理场工具栏中单击 边界，然后选择入口。</p>
+<p>选择 “边界” 8。</p>
+<p>在入口的设置窗口中，定位到速度栏。</p>
+<p>在 U0 文本框中键入 “v2”。</p>
+<h3 id="入口-3"><a href="#入口-3" class="headerlink" title="入口 3"></a>入口 3</h3><p>在物理场工具栏中单击 边界，然后选择入口。</p>
+<p>选择 “边界” 13。</p>
+<p>在入口的设置窗口中，定位到速度栏。</p>
+<p>在 U0 文本框中键入 “v3”。</p>
+<h3 id="出口-1"><a href="#出口-1" class="headerlink" title="出口 1"></a>出口 1</h3><p>在物理场工具栏中单击 边界，然后选择出口。</p>
+<p>选择 “边界” 3。</p>
+<p>在出口的设置窗口中，定位到压力条件栏。</p>
+<p>清除抑制回流复选框。</p>
+<h2 id="网格-1"><a href="#网格-1" class="headerlink" title="网格 1"></a>网格 1</h2><h3 id="大小"><a href="#大小" class="headerlink" title="大小"></a>大小</h3><p>在模型开发器窗口的组件 1 (comp1) 节点下，右键单击网格 1 并选择编辑物理场引导的序列。</p>
+<h3 id="大小-1"><a href="#大小-1" class="headerlink" title="大小 1"></a>大小 1</h3><p>在大小的设置窗口中，定位到单元大小栏。</p>
+<p>从预定义列表中选择超细化。</p>
+<h3 id="边-1"><a href="#边-1" class="headerlink" title="边 1"></a>边 1</h3><p>在网格工具栏中单击<em>三角</em>边。</p>
+<p>拖放到大小节点下方。</p>
+<p>选择 “边界” 2、 8 和 13。</p>
+<h3 id="大小-1-1"><a href="#大小-1-1" class="headerlink" title="大小 1"></a>大小 1</h3><p>右键单击边 1 并选择大小。</p>
+<p>在大小的设置窗口中，定位到单元大小栏。</p>
+<p>单击定制按钮。</p>
+<p>单击以折叠单元大小参数栏。单击以展开单元大小参数栏。</p>
+<p>选中最大单元大小复选框。在关联文本框中键入 “0.5”。</p>
+<h3 id="大小-2"><a href="#大小-2" class="headerlink" title="大小 2"></a>大小 2</h3><p>在模型开发器窗口的组件 1 (comp1)&gt; 网格 1 节点下，单击大小 2。</p>
+<p>在大小的设置窗口中，定位到单元大小栏。</p>
+<p>从预定义列表中选择超细化。</p>
+<h3 id="边界层-2"><a href="#边界层-2" class="headerlink" title="边界层 2"></a>边界层 2</h3><p>在网格工具栏中单击 边界层。</p>
+<p>右键单击边界层 2 并选择上移。</p>
+<p>在边界层的设置窗口中，定位到域选择栏。</p>
+<p>从几何实体层列表中选择域。</p>
+<p>选择 “域” 6–8。</p>
+<h3 id="边界层属性"><a href="#边界层属性" class="headerlink" title="边界层属性"></a>边界层属性</h3><p>在模型开发器窗口中，单击边界层属性。</p>
+<p>选择 “边界” 21–32。</p>
+<p>在边界层属性的设置窗口中，定位到层栏。</p>
+<p>在层数文本框中键入 “4”。</p>
+<p>从厚度明细列表中选择第一层。</p>
+<p>在厚度文本框中键入 “8[um]”。</p>
+<p>单击 全部构建。</p>
+<p>对于这种情况，最好是全耦合求解方程，需要更改求解器中的一些设置以提高稳定性。</p>
+<h2 id="研究-1"><a href="#研究-1" class="headerlink" title="研究 1"></a>研究 1</h2><h3 id="步骤-1：频域-稳态"><a href="#步骤-1：频域-稳态" class="headerlink" title="步骤 1：频域 - 稳态"></a>步骤 1：频域 - 稳态</h3><p>在模型开发器窗口的研究 1 节点下，单击步骤 1： 频域 - 稳态。</p>
+<p>在频域 - 稳态的设置窗口中，定位到研究设置栏。</p>
+<p>在频率文本框中键入 “f0”。</p>
+<h3 id="解-1-sol1"><a href="#解-1-sol1" class="headerlink" title="解 1 (sol1)"></a>解 1 (sol1)</h3><p>在研究工具栏中单击 显示默认求解器。</p>
+<p>在模型开发器窗口中展开解 1 (sol1) 节点。</p>
+<p>在模型开发器窗口中展开研究 1&gt; 求解器配置 &gt; 解 1 (sol1)&gt; 稳态求解器 1 节点。</p>
+<p>右键单击研究 1&gt; 求解器配置 &gt; 解 1 (sol1)&gt; 稳态求解器 1 并选择全耦合。</p>
+<p>在全耦合的设置窗口中，单击以展开方法和终止栏。</p>
+<p>在初始阻尼系数文本框中键入 “1e-4”。</p>
+<p>在最小阻尼系数文本框中键入 “1.0E-6”。</p>
+<p>在更新步长的限制文本框中键入 “1.2”。</p>
+<p>在恢复阻尼系数文本框中键入 “0.1”。</p>
+<p>在最大迭代次数文本框中键入 “200”。</p>
+<p>在研究工具栏中单击 计算。</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><h3 id="二维温度"><a href="#二维温度" class="headerlink" title="二维温度"></a>二维温度</h3><p>在主屏幕工具栏中单击 添加绘图组，然后选择二维绘图组。</p>
+<p>在二维绘图组的设置窗口中，在标签文本框中键入 “二维温度”。</p>
+<h3 id="表面-1"><a href="#表面-1" class="headerlink" title="表面 1"></a>表面 1</h3><p>右键单击二维温度并选择表面。</p>
+<p>在表面的设置窗口中，定位到表达式栏。</p>
+<p>在表达式文本框中键入 “T”。</p>
+<p>在二维温度工具栏中单击 绘制。</p>
+<h3 id="二维温度-1"><a href="#二维温度-1" class="headerlink" title="二维温度"></a>二维温度</h3><p>在模型开发器窗口中，右键单击二维温度并选择上移。</p>
+<h3 id="电导率"><a href="#电导率" class="headerlink" title="电导率"></a>电导率</h3><p>在主屏幕工具栏中单击 添加绘图组，然后选择二维绘图组。</p>
+<p>在二维绘图组的设置窗口中，在标签文本框中键入 “电导率”。</p>
+<h3 id="表面-1-1"><a href="#表面-1-1" class="headerlink" title="表面 1"></a>表面 1</h3><p>右键单击电导率并选择表面。</p>
+<p>在表面的设置窗口中，定位到表达式栏。</p>
+<p>在表达式文本框中键入 “mf.sigmarr”。</p>
+<h3 id="选择-1"><a href="#选择-1" class="headerlink" title="选择 1"></a>选择 1</h3><p>右键单击表面 1 并选择选择。</p>
+<p>选择 “域” 1。</p>
+<p>在电导率工具栏中单击 绘制。</p>
+<h3 id="电导率-1"><a href="#电导率-1" class="headerlink" title="电导率"></a>电导率</h3><p>在模型开发器窗口的结果节点下，右键单击电导率并选择上移</p>
+<h1 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h1><p>氩等离子体的等离子体温度分布</p>
+<p><img src="/pic/image.png" alt="Alt text"></p>
+<p>氩等离子体的等离子体速度大小</p>
+<p><img src="/pic/image-1.png" alt="Alt text"></p>
+<p>线圈附近的温度峰值达到10,000K。等离子体电导率随着温度的升高而增加，在最高温度区域具有最大值，</p>
+<p>下图绘制了等离子体的电导率。</p>
+<p><img src="/pic/image-2.png" alt="Alt text"></p>
+<p>下图显示磁通量模。</p>
+<p><img src="/pic/image-3.png" alt="Alt text"></p>
+<p>请注意，由于集肤效应，等离子体的电导率屏蔽了磁通量。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li>S. Xue, P. Proulx, and M.I. Boulos, “Extended-field electromagnetic model for inductively<br>coupled plasma,” J. Phys. D. 34, 1897, 2001.</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eshyee.github.io">SHYEE</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eshyee.github.io/2023/05/09/%E4%BD%BF%E7%94%A8comsol%E4%BB%BF%E7%9C%9FICP/">https://eshyee.github.io/2023/05/09/%E4%BD%BF%E7%94%A8comsol%E4%BB%BF%E7%9C%9FICP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/comsol/">comsol</a><a class="post-meta__tags" href="/tags/%E4%BB%BF%E7%9C%9F/">仿真</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/1920x1080/?plasma" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/09/pic/index/" title="pic"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">pic</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/05/%E8%9E%BA%E6%97%8B%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8E%A8%E8%BF%9B%E5%99%A8%E5%8F%8A%E5%85%B6%E7%BE%BD%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B3%A2%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%90%B8%E6%94%B6/" title="螺旋等离子体推进器及其羽流中的波传播与吸收"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">螺旋等离子体推进器及其羽流中的波传播与吸收</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/pic/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SHYEE</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eshyee"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/eshyee" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:eshyee@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">等离子体实验室</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E7%89%88"><span class="toc-number">1.</span> <span class="toc-text">直接版</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E7%89%88"><span class="toc-number">2.</span> <span class="toc-text">手动版</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%9F%E5%BA%94%E8%80%A6%E5%90%88%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93"><span class="toc-number">2.1.</span> <span class="toc-text">感应耦合等离子体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A3%81%E5%9C%BA%E5%92%8C%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E8%80%A6%E5%90%88"><span class="toc-number">2.2.</span> <span class="toc-text">磁场和等离子体耦合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E8%B5%84%E6%96%99%EF%BC%88%E6%96%87%E7%8C%AE%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">查找资料（文献）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-number">2.4.</span> <span class="toc-text">理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="toc-number">2.5.</span> <span class="toc-text">模型定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA"><span class="toc-number">2.6.</span> <span class="toc-text">新建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E8%8A%82%E7%82%B9"><span class="toc-number">2.7.</span> <span class="toc-text">根节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%BD%95-1"><span class="toc-number">2.8.</span> <span class="toc-text">几何 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%AE%9A%E4%B9%89"><span class="toc-number">2.9.</span> <span class="toc-text">全局定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B01"><span class="toc-number">2.9.1.</span> <span class="toc-text">参数1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%BD%951"><span class="toc-number">2.10.</span> <span class="toc-text">几何1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E5%BD%A21%EF%BC%88r1%EF%BC%89"><span class="toc-number">2.10.1.</span> <span class="toc-text">矩形1（r1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E5%BD%A22%EF%BC%88r2%EF%BC%89"><span class="toc-number">2.10.2.</span> <span class="toc-text">矩形2（r2）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E5%BD%A23%EF%BC%88r3%EF%BC%89"><span class="toc-number">2.10.3.</span> <span class="toc-text">矩形3（r3）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E5%BD%A24-r4"><span class="toc-number">2.10.4.</span> <span class="toc-text">矩形4(r4)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%861-c1"><span class="toc-number">2.10.5.</span> <span class="toc-text">圆1(c1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%862-c2"><span class="toc-number">2.10.6.</span> <span class="toc-text">圆2(c2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%863-c3"><span class="toc-number">2.10.7.</span> <span class="toc-text">圆3(c3)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.11.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E6%B0%94"><span class="toc-number">2.11.1.</span> <span class="toc-text">空气</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93"><span class="toc-number">2.11.2.</span> <span class="toc-text">等离子体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%B3%E8%8B%B1"><span class="toc-number">2.11.3.</span> <span class="toc-text">石英</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E5%9C%88"><span class="toc-number">2.11.4.</span> <span class="toc-text">线圈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%9D%90%E6%96%99"><span class="toc-number">2.12.</span> <span class="toc-text">添加材料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%90%E6%96%99"><span class="toc-number">2.13.</span> <span class="toc-text">材料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Air-mat1"><span class="toc-number">2.13.1.</span> <span class="toc-text">Air (mat1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copper-mat2"><span class="toc-number">2.13.2.</span> <span class="toc-text">Copper (mat2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quartz-mat3"><span class="toc-number">2.13.3.</span> <span class="toc-text">Quartz (mat3)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Argon-mat4"><span class="toc-number">2.13.4.</span> <span class="toc-text">Argon (mat4)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A3%81%E5%9C%BA-MF"><span class="toc-number">2.14.</span> <span class="toc-text">磁场 (MF)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E5%9C%88-1"><span class="toc-number">2.14.1.</span> <span class="toc-text">线圈 1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E4%BD%93%E4%BC%A0%E7%83%AD-HT"><span class="toc-number">2.15.</span> <span class="toc-text">流体传热 (HT)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BA%E4%BD%93-1"><span class="toc-number">2.15.1.</span> <span class="toc-text">固体 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%80%BC-1"><span class="toc-number">2.15.2.</span> <span class="toc-text">初始值 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6-1"><span class="toc-number">2.15.3.</span> <span class="toc-text">温度 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E5%87%BA-1"><span class="toc-number">2.15.4.</span> <span class="toc-text">流出 1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82-%E6%B5%81-SPF"><span class="toc-number">2.16.</span> <span class="toc-text">层 流 (SPF)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3-1"><span class="toc-number">2.16.1.</span> <span class="toc-text">入口 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3-2"><span class="toc-number">2.16.2.</span> <span class="toc-text">入口 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3-3"><span class="toc-number">2.16.3.</span> <span class="toc-text">入口 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BA%E5%8F%A3-1"><span class="toc-number">2.16.4.</span> <span class="toc-text">出口 1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC-1"><span class="toc-number">2.17.</span> <span class="toc-text">网格 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F"><span class="toc-number">2.17.1.</span> <span class="toc-text">大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F-1"><span class="toc-number">2.17.2.</span> <span class="toc-text">大小 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9-1"><span class="toc-number">2.17.3.</span> <span class="toc-text">边 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F-1-1"><span class="toc-number">2.17.4.</span> <span class="toc-text">大小 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F-2"><span class="toc-number">2.17.5.</span> <span class="toc-text">大小 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E5%B1%82-2"><span class="toc-number">2.17.6.</span> <span class="toc-text">边界层 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E5%B1%82%E5%B1%9E%E6%80%A7"><span class="toc-number">2.17.7.</span> <span class="toc-text">边界层属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6-1"><span class="toc-number">2.18.</span> <span class="toc-text">研究 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E9%A2%91%E5%9F%9F-%E7%A8%B3%E6%80%81"><span class="toc-number">2.18.1.</span> <span class="toc-text">步骤 1：频域 - 稳态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3-1-sol1"><span class="toc-number">2.18.2.</span> <span class="toc-text">解 1 (sol1)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C"><span class="toc-number">2.19.</span> <span class="toc-text">结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%B8%A9%E5%BA%A6"><span class="toc-number">2.19.1.</span> <span class="toc-text">二维温度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E9%9D%A2-1"><span class="toc-number">2.19.2.</span> <span class="toc-text">表面 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%B8%A9%E5%BA%A6-1"><span class="toc-number">2.19.3.</span> <span class="toc-text">二维温度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AF%BC%E7%8E%87"><span class="toc-number">2.19.4.</span> <span class="toc-text">电导率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E9%9D%A2-1-1"><span class="toc-number">2.19.5.</span> <span class="toc-text">表面 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9-1"><span class="toc-number">2.19.6.</span> <span class="toc-text">选择 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AF%BC%E7%8E%87-1"><span class="toc-number">2.19.7.</span> <span class="toc-text">电导率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C-1"><span class="toc-number">3.</span> <span class="toc-text">结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"/></a><div class="content"><a class="title" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge">Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge</a><time datetime="2025-02-12T06:31:17.000Z" title="Created 2025-02-12 14:31:17">2025-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Relationship of mode transitions and standing waves in helicon plasmas"/></a><div class="content"><a class="title" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas">Relationship of mode transitions and standing waves in helicon plasmas</a><time datetime="2023-10-25T11:30:28.000Z" title="Created 2023-10-25 19:30:28">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Effects of magnetic field on electron power absorption in helicon fluid simulation"/></a><div class="content"><a class="title" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation">Effects of magnetic field on electron power absorption in helicon fluid simulation</a><time datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"/></a><div class="content"><a class="title" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</a><time datetime="2023-10-07T03:15:01.000Z" title="Created 2023-10-07 11:15:01">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/28/vue/" title="vue"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue"/></a><div class="content"><a class="title" href="/2023/09/28/vue/" title="vue">vue</a><time datetime="2023-09-28T02:48:17.000Z" title="Created 2023-09-28 10:48:17">2023-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By SHYEE</div><div class="framework-info"></div><div class="footer_custom_text">Hi, welcome to <a target="_blank" rel="noopener" href="http://shyee.club">SHYEECLUB</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="http://shyee.club/js/test.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

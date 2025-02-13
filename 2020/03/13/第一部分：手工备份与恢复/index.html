@@ -1,0 +1,764 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>备份与恢复 | SHYEE-PLASMA</title><meta name="author" content="SHYEE"><meta name="copyright" content="SHYEE"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一部分：手工备份与恢复 第一章：备份恢复概述 一）数据库故障类型： 1）user process failure：  pmon 自动处理 2）instance failure:  smon 自动处理 3）user errors ：  需要dba通过备份恢复解决 4）media failure：必须通过备份和日志恢复 二）备份和恢复计划 1）根据生产环境的恢复周期，制定详细的备份计划，然后严格执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="备份与恢复">
+<meta property="og:url" content="https://eshyee.github.io/2020/03/13/%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%89%8B%E5%B7%A5%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/index.html">
+<meta property="og:site_name" content="SHYEE-PLASMA">
+<meta property="og:description" content="第一部分：手工备份与恢复 第一章：备份恢复概述 一）数据库故障类型： 1）user process failure：  pmon 自动处理 2）instance failure:  smon 自动处理 3）user errors ：  需要dba通过备份恢复解决 4）media failure：必须通过备份和日志恢复 二）备份和恢复计划 1）根据生产环境的恢复周期，制定详细的备份计划，然后严格执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://source.unsplash.com/1920x1080/?plasma">
+<meta property="article:published_time" content="2020-03-13T01:00:23.000Z">
+<meta property="article:modified_time" content="2023-07-03T13:09:58.317Z">
+<meta property="article:author" content="SHYEE">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="计算机安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/1920x1080/?plasma"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://eshyee.github.io/2020/03/13/%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%89%8B%E5%B7%A5%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: SHYEE","link":"Link: ","source":"Source: SHYEE-PLASMA","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '备份与恢复',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-07-03 21:09:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/pic/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/1920x1080/?plasma')"><nav id="nav"><span id="blog-info"><a href="/" title="SHYEE-PLASMA"><span class="site-name">SHYEE-PLASMA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">备份与恢复</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-03-13T01:00:23.000Z" title="Created 2020-03-13 09:00:23">2020-03-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-07-03T13:09:58.317Z" title="Updated 2023-07-03 21:09:58">2023-07-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8/">计算机安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">6.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>27min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="备份与恢复"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>第一部分：手工备份与恢复</p>
+<p>第一章：备份恢复概述</p>
+<p>一）数据库故障类型：</p>
+<p>1）user process failure：  pmon 自动处理</p>
+<p>2）instance failure:  smon 自动处理</p>
+<p>3）user errors ：  需要dba通过备份恢复解决</p>
+<p>4）media failure：必须通过备份和日志恢复</p>
+<p>二）备份和恢复计划</p>
+<p>1）根据生产环境的恢复周期，制定详细的备份计划，然后严格执行</p>
+<p>2）对备份，要在一定的时间内利用测试环境，进行故障恢复的练习</p>
+<p>三）备份恢复分类</p>
+<p>1）逻辑备份与恢复– 面向object</p>
+<p>①传统的导入导出：exp&#x2F;imp：</p>
+<p>②数据泵导入导出：expdp&#x2F;impdp</p>
+<p>逻辑备份就是热备数据库对象某一时刻状态，不能运用在media failure上，逻辑备份的恢复就是还原备份，没有recover的概念。</p>
+<p>2）物理备份与恢复– 面向media failure</p>
+<p>①手工备份与恢复，也叫用户管理的备份与恢复，通过OS 的命令，完成备份与还原，然后再运用日志进行恢复。</p>
+<p>②自动备份与恢复，利用oracle 的备份恢复工具rman，使还原与恢复过程自动完成，可以备份恢复ASM FILE。</p>
+<p>物理备份从方式上可以有一致性备份（冷备）和非一致性备份（热备）</p>
+<p>完整的备份策略应该以物理备份为主，逻辑备份为辅（用于备份一些重要的表）</p>
+<p>3）闪回技术– 面向人为的逻辑错误</p>
+<p>一种利用undo数据或闪回日志的快速恢复技术。可以针对不同层面问题进行逻辑恢复，11g支持七种flashback方式。</p>
+<p>四）完全恢复与不完全恢复</p>
+<p>media failure后，需要运用日志进行recover。</p>
+<p>1）完全恢复：</p>
+<p>利用完整备份或部分备份，可以将datafile恢复到failure前得最后一次commit，不会出现数据丢失。</p>
+<p>2）不完全恢复</p>
+<p>需要运用完整备份和日志将database恢复到过去的某个时间点（或SCN），有数据丢失。</p>
+<p><img src="file:///C:/Users/EShyee/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg" alt="img"></p>
+<p>五）归档与非归档</p>
+<p>1）归档模式：redo log 写入 archive log </p>
+<p>2）非归档模式：没有archive log, redo log file循环覆盖</p>
+<p><img src="file:///C:/Users/EShyee/AppData/Local/Temp/msohtmlclip1/01/clip_image004.jpg" alt="img"></p>
+<p>当处于非归档模式下时，在丢失数据文件后唯一的选择是执行完整的数据库还原，而不能进行recover。</p>
+<p>第二章：手工备份与恢复</p>
+<p>一）相关命令</p>
+<p>1）备份和还原都使用OS命令，如linux中的cp</p>
+<p>2）恢复用sqlplus命令:recover</p>
+<p>二）备份前进行检查:</p>
+<p>1）检查需要备份的数据文件 </p>
+<p>SQL&gt; select name from v$datafile;</p>
+<p>SQL&gt; select file_id,file_name,tablespace_name from dba_data_files;</p>
+<p>2）检查要备份的控制文件</p>
+<p>SQL&gt; select name from v$controlfile;</p>
+<p>3）在线redo日志不需要做备份</p>
+<p>三）dbv检查坏块</p>
+<p>在手工备份前，应该检查datafile 是否有坏块，备份完后对备份也要做检查。</p>
+<p>对某个datafile做坏块检查</p>
+<p>$ dbv file&#x3D;&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;users01.dbf feedback&#x3D;50</p>
+<p>DBVERIFY - 开始验证: FILE &#x3D; &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;users01.dbf</p>
+<p>…….</p>
+<p>四）冷备的注意事项：</p>
+<p>1）必须干净的关闭数据库，以保证数据一致性。</p>
+<p>SQL&gt;shutdwon immediate;</p>
+<p>2）在OS下必须备份所有数据文件</p>
+<p>3）在OS下必须备份控制文件(至少备份一个）</p>
+<p>4）非归档备份还原策略</p>
+<p>恢复时还原所有备份，重建所有在线日志, 没有recover步骤。</p>
+<p>SQL&gt;startup mount</p>
+<p>SQL&gt;alter database clear logfile group n;（n为所有在线日志组）</p>
+<p>SQL&gt;alter database open;</p>
+<p>五）手工非一致性备份（热备份）</p>
+<p>1）在备份前要进入热备模式，备份后要结束热备模式</p>
+<p>执行begin backup 设置备份模式（在数据文件上生成检查点，写入scn ，将来恢复的时候以此scn为起点）</p>
+<p>对只读的表空间不能做热备份，临时表空间不需要备份，特别强调：NOARCHIVE模式下不支持手工热备。</p>
+<p>对整个数据库设置热备模式：SQL&gt; alter database begin backup</p>
+<p>对整个数据库结束热备模式：SQL&gt; alter database end backup;</p>
+<p>对单个表空间设置热备模式：SQL&gt; alter tablespace users begin backup;</p>
+<p>对单个表空间结束热备模式：SQL&gt; alter tablespace users end backup;      </p>
+<p>2）手工热备利用v$backup 监控    </p>
+<p>例；</p>
+<p>SQL&gt; alter tablespace test begin backup; </p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile_header;</p>
+<p>   FILE# CHECKPOINT_CHANGE#</p>
+<hr>
+<p>​     1      2414314</p>
+<p>​     2      2414314</p>
+<p>​     3      2414314</p>
+<p>​     4      2414314</p>
+<p>​     5      2414314</p>
+<p>​     6      2430480  在备份期间，scn被冻结，它是恢复阶段运用日志的起点。</p>
+<p>​     7      2414314</p>
+<p>SQL&gt; select * from v$backup;</p>
+<p>   FILE# STATUS        CHANGE# TIME</p>
+<hr>
+<p>​     1 NOT ACTIVE         0</p>
+<p>​     2 NOT ACTIVE         0</p>
+<p>​     3 NOT ACTIVE         0</p>
+<p>​     4 NOT ACTIVE         0</p>
+<p>​     5 NOT ACTIVE         0</p>
+<p>​     6 ACTIVE            2430480 2012-07-30 11:07:19   </p>
+<p>​     7 NOT ACTIVE         0</p>
+<p>STATUS 是ACTIVE，表示可以备份相应的数据文件。</p>
+<p>$cp test01.dbf test01.bak</p>
+<p>SQL&gt; alter tablespace test end backup;</p>
+<p>SQL&gt; select * from v$backup;</p>
+<p>备份完毕，尽快执行end backup</p>
+<p>如果在end backup之前发生数据库abort,那么可以在下次启动到mount时end backup，从而完成实例恢复。</p>
+<p>六）split block问题</p>
+<p>一个Oracle block一般包含多个OS block,，当手工热备时，OS的cp单位不是Oracle block而是OS block，而Oracle的DBWR又可能不时的从内存中刷新Oracle block(，如此，OS级的脏块)到磁盘上拷贝便可能造成：一个Oracle Block是由不同的版本组成，比如未被DBWR刷新Header block 加上另一部分被刷新的foot block，这样cp出来的Oracle blcok就是split block。</p>
+<p>数据库的一致性是不允许oracle block是split的, Oracle采取的办法是：在backup mode后，如果发现首次DBWR要写脏块，则将该块被刷新之前的镜像数据记录到redo buffer，这样，虽然cp后的文件里仍然含有split block，而当需要恢复时，日志会前滚该块的前镜像，以保证所有被恢复的oracle block最终是一个完整的版本。</p>
+<p>这就是我们常常发现在热备时日志文件会急剧增大的原因。</p>
+<p>第三章：手工完全恢复</p>
+<p>一）基本概念</p>
+<p>1）完全恢复的步骤</p>
+<p>  1）restore: OS拷贝命令还原所有或部分datafile</p>
+<p>  2）recover：SQL*PLUS利用归档日志和当前的redo日志做恢复</p>
+<p>2）完全恢复可以基于三个级别 </p>
+<p>  recover database：  所有数据文件损坏，或包括大部分datafile丢失，一般是在mount状态完成</p>
+<p>  recover tablespace：  非关键表空间损坏，表空间下某些数据文件不能访问，一般是在open下完成</p>
+<p>  recover datafile：  单一或少数数据文件损坏，可以在mount或open 状态完成</p>
+<p>3）什么是关键文件</p>
+<p>如果关键文件损坏，数据库将不能维持在open状态，或崩溃或死机！</p>
+<p>哪些文件是关键文件：①system01 file，②undotbs file，③control file，④current log file</p>
+<p>4）恢复过程可以查看的视图：</p>
+<p>  1）v$recover_file  查看需要恢复的datafile</p>
+<p>  2）v$recovery_log  查看recover 需要的redo 日志</p>
+<p>  3）v$archvied_log  查看已经归档的日志</p>
+<p>二）适用场景</p>
+<p>1）recover database (所有或大部分数据文件损坏，mount或open下进行)</p>
+<p>OS：使用cp 还原受损的dbf（不一定是全部，v$recover_file记录的都需要还原）</p>
+<p>SQLPLUS：</p>
+<p>①recover database;</p>
+<p>②alter database open;</p>
+<p>2）recover tablespace (针对表空间的非关键数据文件损坏，一般是open下进行)</p>
+<p>OS:使用cp 还原该表空间XXX下的所有数据文件</p>
+<p>SQLPLUS：</p>
+<p>①alter tablespace XXX offline;</p>
+<p>②recover tablespace XXX;</p>
+<p>③alter tablespace XXX online;</p>
+<p>3）recover datafile  (单个或几个数据文件损坏，关键文件在mount下进行，非关键文件在open下进行)</p>
+<p>第一种情形</p>
+<p>OS:使用cp 还原相关的关键数据文件(mount)</p>
+<p>SQLPLUS：</p>
+<p>①recover datafile 6,8;</p>
+<p>②alter database open;</p>
+<p>第二种情形</p>
+<p>OS:使用cp 还原相关的非关键数据文件(open)</p>
+<p>SQLPLUS：</p>
+<p>①alter database datafile 6,8 offline;</p>
+<p>②recover datafile 6,8;</p>
+<p>③alter database datafile 6,8 online;</p>
+<p>三）示例</p>
+<p>前提: 有一套datafile全备, 使用当前控制文件, 自上次备份以来的归档日志和当前联机日志是完整的。</p>
+<p>示例1：recover database （如果是system01.dbf损坏只能在mount下恢复。）</p>
+<p>sys:</p>
+<p>SQL&gt; select * from scott.test;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     1</p>
+<p>在这个状态下先在OS下做一个数据文件和控制文件的冷备。</p>
+<p>SQL&gt; shutdown immediate</p>
+<p>[oracle@prod ~] $cp &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;*.dbf &#x2F;u01&#x2F;back1 </p>
+<p>[oracle@prod ~] $cp &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;*.ctl &#x2F;u01&#x2F;back1 </p>
+<p>[oracle@prod ~] $startup</p>
+<p>SQL&gt; insert into scott.test values(2);</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; insert into scott.test values(3);</p>
+<p>SQL&gt; select * from scott.test;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     2</p>
+<p>​     3   这条记录未提交，恢复时会回滚掉</p>
+<p>​     1</p>
+<p>1）模拟介质失败</p>
+<p>[oracle@prod ~]$ rm &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;system01.dbf  数据库在打开的情况下就删除关键文件</p>
+<p>[oracle@prod ~]$ rm&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;users01.dbf</p>
+<p>[oracle@prod ~]$ rm&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;example01.dbf</p>
+<p>$sqlplus &#x2F; as sysdba  换个session登录,然后关闭数据库</p>
+<p>SQL&gt; shutdown abort  数据库直接abort了</p>
+<p>2）启动database，报错！</p>
+<p>SQL&gt; startup </p>
+<p>SQL&gt;select file#,error from v$recover_file;</p>
+<p>3）还原损坏的三个数据文件</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;system01.dbf &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;users01.dbf &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;example01.dbf &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>4）比较控制文件和数据文件头的SCN</p>
+<p>SQL&gt; select file#,heckpoint_change# from v$datafile;</p>
+<p>SQL&gt; select file#,heckpoint_change# from v$datafile_header;</p>
+<p>SQL&gt; recover database;</p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile;</p>
+<p>5)打开数据库</p>
+<p>SQL&gt; alter database open;</p>
+<p>6）验证</p>
+<p>SQL&gt; select * from scott.test;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     2</p>
+<p>​     1</p>
+<p>示例2：recover tablespace（状态：database open)</p>
+<p>针对的是非关键表空间的损坏，基于表空间的完全恢复实际上还是对其下的datafile的恢复</p>
+<p>模拟这种情形非常实用，通常是某个非关键表空间下的数据文件受损，但并没有造成Oracle崩溃，我们只需针对个别有问题的tablespace去做单独的在线恢复操作，也就是说恢复时数据库整体是online的，而局部表空间是offline的，数据库不需要shutdown。</p>
+<p>恢复表空间（删除了tablespace下的所有的datafile）</p>
+<p>1）了解一下当前状态，在test表空间上建立scott.t1表，</p>
+<p>SQL&gt; conn scott&#x2F;scott</p>
+<p>SQL&gt; create table t1 (id int) tablespace test;</p>
+<p>SQL&gt; insert into t1 values(1);</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; select * from t1;</p>
+<p>NAME</p>
+<p>-————————————————-</p>
+<p>1</p>
+<p>2）模拟表空间损坏，数据库open下，直接删除表空间下的数据文件</p>
+<p>[oracle@prod ~]$ rm &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;test01.dbf</p>
+<p>3）查证该表空间上的表不可访问了</p>
+<p>SQL&gt; alter system flush buffer_cache;  清除data buffer </p>
+<p>SQL&gt; conn &#x2F; as sysdba  换个session登陆，访问t1表，因内存里已清除了buffer块，只好去做物理读，所以报错!</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>4）看看scn的情况</p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile;</p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile_header;</p>
+<p>5）将test表空间offline</p>
+<p>SQL&gt; alter tablespace test offline immediate;  immediate使表空间能立即脱机，不等Oracle对任何数据文件做检查</p>
+<p>6）数据库open下，使用备份还原这个表空间下的所有数据文件</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;test01.dbf &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>7）恢复tablespace</p>
+<p>SQL&gt; recover tablespace test;</p>
+<p>8）使表空间online</p>
+<p>SQL&gt; alter tablespace test online;  此时数据库状态一直是open的</p>
+<p>9）验证</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>ID</p>
+<p>-————————————————-</p>
+<p>1</p>
+<p>示例3：recover datafile（database mount或open状态）</p>
+<p>恢复datafile, 同范例2不同的是模拟UNDO文件损坏: 因UNDO数据文件也是关键文件，所以只能在mount状态下恢复。</p>
+<p>1）模拟环境：</p>
+<p>SQL&gt; insert into scott.t1 values(2);   插入一行记录是为了使t1和备份有区别</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>ID</p>
+<p>-————————————————-</p>
+<p>1</p>
+<p>2</p>
+<p>SQL&gt; delete scott.t1;  注意：删掉了t1并没有提交，老值在UNDO里。</p>
+<p>2）在open 状态下删除datafile</p>
+<p>[oracle@prod ~]$ rm &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;undotbs01.dbf</p>
+<p>3）关闭数据库</p>
+<p>SQL&gt; shtudown abort</p>
+<p>4）启动数据库mount</p>
+<p>SQL&gt; startup</p>
+<p>数据库装载完毕。</p>
+<p>ORA-01157: 无法标识&#x2F;锁定数据文件 3 - 请参阅 DBWR 跟踪文件</p>
+<p>ORA-01110: 数据文件 3: ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;undotbs01.dbf’</p>
+<p>5）还原并恢复UNDO数据文件</p>
+<p>[oracle@prod prod]$ cp &#x2F;u01&#x2F;back1&#x2F;undotbs01.dbf .&#x2F;</p>
+<p>SQL&gt; recover datafile 3;</p>
+<p>完成介质恢复。</p>
+<p>6）打开数据库（会完成UNDO表空间数据的回滚）</p>
+<p>SQL&gt; alter database open;</p>
+<p>数据库已更改</p>
+<p>7）验证</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>ID</p>
+<p>-————————————————-</p>
+<p>1</p>
+<p>2</p>
+<p>第四章：手工不完全恢复</p>
+<p>一）基本概念</p>
+<p>1）不完全恢复的特点：</p>
+<p> ①必须停机，在mount下运行重做日志。</p>
+<p> ②必须以sysdba身份连接进行不完全恢复。</p>
+<p> ③让整个database 回到过去某个时间点，不能避免数据丢失。</p>
+<p>2）不完全恢复（Incomplete recover） 适用环境：</p>
+<p> ①在过去的某个时间点重要的数据被破坏。</p>
+<p> ②最小化备份测试。</p>
+<p> ③在做完全恢复时，丢失了部分归档日志或当前online redo log（考点）</p>
+<p> ④当误删除了表空间时（使用备份的控制文件）</p>
+<p>3）不完全恢复的基本类型：</p>
+<p> ①基于时间点（until time）  使整个数据库恢复到过去的一个时间点前</p>
+<p> ②基于scn（until change）  使整个数据库恢复到过去的某个SCN前</p>
+<p> ③基于cancel (until cancel)  使整个数据库恢复到归档日志或当前日志的断点前</p>
+<p> ④基于误删除表空间（使用备份的controlfile）  使整个数据库恢复到误删除表空间前</p>
+<p>二）不完全恢复的步骤</p>
+<p>1）利用logminer 工具，找出在某个时间点所作的DDL 或DML 误操作（包括：时间点、scn、sql语句）</p>
+<p>2）做当前数据库的最新全备。</p>
+<p>3）使用还原点前的备份还原数据文件，</p>
+<p>4）运用日志恢复所有数据文件，前滚至需要的时间点前停止。</p>
+<p>5）使用resetlogs方式打开数据库。</p>
+<p>三）使用当前控制文件做不完全恢复</p>
+<p>示例1: 恢复过去某个时间点误删除的table（基于时间点的不完全恢复）</p>
+<p>1）环境：scott用户在test表空间下有个t1表</p>
+<p>SQL&gt; conn scott&#x2F;scott</p>
+<p>SQL&gt; select * from t1;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     1</p>
+<p>​     2</p>
+<p>2）误删除了t1表，并purge了。</p>
+<p>SQL&gt; drop table t1 purge;</p>
+<p>SQL&gt; select * from v$log;</p>
+<p>SQL&gt; alter system switch logfile;</p>
+<p>SQL&gt; &#x2F;</p>
+<p>SQL&gt; select name from v$archived_log;</p>
+<p>NAME</p>
+<p>-——————————————————————————-</p>
+<p>&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_131.log</p>
+<p>&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_132.log</p>
+<p>&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_133.log  drop table t1 purge的日志条目切换到此归档日志里了。</p>
+<p>&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_134.log</p>
+<p>&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_135.log</p>
+<p>3）通过logmr 找出误操作的ddl命令的timestamp 或 scn，然后做一个不完全恢复。</p>
+<p>①建目录、设置参数</p>
+<p>$&gt;mkdir -p &#x2F;home&#x2F;oracle&#x2F;logmnr</p>
+<p>SQL&gt; alter system set utl_file_dir&#x3D;’&#x2F;home&#x2F;oracle&#x2F;logmnr’ scope&#x3D;spfile;</p>
+<p>SQL&gt; startup force;</p>
+<p>SQL&gt; show parameter utl_file_dir</p>
+<p>NAME                  TYPE    VALUE</p>
+<hr>
+<p>utl_file_dir              string   &#x2F;home&#x2F;oracle&#x2F;logmnr</p>
+<p>②指定logmnr目录</p>
+<p>SQL&gt; execute dbms_logmnr_d.build(‘dict.ora’,’&#x2F;home&#x2F;oracle&#x2F;logmnr’,dbms_logmnr_d.store_in_flat_file);</p>
+<p>③添加第一条日志条目</p>
+<p>SQL&gt; execute dbms_logmnr.add_logfile(logfilename&#x3D;&gt;’&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_133.log’,options&#x3D;&gt;dbms_logmnr.new);</p>
+<p>④添加后续日志条目</p>
+<p>SQL&gt; execute dbms_logmnr.add_logfile(logfilename&#x3D;&gt;’&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_134.log’,options&#x3D;&gt;dbms_logmnr.addfile); </p>
+<p>⑤解析日志条目</p>
+<p>SQL&gt; execute dbms_logmnr.start_logmnr(dictfilename&#x3D;&gt;’&#x2F;home&#x2F;oracle&#x2F;logmnr&#x2F;dict.ora’,options&#x3D;&gt;dbms_logmnr.ddl_dict_tracking);</p>
+<p>⑥查看v$logmnr_contents视图</p>
+<p>SQL&gt; select username,scn,to_char(timestamp,’yyyy-mm-dd hh24:mi:ss’) time,sql_redo from v$logmnr_contents WHERE lower(sql_redo) like ‘drop table%’;</p>
+<p>USERNAME   SCN     TIME         SQL_REDO</p>
+<hr>
+<p>SCOTT    1918000    2012-08-01 17:28:29   drop table t1 purge;</p>
+<p>⑦关闭lognmr</p>
+<p>SQL&gt; execute dbms_logmnr.end_logmnr;</p>
+<p>4）关闭数据库，删除所有dbf，准备做不完全恢复</p>
+<p>SQL&gt; shutdown abort</p>
+<p>[oracle@prod ~]$ cd &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>[oracle@prod ~]$ rm *.dbf</p>
+<p>5）还原所有备份的数据文件</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;*.dbf .&#x2F;</p>
+<p>6）根据log miner提供的信息，做基于时间点的不完全恢复</p>
+<p>SQL&gt; startup </p>
+<p>SQL&gt; recover database until time ‘2012-08-01 17:28:29’;</p>
+<p>ORA-00279: change 1917581 generated at 07&#x2F;18&#x2F;2012 16:46:34 needed for thread 1</p>
+<p>ORA-00289: suggestion : &#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_782662700_133.log</p>
+<p>ORA-00280: change 1917581 for thread 1 is in sequence #133</p>
+<p>17:33:17 Specify log: {<RET>&#x3D;suggested | filename | AUTO | CANCEL}</p>
+<p>auto</p>
+<p>Log applied.</p>
+<p>Media recovery complete.</p>
+<p>7）resetlogs方式打开数据库</p>
+<p>SQL&gt; alter database open resetlogs;</p>
+<p>8）验证</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     1</p>
+<p>​     2</p>
+<p>9）看看在resetlogs后，日志sequence重置了。</p>
+<p>SQL&gt; select * from v$log;</p>
+<p>示例2：当前日志组损坏，造成数据库崩溃。</p>
+<p>session 1</p>
+<p>SQL&gt; create table scott.t1(id int);</p>
+<p>SQL&gt; insert into scott.t1 values(1);</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; alter system archive log current;</p>
+<p>SQL&gt; insert into scott.t1 values(2);</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     1  这条已经归档</p>
+<p>​     2   这条在当前日志中，没有归档</p>
+<p>SQL&gt; select group#,sequence#,status from v$log;</p>
+<p>  GROUP# SEQUENCE# STATUS</p>
+<hr>
+<p>​     1     22 CURRENT  查v$logfile知道group1是redo01.log</p>
+<p>​     2     20 INACTIVE</p>
+<p>​     3     21 ACTIVE</p>
+<p>session 2</p>
+<p>[oracle@cuug prod]$ rm redo01.log </p>
+<p>session 1</p>
+<p>SQL&gt; shutdown abort</p>
+<p>session 2</p>
+<p>[oracle@cuug prod]$ rm *.dbf</p>
+<p>[oracle@cuug prod]$ cp &#x2F;u01&#x2F;back1&#x2F;*.dbf .&#x2F;  还原所有数据文件备份</p>
+<p>session 1</p>
+<p>SQL&gt; startup</p>
+<p>ORA-00313: 无法打开日志组 1 (用于线程 1) 的成员 ORA-00312:</p>
+<p>联机日志 1 线程 1: ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;redo01.log’</p>
+<p>SQL&gt; recover database until cancel;</p>
+<p>ORA-00279: 更改 1016334 (在 04&#x2F;08&#x2F;2016 15:45:03 生成) 对于线程 1 是必需的 ORA-00289:</p>
+<p>建议: &#x2F;u01&#x2F;arch&#x2F;prod&#x2F;arch_1_904564083_22.log  一定要确认一下这个日志是否是当前日志。</p>
+<p>ORA-00280: 更改 1016334 (用于线程 1) 在序列 #22 中</p>
+<p>Specify log: {<RET>&#x3D;suggested | filename | AUTO | CANCEL}</p>
+<p>cancel</p>
+<p>Media recovery cancelled.</p>
+<p>SQL&gt; alter database open resetlogs;</p>
+<p>SQL&gt; select * from scott.t1;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     1</p>
+<p>四）使用备份控制文件做不完全恢复</p>
+<p>1）为什么会使用备份的控制文件?</p>
+<p>①当前控制文件全部损坏，而数据文件和控制文件的备份及当前日志处于不同的SCN版本</p>
+<p>②当前控制文件没有损坏，但想要恢复误删除的表空间。</p>
+<p>2）使用备份的控制文件恢复数据库的语法：</p>
+<p>recover database until [time|change] using backup controlfile;</p>
+<p>[time|change]是可选的，就是说如果条件满足，仍然可以做到完全恢复。</p>
+<p>接下来会有如下选项：</p>
+<p>Specify log: {<RET>&#x3D;suggested | filename | AUTO | CANCEL}</p>
+<p>此语法的出现是由于控制文件和当前日志不一致，当前日志的scn总是最新的，而控制文件可能是旧的或尚未更新的（类似shutdwon abort操作)。</p>
+<p>AUTO：  根据v$archived_log记录的归档日志前滚恢复，不包括前滚current log;</p>
+<p>filename：  不在v$archived_log中的日志，指控制文件中受损的归档记录或current log</p>
+<p>CANCEL：  退出。</p>
+<p>3）使用backup controlfile子句的恢复数据库之后，一律要使用alter database open resetlogs打开数据库。</p>
+<p>示例1</p>
+<p>环境：当前所有控制文件损坏，数据文件损坏，有数据文件全备，但之后增加了表空间，并备份了配套的控制文件。</p>
+<p>模式：所有数据文件备份（老）——(新建表空间abcd)—–备份控制文件（次新）——日志文件（新）</p>
+<p>分析：新建表空间数据文件损坏, 全备里没有该数据文件的备份及控制文件描述，当前控制文件又丢失，只能用备份的控制文件恢复。</p>
+<p>1）环境：</p>
+<p>SQL&gt; select * from v$tablespace;</p>
+<p>SQL&gt; select GROUP#,SEQUENCE#,STATUS from v$log;</p>
+<p>  GROUP# SEQUENCE#  STATUS  </p>
+<hr>
+<p>   1     7      CURRENT</p>
+<p>   2     5      INACTIVE</p>
+<p>   3     6      INACTIVE</p>
+<p>SQL&gt; create tablespace abcd datafile ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’ size 5m;</p>
+<p>SQL&gt; create table scott.a1 (name char(10)) tablespace abcd;</p>
+<p>SQL&gt; insert into scott.a1 values(‘a’);</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; select * from scott.a1;</p>
+<p>NAME</p>
+<p>-———</p>
+<p>a</p>
+<p>SQL&gt; alter system switch logfile;</p>
+<p>2）备份控制文件</p>
+<p>SQL&gt; alter database backup controlfile to ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;con.bak1’;</p>
+<p>3）模拟abcd01.dbf损坏和所有ctl损坏</p>
+<p>[oracle@prod ~]$rm &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf  数据库open状态，删除abcd01.dbf数据文件</p>
+<p>SQL&gt; alter system flush buffer_cache;  db buffer 清空 </p>
+<p>SQL&gt; conn &#x2F; as sysdba  换个session查看 a1表物理读失败</p>
+<p>SQL&gt; select * from scott.a1;</p>
+<p>[oracle@prod ~]$ rm *.ctl</p>
+<p>4）关闭数据库</p>
+<p>SQL&gt; shutdown abort;</p>
+<p>5）恢复所有数据文件备份，准备做不完全恢复</p>
+<p>[oracle@prod ~]$ cd &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>[oracle@prod ~]$ rm *.dbf</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;*.dbf .&#x2F;</p>
+<p>[oracle@prod ~]$ cp con.bak1 control01.ctl</p>
+<p>[oracle@prod ~]$ cp con.bak1 control02.ctl</p>
+<p>[oracle@prod ~]$ cp con.bak1 control03.ctl</p>
+<p>SQL&gt; startup</p>
+<p>SQL&gt; col name for a50;</p>
+<p>SQL&gt; select file#,checkpoint_change#,name from v$datafile;</p>
+<p>   FILE# CHECKPOINT_CHANGE# NAME</p>
+<hr>
+<p>​     1      6676574 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;system01.dbf</p>
+<p>​     2      6676574 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;sysaux01.dbf</p>
+<p>​     3      6676601 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf</p>
+<p>​     4      6676574 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;user01.dbf</p>
+<p>​     5      6676574 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;example01.dbf</p>
+<p>​     6      6676574 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;test01.dbf</p>
+<p>​     7      6676574 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;undotbs01.dbf</p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile_header;</p>
+<p>   FILE# CHECKPOINT_CHANGE#</p>
+<hr>
+<p>​     1      6676343</p>
+<p>​     2      6676343</p>
+<p>​     3         0</p>
+<p>​     4      6676343</p>
+<p>​     5      6676343</p>
+<p>​     6      6676343</p>
+<p>​     7      6676343</p>
+<p>可以看出：</p>
+<p>①file3 在控制文件里记录是abcd01.dbf,而与之对应的数据文件3是不存在的，</p>
+<p>②备份的数据备份的scn比控制文件scn还老。</p>
+<p>6）使用备份控制文件恢复</p>
+<p>SQL&gt; recover database using backup controlfile;</p>
+<p>ORA-00283: 恢复会话因错误而取消</p>
+<p>ORA-01110: 数据文件 3: ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’</p>
+<p>ORA-01157: 无法标识&#x2F;锁定数据文件 3 - 请参阅 DBWR 跟踪文件</p>
+<p>ORA-01110: 数据文件 3: ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’</p>
+<p>此错是因为老备份里没有abcd表空间，但只要控制文件里记录了abcd就好办，方法是建一个datafile的空文件，而其中内容可由日志文件recover(前滚)时填补出来。</p>
+<p>SQL&gt; alter database create datafile ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’;</p>
+<p>SQL&gt; recover database using backup controlfile;  再次使用备份控制文件恢复</p>
+<p>ORA-00308: 无法打开归档日志 ‘&#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_804846837_9.log’</p>
+<p>ORA-27037: 无法获得文件状态</p>
+<p>Linux Error: 2: No such file or directory</p>
+<p>Additional information: 3</p>
+<p>archive日志前滚结束了，但当前日志里还有信息需要恢复</p>
+<p>注意: 对于这个例子来说，一定要看清提示：如果提示的不是归档的日志（是当前日志），则要直接要输入filename 而不能输入auto，否则open时会失败。</p>
+<p>SQL&gt; recover database using backup controlfile;  再次使用备份控制文件恢复</p>
+<p>指定日志: {<RET>&#x3D;suggested | filename | AUTO | CANCEL}</p>
+<p>&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;redo03.log  把当前日志它。</p>
+<p>已应用的日志。</p>
+<p>完成介质恢复。</p>
+<p>7）resetlogs打开数据库</p>
+<p>SQL&gt; alter database open resetlogs;</p>
+<p>8）验证</p>
+<p>SQL&gt; select * from scott.a1;</p>
+<p>NAME</p>
+<p>-—————————————</p>
+<p>a</p>
+<p>示例2：</p>
+<p>环境：当前控制文件损坏，新建表空间在备份控制文件之后</p>
+<p>模式：全备（老）—–备份控制文件（次新）—–新建表空间abcd——日志文件（新）</p>
+<p>分析：整个恢复过程中datafile结构有了变化，变化发生在备份控制文件之后，新增了表空间abcd。控制文件备份里没有此表空间记录，但日志里有。</p>
+<p>1）环境</p>
+<p>SQL&gt; drop tablespace abcd including contents and datafiles;</p>
+<p>SQL&gt; alter database backup controlfile to ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;con.bak’;</p>
+<p>控制文件备份中没有abcd表空间</p>
+<p>SQL&gt; create tablespace abcd datafile ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’ size 5m; </p>
+<p>SQL&gt; create table scott.r1 (id int) tablespace abcd ;</p>
+<p>SQL&gt; insert into scott.r1 values(1);</p>
+<p>SQL&gt; commit;</p>
+<p>SQL&gt; select * from v$tablespace;</p>
+<p>SQL&gt; select * from scott.r1;</p>
+<p>​    ID</p>
+<p>-———</p>
+<p>​     1</p>
+<p>SQL&gt;select GROUP#,SEQUENCE#,STATUS from v$log;</p>
+<p>  GROUP#  SEQUENCE#   STATUS</p>
+<hr>
+<p>  1        1     CURRENT</p>
+<p>  2        0     UNUSED</p>
+<p>  3        0     UNUSED</p>
+<p>2）模拟新建数据文件损坏</p>
+<p>[oracle@prod ~]rm abcd01.dbf</p>
+<p>SQL&gt;alter system flush buffer_cache;</p>
+<p>SQL&gt;conn &#x2F; as sysdba</p>
+<p>SQL&gt;select * from scott.r1;</p>
+<p>3）关闭数据库</p>
+<p>SQL&gt;shutdown abort</p>
+<p>4）还原所有数据文件，以老控制文件替换当前控制文件</p>
+<p>[oracle@prod ~]$ cd &#x2F;u01&#x2F;oradata&#x2F;prod</p>
+<p>[oracle@prod ~]$ rm *.ctl</p>
+<p>[oracle@prod ~]$ rm *.dbf</p>
+<p>[oracle@prod ~]$ cp &#x2F;u01&#x2F;back1&#x2F;*.dbf .&#x2F;</p>
+<p>[oracle@prod ~]$ cp con.bak2 control01.ctl</p>
+<p>[oracle@prod ~]$ cp con.bak2 control02.ctl</p>
+<p>[oracle@prod ~]$ cp con.bak2 control03.ctl</p>
+<p>5）启动数据库</p>
+<p>SQL&gt; startup</p>
+<p>ORACLE 例程已经启动。</p>
+<p>……</p>
+<p>数据库装载完毕。</p>
+<p>ORA-01589: 要打开数据库则必须使用 RESETLOGS 或 NORESETLOGS 选项</p>
+<p>SQL&gt; select file#,checkpoint_change#,name from v$datafile;</p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile_header;</p>
+<p>6）使用备份控制文件恢复数据库</p>
+<p>SQL&gt; recover database using backup controlfile;</p>
+<p>ORA-00279: 更改 6676343 (在 01&#x2F;16&#x2F;2013 14:11:39 生成) 对于线程 1 是必需的</p>
+<p>ORA-00289: 建议: &#x2F;u01&#x2F;disk1&#x2F;prod&#x2F;arch_1_804846837_4.log</p>
+<p>ORA-00280: 更改 6676343 (用于线程 1) 在序列 #4 中</p>
+<p>指定日志: {<RET>&#x3D;suggested | filename | AUTO | CANCEL}</p>
+<p>auto</p>
+<p>指定日志: {<RET>&#x3D;suggested | filename | AUTO | CANCEL}</p>
+<p>&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;redo01.log</p>
+<p>ORA-00283: 恢复会话因错误而取消</p>
+<p>ORA-01244: 未命名的数据文件由介质恢复添加至控制文件</p>
+<p>ORA-01110: 数据文件 3: ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’</p>
+<p>ORA-01112: 未启动介质恢复</p>
+<p>SQL&gt; select file#,checkpoint_change#,name from v$datafile;</p>
+<p>   FILE# CHECKPOINT_CHANGE# NAME</p>
+<hr>
+<p>​     1      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;system01.dbf</p>
+<p>​     2      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;sysaux01.dbf</p>
+<p>​     3      6677999 &#x2F;u01&#x2F;oracle&#x2F;dbs&#x2F;UNNAMED00003  这是从日志回写到控制文件中的名字，需要重命名</p>
+<p>​     4      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;user01.dbf</p>
+<p>​     5      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;example01.dbf</p>
+<p>​     6      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;test01.dbf</p>
+<p>​     7      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;undotbs01.dbf</p>
+<p>SQL&gt; select file#,checkpoint_change# from v$datafile_header;</p>
+<p>   FILE# CHECKPOINT_CHANGE#</p>
+<hr>
+<p>​     1      6678002</p>
+<p>​     2      6678002</p>
+<p>​     3         0  这里需要建立一个空的数据文件。</p>
+<p>​     4      6678002</p>
+<p>​     5      6678002</p>
+<p>​     6      6678002</p>
+<p>​     7      6678002</p>
+<p>7）建立数据文件并对控制文件中未知的数据文件重命名</p>
+<p>SQL&gt; alter database create datafile ‘&#x2F;u01&#x2F;oracle&#x2F;dbs&#x2F;UNNAMED00003’ as ‘&#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf’;</p>
+<p>上面的命令一石二鸟，自动完成了两个动作</p>
+<p>①加了一个数据文件abcd01.dbf，</p>
+<p>②重命名控制文件UNNAMED00003为abcd01.dbf</p>
+<p>SQL&gt; select file#,checkpoint_change#,name from v$datafile;</p>
+<p>   FILE# CHECKPOINT_CHANGE# NAME</p>
+<hr>
+<p>​     1      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;system01.dbf</p>
+<p>​     2      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;sysaux01.dbf</p>
+<p>​     3      6677999 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;abcd01.dbf</p>
+<p>​     4      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;user01.dbf</p>
+<p>​     5      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;example01.dbf</p>
+<p>​     6      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;test01.dbf</p>
+<p>​     7      6678002 &#x2F;u01&#x2F;oradata&#x2F;prod&#x2F;undotbs01.dbf</p>
+<p>SQL&gt; recover database using backup controlfile;</p>
+<p>8）resetlogs打开数据库</p>
+<p>SQL&gt; alter database open resetlogs;</p>
+<p>9）验证</p>
+<p>SQL&gt; select * from scott.r1;</p>
+<p>​    ID</p>
+<p>-———</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eshyee.github.io">SHYEE</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eshyee.github.io/2020/03/13/%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%89%8B%E5%B7%A5%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">https://eshyee.github.io/2020/03/13/%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%89%8B%E5%B7%A5%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8/">计算机安全</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/1920x1080/?plasma" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/13/%E5%B7%A5%E4%BD%9C%E5%88%86%E8%A7%A3%E7%BB%93%E6%9E%84/" title="工作分解结构"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">工作分解结构</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/12/LinearTable-6/" title="LinearTable-6"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">LinearTable-6</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2020/02/25/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%80/" title="Oracle系列学习(一)"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-25</div><div class="title">Oracle系列学习(一)</div></div></a></div><div><a href="/2020/04/01/Mysql%20%E8%BF%9B%E9%98%B6/" title="MySQL进阶"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-01</div><div class="title">MySQL进阶</div></div></a></div><div><a href="/2020/03/12/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%B8%89/" title="Oracle系列学习(三)"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-12</div><div class="title">Oracle系列学习(三)</div></div></a></div><div><a href="/2020/03/03/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%8C/" title="Oracle系列学习(二)"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-03</div><div class="title">Oracle系列学习(二)</div></div></a></div><div><a href="/2020/03/30/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E4%BA%94/" title="Oracle系列学习(五)"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-30</div><div class="title">Oracle系列学习(五)</div></div></a></div><div><a href="/2020/03/26/Oracle%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0-%E5%9B%9B/" title="Oracle系列学习(四)"><img class="cover" src="https://source.unsplash.com/1920x1080/?plasma" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-26</div><div class="title">Oracle系列学习(四)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/pic/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SHYEE</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">106</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">107</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eshyee"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/eshyee" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:eshyee@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">等离子体实验室</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge"/></a><div class="content"><a class="title" href="/2025/02/12/Deep%20learning%20via%20CNN%20for%20identification%20of%20blue%20core%20phenomenon%20in%20helicon%20plasma%20discharge/" title="Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge">Deep learning via CNN for identification of blue core phenomenon in helicon plasma discharge</a><time datetime="2025-02-12T06:31:17.000Z" title="Created 2025-02-12 14:31:17">2025-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Relationship of mode transitions and standing waves in helicon plasmas"/></a><div class="content"><a class="title" href="/2023/10/25/Relationship-of-mode-transitions-and-standing-waves-in-helicon-plasmas/" title="Relationship of mode transitions and standing waves in helicon plasmas">Relationship of mode transitions and standing waves in helicon plasmas</a><time datetime="2023-10-25T11:30:28.000Z" title="Created 2023-10-25 19:30:28">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Effects of magnetic field on electron power absorption in helicon fluid simulation"/></a><div class="content"><a class="title" href="/2023/10/14/Effects-of-magnetic-field-on-electron-power-absorption-in-helicon-fluid-simulation/" title="Effects of magnetic field on electron power absorption in helicon fluid simulation">Effects of magnetic field on electron power absorption in helicon fluid simulation</a><time datetime="2023-10-14T08:09:12.000Z" title="Created 2023-10-14 16:09:12">2023-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma"/></a><div class="content"><a class="title" href="/2023/10/07/Damping-characteristics-of-helicon-and-Trivelpiece%E2%80%93Gould-waves-in-high-density-and-low-magnetic-field-helicon-plasma/" title="Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma">Damping characteristics of helicon and Trivelpiece–Gould waves in high density and low magnetic field helicon plasma</a><time datetime="2023-10-07T03:15:01.000Z" title="Created 2023-10-07 11:15:01">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/28/vue/" title="vue"><img src="https://source.unsplash.com/1920x1080/?plasma" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue"/></a><div class="content"><a class="title" href="/2023/09/28/vue/" title="vue">vue</a><time datetime="2023-09-28T02:48:17.000Z" title="Created 2023-09-28 10:48:17">2023-09-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By SHYEE</div><div class="framework-info"></div><div class="footer_custom_text">Hi, welcome to <a target="_blank" rel="noopener" href="http://shyee.club">SHYEECLUB</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="http://shyee.club/js/test.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
